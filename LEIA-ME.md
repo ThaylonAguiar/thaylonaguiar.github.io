@@ -105,3 +105,6 @@ Itens novos são sempre criados completos.
 
 ## v42
 - Corrigido: o campo **Código** não procura mais dentro do EAN (EAN só pelo campo EAN).
+
+## v43
+- Corrigido no celular: o texto destacado na busca sumia (a classe do destaque colidia com uma classe que esconde um elemento em telas pequenas).

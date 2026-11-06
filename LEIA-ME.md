@@ -108,3 +108,9 @@ Itens novos são sempre criados completos.
 
 ## v43
 - Corrigido no celular: o texto destacado na busca sumia (a classe do destaque colidia com uma classe que esconde um elemento em telas pequenas).
+
+## v44 · Fotos por item quando a referência se repete
+- Referência usada por **um só item**: nada muda (as fotos continuam guardadas pela referência).
+- Referência usada por **vários itens** (ex.: 15W40 em óleos de marcas diferentes): cada item passa a ter as **suas próprias fotos** (guardadas pelo ID). Adicionar ou remover foto num item não afeta os outros.
+- Fotos antigas que estavam compartilhadas pela referência não somem: no item aparece o aviso "Usar neste item", que copia essas fotos só para aquele item (faça isso no item certo, ex.: o ACDELCO).
+- Remover uma foto só apaga o arquivo se nenhum outro item ainda usar a mesma imagem.

@@ -112,7 +112,7 @@ async function backup(fotos){
  z.file("dados/backup_completo.json",JSON.stringify({gerado:new Date().toISOString(),itens:L,relacionamentos:[...ds],fotos:Object.fromEntries(IMG),overlay:db.dump()},null,1));
  z.file("LEIA-ME.txt","Backup do catalogo - Menor Preco Auto Pecas\r\n\r\ndados/ITENS.csv: todos os itens (abra no Excel; colunas ID, TITULO, REFERENCIA, GRUPO, ENDERECO, DESCRICAO).\r\ndados/RELACIONAMENTOS.csv: pares de itens relacionados.\r\ndados/backup_completo.json: tudo em formato de programa.\r\nfotos/: uma pasta por referencia, com as fotos numeradas (versoes reduzidas, ate 1000 px).\r\n");
  let nf=0,err=0;
- if(fotos){const byRk=new Map();M.forEach(x=>{const k=rk(x.r);if(k&&!byRk.has(k))byRk.set(k,x.r)});
+ if(fotos){const byRk=new Map();M.forEach(x=>{const k=ik(x);if(k&&!byRk.has(k))byRk.set(k,x.r+(k.includes('__')?'_'+x.id:''))});
   const tot=[...IMG.values()].reduce((s,l)=>s+l.length,0);
   for(const [k,ids] of IMG){const ref=byRk.get(k)||k;
    for(let i=0;i<ids.length;i++){try{z.file("fotos/"+safeN(ref)+"/"+(i+1)+".jpg",await getB(ids[i]));nf++}catch(e){err++}
@@ -171,7 +171,7 @@ async function labSave0(){
   await dl.save({filename:"ETIQUETAS "+new Date().toISOString().slice(0,10)+".docx",data:blob});toast("Etiquetas salvas. Abra no Word e imprima.")
  }catch(e){toast(e&&e.code=="declined"?"Cancelado.":"N\u00e3o foi poss\u00edvel gerar: "+((e&&(e.message||e.code))||e))}}
 
-function labelOf(x){const l=labelOf0(x),m=l.h.match(/\[([^\]]*)\]\s*$/);return Object.assign(l,{id:x.id,t:x.t,k:rk(x.r),s:null,img:null,def:x.t.split("-")[0].trim()+(m?"   ["+m[1]+"]":"")})}
+function labelOf(x){const l=labelOf0(x),m=l.h.match(/\[([^\]]*)\]\s*$/);return Object.assign(l,{id:x.id,t:x.t,k:ik(x),s:null,img:null,def:x.t.split("-")[0].trim()+(m?"   ["+m[1]+"]":"")})}
 function setS(i,s){const l=LB[i];l.s=s;if(s&&s!="P"&&!l.img)l.img=(IMG.get(l.k)||[])[0]||null;labR()}
 function allP(){LB.forEach(l=>{if(!l.s)l.s="P"});labR()}
 function labCard(l,i){const s=l.s,ct='style="cursor:default"',lk=(t,f)=>`<a href="#" onclick="${f};return false" style="color:var(--ac);font-size:12px">${t}</a>`;
@@ -279,9 +279,12 @@ function ovClose(id){if(id=="cf")$("#cn").click();else if(id=="dv")closeD();else
 function setCols(n){document.documentElement.style.setProperty("--c",n);document.querySelector(".wrap").style.maxWidth=+n>1?"none":"900px";try{localStorage.setItem("cols",n)}catch(e){}}
 {let c0="1";try{c0=localStorage.getItem("cols")||"1"}catch(e){}$("#cl").value=c0;setCols(c0)}
 const rk=r=>norm(r).replace(/[^A-Z0-9]+/g,"_").replace(/^_|_$/g,"");
+let _rcM=null,_rcN=-1;function refCnt(k){if(_rcM===null||_rcN!==M.size){_rcM=new Map();M.forEach(y=>{const z=rk(y.r);if(z)_rcM.set(z,(_rcM.get(z)||0)+1)});_rcN=M.size}return _rcM.get(k)||0}
+/* chave das fotos do item: referência única = pela referência; referência repetida em vários itens = por ID */
+const ik=x=>{if(!x)return"";const k=rk(x.r);return!k?"":refCnt(k)>1?k+"__"+x.id:k};
 async function bulk2(fs){const first=new Map();M.forEach((x,id)=>{const k=rk(x.r);if(k&&!first.has(k))first.set(k,id)});
  const g=new Map(),miss=new Set();[...fs].forEach(f=>{if(!/^image\//.test(f.type)&&!/\.(jpe?g|png|webp|gif)$/i.test(f.name))return;const p=(f.webkitRelativePath||"").split("/");if(p.length<2)return;const fo=p[p.length-2],k=rk(fo);if(!first.has(k)){miss.add(fo);return}if(!g.has(k))g.set(k,[]);g.get(k).push(f)});
- const jobs=[...g].filter(([k])=>!(IMG.get(k)||[]).length),skip=g.size-jobs.length,fail=[];let i=0,done=0,fotos=0;putPh.bad=0;
+ const jobs=[...g].filter(([k])=>!(IMG.get(ik(M.get(first.get(k))))||[]).length),skip=g.size-jobs.length,fail=[];let i=0,done=0,fotos=0;putPh.bad=0;
  const worker=async()=>{while(i<jobs.length){const [k,L]=jobs[i++];L.sort((a,b)=>a.name.localeCompare(b.name));try{const n=await putPh(first.get(k),L,true);fotos+=n;if(!n)fail.push(k)}catch(e){fail.push(k)}done++;toast("Enviando: pasta "+done+" de "+jobs.length+" · "+fotos+" fotos"+(skip?" · "+skip+" já tinham foto":"")+"…")}};
  await Promise.all([1,2,3,4].map(worker));
  toast("Concluído: "+(jobs.length-fail.length)+" pastas enviadas ("+fotos+" fotos), "+skip+" já existiam. Falhas: "+fail.length+(putPh.bad?" (fotos com erro: "+putPh.bad+")":"")+". Sem item correspondente: "+miss.size+(miss.size?" (ex.: "+[...miss].slice(0,5).join(", ")+")":"")+(fail.length||putPh.bad?". Envie as mesmas pastas de novo para tentar o que faltou.":""));$("#bf").value=""}
@@ -309,8 +312,10 @@ function fCods(){const i=$("#fcd"),T=$("#tcd");if(!i||!T)return;const q=String(i
 const appsF=()=>`<div class="fa" style="margin:6px 0"><input id="fap" placeholder="Filtrar aplicações: ex. corsa 1.4 2005" oninput="fApps()" style="width:100%"><div class="mu" style="font-size:12px;margin-top:2px"><span id="fac"></span> <a href="#" id="fatg" onclick="return togAp()" style="display:none;margin-left:8px;color:var(--ac)">mostrar tudo</a></div></div>`;
 const eanT=a=>{const f=String(($("#fe")||{}).value||"").replace(/\D/g,"");return a.eans&&a.eans.length?`<h3>EAN</h3><div class="sc"><table>${a.eans.map(e=>`<tr><th>${esc(e[0]||"EAN")}</th><td style="white-space:normal">${_hlr(e[1],f?_rLit(e[1],f):[])}</td></tr>`).join("")}</table></div>`:""};
 const codsT=a=>(a.notes.length?`<p class="nt">${a.notes.map(esc).join("<br>")}</p>`:"")+(a.cods.length?`<h3>Códigos</h3><div class="fa" style="margin:6px 0"><input id="fcd" placeholder="Filtrar códigos: ex. DS1627 ou marca" oninput="fCods()" style="width:100%"><div class="mu" style="font-size:12px;margin-top:2px"><span id="fcc"></span> <a href="#" id="fcg" onclick="return togCd()" style="display:none;margin-left:8px;color:var(--ac)">mostrar tudo</a></div></div><div class="sc"><table id="tcd">${a.cods.map(c=>`<tr><th data-o="${esc(c[0])}">${esc(c[0])}</th><td style="white-space:normal" data-o="${esc(c[1])}">${esc(c[1])}</td></tr>`).join("")}</table></div>`:"");
-function galHtml(id){const L=IMG.get(rk(M.get(id).r))||[],k=Math.min(gix[id]||0,Math.max(L.length-1,0));
- curDet=id;return `<h3>Fotografias do produto</h3><div class="gal">${L.length?`<img src="/_blob/${L[k]}" alt=""><div class="mu">${k+1} de ${L.length}</div><div class="row" style="justify-content:center"><button class="btn" onclick="gp('${id}',-1)">‹ Anterior</button><button class="btn" onclick="gp('${id}',1)">Próxima ›</button><button class="btn d" onclick="rmPh('${id}')">Remover foto</button></div>`:'<p class="mu">Sem fotos.</p>'}<div class="row" style="justify-content:center"><label class="btn" for="pf" style="margin:0" onclick="phFor='${id}'">+ Adicionar fotos</label><button class="btn" onclick="webQ('${id}',0)">🔎 Pesquisar na internet</button><button class="btn" onclick="webQ('${id}',1)">🖼 Buscar imagens na internet</button></div><p class="mu" style="text-align:center;font-size:12px;margin:4px 0 0">Dica: na busca de imagens, clique com o botão direito &gt; Copiar imagem, volte aqui e aperte Ctrl+V (ou arraste a imagem para esta janela).</p><div class="row" style="justify-content:center;margin-top:8px"><button class="btn" onclick="shareItem('${id}')">📤 Compartilhar</button><button class="btn" onclick="pdfItem('${id}')">📄 Salvar PDF</button></div></div>`}
+function legH(id,L){const x=M.get(id),k=rk(x.r),o=IMG.get(k)||[];if(!k||L.length||!o.length||ik(x)==k||document.body.classList.contains("ro"))return"";return `<p class="mu" style="margin:4px 0">Esta referência é usada em mais de um item e há ${o.length} foto(s) antiga(s) compartilhada(s). <a href="#" onclick="useLeg('${id}');return false" style="color:var(--ac)">Usar neste item</a></p>`}
+async function useLeg(id){const x=M.get(id),o=IMG.get(rk(x.r))||[];if(!o.length)return;const key=ik(x);if(await W(()=>db.doc("img/"+key).set({ids:[...o]}))){IMG.set(key,[...o]);gix[id]=0;refresh()}}
+function galHtml(id){const L=IMG.get(ik(M.get(id)))||[],k=Math.min(gix[id]||0,Math.max(L.length-1,0));
+ curDet=id;return `<h3>Fotografias do produto</h3><div class="gal">${legH(id,L)}${L.length?`<img src="/_blob/${L[k]}" alt=""><div class="mu">${k+1} de ${L.length}</div><div class="row" style="justify-content:center"><button class="btn" onclick="gp('${id}',-1)">‹ Anterior</button><button class="btn" onclick="gp('${id}',1)">Próxima ›</button><button class="btn d" onclick="rmPh('${id}')">Remover foto</button></div>`:'<p class="mu">Sem fotos.</p>'}<div class="row" style="justify-content:center"><label class="btn" for="pf" style="margin:0" onclick="phFor='${id}'">+ Adicionar fotos</label><button class="btn" onclick="webQ('${id}',0)">🔎 Pesquisar na internet</button><button class="btn" onclick="webQ('${id}',1)">🖼 Buscar imagens na internet</button></div><p class="mu" style="text-align:center;font-size:12px;margin:4px 0 0">Dica: na busca de imagens, clique com o botão direito &gt; Copiar imagem, volte aqui e aperte Ctrl+V (ou arraste a imagem para esta janela).</p><div class="row" style="justify-content:center;margin-top:8px"><button class="btn" onclick="shareItem('${id}')">📤 Compartilhar</button><button class="btn" onclick="pdfItem('${id}')">📄 Salvar PDF</button></div></div>`}
 function webQ(id,img){const x=M.get(id);if(!x)return;const t=String(x.t||"").replace(/^~\s*/,"");const pre=t.split("-")[0].trim();const m=String(x.d||"").match(/C[ÓO]DIGOS:\s*\n([^:\n]+):/);let br=m?m[1].trim():"";if(!br){const a=t.split("-")[1]||"";br=a.trim().split(/\s+/)[0]||""}const q=[pre,br,x.r].filter(Boolean).join(" ").replace(/\s+/g," ");window.open("https://www.google.com/search?"+(img?"tbm=isch&":"")+"q="+encodeURIComponent(q),"_blank","noopener")}
 
 function _wrap(c,t,w){const out=[];let l="";for(const p of String(t||"").split(" ")){const n=l?l+" "+p:p;if(c.measureText(n).width>w&&l){out.push(l);l=p}else l=n}if(l)out.push(l);return out.length?out:[""]}
@@ -321,7 +326,7 @@ async function fichaPages(id,o){
  const np=()=>{cv=document.createElement("canvas");cv.width=W*S;cv.height=MAXH*S;c=cv.getContext("2d");c.scale(S,S);c.fillStyle="#fff";c.fillRect(0,0,W,MAXH);pages.push(cv);y=P};
  np();c.fillStyle="#111";c.font="bold 34px "+F;for(const l of _wrap(c,String(x.t).replace(/^~\s*/,""),W-2*P)){y+=40;c.fillText(l,P,y)}
  c.fillStyle="#555";c.font="24px "+F;y+=36;c.fillText("Ref: "+(x.r||"-")+(x.g?"   ·   "+x.g+(x.sg?" › "+x.sg:""):""),P,y);y+=24;
- const ids=(IMG.get(rk(x.r))||[]).slice(0,2),ims=(await Promise.all(ids.map(i=>_img("/_blob/"+i)))).filter(Boolean);
+ const ids=(IMG.get(ik(x))||[]).slice(0,2),ims=(await Promise.all(ids.map(i=>_img("/_blob/"+i)))).filter(Boolean);
  if(ims.length){const n=ims.length,gw=TB?(W-2*P-16)/2:(W-2*P-24)/2,gh=TB?Math.min(gw,340):gw,tot=n*gw+(n-1)*24,x0=(W-tot)/2;ims.forEach((im,i)=>{const r=Math.min(gw/im.width,gh/im.height),w=im.width*r,h=im.height*r,bx=(TB?P+i*(gw+16):x0+i*(gw+24));c.drawImage(im,bx+(gw-w)/2,y+(gh-h)/2,w,h)});y+=gh+30}
  const cols=[[ "Marca",150],["Modelo",340],["De",80],["Até",80],["Obs.",W-2*P-650]];
  const head=()=>{c.fillStyle="#1d2330";c.fillRect(P,y,W-2*P,38);c.fillStyle="#fff";c.font="bold 22px "+F;let xx=P+8;for(const [n,w] of cols){c.fillText(n,xx,y+27);xx+=w}y+=38};
@@ -379,20 +384,20 @@ function imgFiles(dt){return[...(dt&&dt.files||[])].filter(f=>/^image\//.test(f.
 document.addEventListener("paste",async e=>{if(document.body.classList.contains("ro"))return;if(!curDet||!$("#dc")||!$("#dc").offsetParent)return;const fs=imgFiles(e.clipboardData);if(!fs.length)return;e.preventDefault();toast("Enviando…");const n=await putPh(curDet,fs);if(n)toast(n+" foto(s) salva(s)")});
 document.addEventListener("dragover",e=>{if(curDet&&$("#dc")&&$("#dc").offsetParent)e.preventDefault()});
 document.addEventListener("drop",async e=>{if(document.body.classList.contains("ro"))return;if(!curDet||!$("#dc")||!$("#dc").offsetParent)return;const fs=imgFiles(e.dataTransfer);if(!fs.length)return;e.preventDefault();toast("Enviando…");const n=await putPh(curDet,fs);if(n)toast(n+" foto(s) salva(s)")});
-function gp(id,d){const n=(IMG.get(rk(M.get(id).r))||[]).length;if(!n)return;gix[id]=((gix[id]||0)+d+n)%n;refresh()}
-function refresh(){if($("#gv").style.display=="block")openGrp();if($("#rv").style.display=="block"&&rsel)prev(rsel);if(cur&&$("#dv").style.display=="block")openItem(cur)}
+function gp(id,d){const n=(IMG.get(ik(M.get(id)))||[]).length;if(!n)return;gix[id]=((gix[id]||0)+d+n)%n;refresh()}
+function refresh(){_rcN=-1;if($("#gv").style.display=="block")openGrp();if($("#rv").style.display=="block"&&rsel)prev(rsel);if(cur&&$("#dv").style.display=="block")openItem(cur)}
 function relViewOld(id){const L=rel(id);$("#rc").innerHTML=`<h2>Produtos relacionados · ${L.length} item(ns)</h2><div class="mu">Produto atual: ${esc(M.get(id).t)} · ID ${id}</div><div class="sc" style="max-height:30vh;overflow:auto"><table>${L.map(i=>{const y=M.get(i);return`<tr class="rw" style="cursor:pointer" onclick="prev('${i}')"><td>${esc(y.t)}</td><td>${esc(y.r)}</td><td>${esc(y.g)||"SEM GRUPO"}</td><td>${i}</td></tr>`}).join("")||"<tr><td>Nenhum</td></tr>"}</table></div><div id="pv"></div>`;$("#rv").style.display="block";rsel=null;if(L.length)prev(L[0])}
 function prevOld(i){rsel=i;const x=M.get(i);if(!x)return;const a=parse(x);$("#pv").innerHTML=`<h3>${esc(x.t)} · Ref ${esc(x.r)||"-"} · ID ${i}</h3>${galHtml(i)}<h3>Aplicações</h3>${appsT(a)}${codsT(a)}<div class="row"><button class="btn" onclick="$('#rv').style.display='none';openItem('${i}')">Abrir ficha</button></div>`}
 function shrink(f){return new Promise((ok,no)=>{const im=new Image(),u=URL.createObjectURL(f);im.onload=()=>{const s=Math.min(1,1000/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>b?ok(b):no(new Error("falha")),"image/jpeg",.8)};im.onerror=()=>no(new Error("imagem inválida"));im.src=u})}
 async function putPh(id,files,quiet){if(document.body.classList.contains("ro")){quiet||toast("Modo visitante: somente consulta.");return 0}if(!rk(M.get(id).r)){quiet||toast("Este item não tem referência cadastrada.");return 0}const as=typeof claude!="undefined"?await claude.use("assets"):null;if(!as||!db){quiet||toast("Não foi possível enviar fotos agora. Toque no aviso do topo para entrar com o Google.");return 0}
  const add=[];let bad=0;for(const f of files){try{add.push((await as.upload(await shrink(f),M.get(id).r)).id)}catch(e){bad++;quiet||toast("Erro na foto: "+(e.message||e.code));if(!quiet)break}}
  if(quiet&&bad){for(const x of add){try{await as.delete(x)}catch(e){}}putPh.bad=(putPh.bad||0)+bad;return 0}
- if(add.length)await W(()=>db.doc("img/"+rk(M.get(id).r)).set({ids:[...(IMG.get(rk(M.get(id).r))||[]),...add]}));return add.length}
+ if(add.length)await W(()=>db.doc("img/"+ik(M.get(id))).set({ids:[...(IMG.get(ik(M.get(id)))||[]),...add]}));return add.length}
 async function addPh(fs){if(!phFor||!fs.length)return;toast("Enviando…");const n=await putPh(phFor,[...fs]);$("#pf").value="";if(n)toast(n+" foto(s) salva(s)")}
 async function bulk(fs){const g=new Map();[...fs].forEach(f=>{const m=f.name.match(/\d+/);if(!m)return;const id=m[0].slice(0,6).padStart(6,"0");if(!M.has(id))return;if(!g.has(id))g.set(id,[]);g.get(id).push(f)});
  const used=[...g.values()].reduce((s,l)=>s+l.length,0);let n=0;for(const [id,L] of g){L.sort((a,b)=>a.name.localeCompare(b.name));n++;toast("Enviando "+n+" de "+g.size+" itens…");if(!await putPh(id,L))break}
  toast("Concluído: "+n+" itens com fotos. Arquivos ignorados (sem ID válido no nome): "+(fs.length-used));$("#bf").value=""}
-async function rmPh(id){const key=rk(M.get(id).r),L=IMG.get(key)||[],k=gix[id]||0;if(!L.length||!await askC("Remover esta foto?"))return;const as=await claude.use("assets");if(await W(()=>db.doc("img/"+key).set({ids:L.filter((_,i)=>i!=k)}))){gix[id]=0;try{as&&await as.delete(L[k])}catch(e){}}}
+async function rmPh(id){const key=ik(M.get(id)),L=IMG.get(key)||[],k=gix[id]||0;if(!L.length||!await askC("Remover esta foto?"))return;const as=await claude.use("assets");if(await W(()=>db.doc("img/"+key).set({ids:L.filter((_,i)=>i!=k)}))){gix[id]=0;const usado=[...IMG].some(([kk,v])=>kk!=key&&v.includes(L[k]));if(!usado)try{as&&await as.delete(L[k])}catch(e){}}}
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase();
 const cmpA=s=>norm(s).replace(/[\s\-]+/g,"");
@@ -451,6 +456,7 @@ var _f0=filt;filt=function(){const L=_f0.apply(this,arguments);if(RF)L.sort((a,b
 function togRF(){RF=RF?0:1;try{localStorage.setItem("rf",RF)}catch(e){};rfUI();shown=60;render()}
 function rfUI(){const b=document.getElementById("brf");if(b)b.textContent=RF?"Ordem: REFERÊNCIA ↕ (trocar p/ título)":"Ordem: TÍTULO ↕ (trocar p/ referência)"}
 function render(){
+ _rcN=-1;
  const gs=[...new Set([...M.values()].map(x=>x.g).filter(Boolean))].sort(),sel=$("#fg"),v=sel.value;
  fillF(v);
  $("#dl").innerHTML=gs.map(g=>`<option value="${esc(g)}">`).join("");
@@ -598,7 +604,7 @@ async function mgGo(){const P=M.get(MGP);if(!P||MG.length<2)return;const O=MG.fi
  if(!await W(()=>db.doc("items/"+P.id).set(x)))return;
  await addVer(P.id,x,"Mesclagem com "+O.map(o=>o.r+" (ID "+o.id+")").join(", "),P,{ms:O.map(o=>({id:o.id,t:o.t,r:o.r,g:o.g||"",sg:o.sg||"",d:o.d}))});
  M.set(P.id,{id:P.id,t:x.t,r:x.r,d:x.d,g:x.g,sg:x.sg,e:x.e});
- const kp=rk(P.r);let ids=[...(IMG.get(kp)||[])],nf=0;O.forEach(o=>(IMG.get(rk(o.r))||[]).forEach(a=>{if(!ids.includes(a)){ids.push(a);nf++}}));
+ const kp=ik(P);let ids=[...(IMG.get(kp)||[])],nf=0;O.forEach(o=>(IMG.get(ik(o))||[]).forEach(a=>{if(!ids.includes(a)){ids.push(a);nf++}}));
  if(nf)await W(()=>db.doc("img/"+kp).set({ids}));
  let nr=0;for(const o of O)for(const b of rel(o.id)){if(b==P.id||O.some(z=>z.id==b))continue;if(await W(()=>db.doc("dir/"+k2(P.id,b)).set({a:P.id,b,del:false})))nr++}
  if(del=="del")for(const o of O)await W(()=>db.doc("items/"+o.id).set({del:true}));
@@ -631,7 +637,7 @@ async function impLote(f){if(!f)return;$("#lf").value="";
   if(seen.has(k)){dups.push(r+" (repetido no lote)");return}seen.add(k);
   if(byRk.has(k)){const id=byRk.get(k),ex=M.get(id),ds=String(it.descricao||"").trim(),o2=it.substituir===true?{a:"s",c:"s",o:"s"}:op,
     mg=mergeDesc(ex.d,ds,o2),cA=mergeDesc(ex.d,ds,{a:o2.a,c:"n",o:"n"})[1],cC=mergeDesc(ex.d,ds,{a:"n",c:o2.c,o:"n"})[1],cO=mergeDesc(ex.d,ds,{a:"n",c:"n",o:o2.o})[1],
-    tch=o2.a=="s"&&t&&t!=ex.t,hasI=(IMG.get(rk(ex.r))||[]).length,fl=(it.fotos||[]).length,
+    tch=o2.a=="s"&&t&&t!=ex.t,hasI=(IMG.get(ik(ex))||[]).length,fl=(it.fotos||[]).length,
     im=fl&&(op.i=="s"||(op.i=="m"&&!hasI))?op.i:null,tx=mg[1]||tch,w=[];
    if(cA||tch)w.push("aplicações");if(cC)w.push("códigos");if(cO)w.push("observações");if(im)w.push(im=="s"&&hasI?"fotos (substitui)":"fotos");
    if(tx||im)ups.push({it,id,d:mg[0],ex,tx,im,t:o2.a=="s"&&t?t:ex.t,tag:"ATUALIZA: "+(w.join(", ")||"texto")});else dups.push(r+" (já existe, nada novo: ID "+id+")");return}
@@ -657,7 +663,7 @@ async function impLote(f){if(!f)return;$("#lf").value="";
  for(const it of todos){const a=ids.get(nk(it.referencia));if(!a)continue;for(const rr of(it.relacionados||[])){const b=byRk.get(nk(rr));if(!b||b==a){pend.push(it.referencia+" → "+rr);continue}await W(()=>db.doc("dir/"+k2(a,b)).set({a,b,del:false}));nr++}}
  const as=await claude.use("assets"),jobs=[],mime=p=>/\.png$/i.test(p)?"image/png":/\.webp$/i.test(p)?"image/webp":"image/jpeg";
  const ij=[...novos.map(it=>({it,m:"m"})),...ups.filter(u=>u.im).map(u=>({it:u.it,m:u.im}))];
- for(const o of ij){const id=ids.get(nk(o.it.referencia));if(!id)continue;const rr0=M.get(id).r,k=rk(rr0),old=IMG.get(k)||[];if(o.m=="m"&&old.length)continue;const fl=(o.it.fotos||[]).map(p=>({p,e:z.file(p)})).filter(q=>q.e);if(fl.length)jobs.push({k,ref:rr0,fl,old:o.m=="s"?old:[]})}
+ for(const o of ij){const id=ids.get(nk(o.it.referencia));if(!id)continue;const rr0=M.get(id).r,k=ik(M.get(id)),old=IMG.get(k)||[];if(o.m=="m"&&old.length)continue;const fl=(o.it.fotos||[]).map(p=>({p,e:z.file(p)})).filter(q=>q.e);if(fl.length)jobs.push({k,ref:rr0,fl,old:o.m=="s"?old:[]})}
  let i=0,done=0,okf=0;const badF=[];
  const wk=async()=>{while(i<jobs.length){const jb=jobs[i++],add=[];let bad=0;
   for(const o of jb.fl){try{const bl=new Blob([await o.e.async("arraybuffer")],{type:mime(o.p)});add.push((await as.upload(await shrink(bl),jb.ref)).id)}catch(er){bad++}}

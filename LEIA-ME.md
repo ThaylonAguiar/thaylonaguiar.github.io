@@ -114,3 +114,10 @@ Itens novos são sempre criados completos.
 - Referência usada por **vários itens** (ex.: 15W40 em óleos de marcas diferentes): cada item passa a ter as **suas próprias fotos** (guardadas pelo ID). Adicionar ou remover foto num item não afeta os outros.
 - Fotos antigas que estavam compartilhadas pela referência não somem: no item aparece o aviso "Usar neste item", que copia essas fotos só para aquele item (faça isso no item certo, ex.: o ACDELCO).
 - Remover uma foto só apaga o arquivo se nenhum outro item ainda usar a mesma imagem.
+
+## v45 - Grupos de itens
+- Extras > **Grupos de itens**: lista (ordem alfabetica) + **Criar grupo de itens** (nome, referencia, itens). Busca por titulo, referencia ou ID; "Adicionar todos os resultados" inclui todos de uma vez. Clique no grupo para renomear, adicionar/remover itens ou excluir (os itens nao sao apagados).
+- Na lista principal o grupo aparece como UM registro (borda azul, "GRUPO DE ITENS - N itens"); clicar expande e mostra os itens (cada um abre normalmente).
+- Link **"Grupos de itens: AGRUPADOS/SOLTOS (trocar)"** ao lado de "limpar filtros": SOLTOS volta ao comportamento antigo (todos os itens soltos).
+- Buscando so por titulo/referencia, o grupo substitui seus itens se o nome/ref do grupo bater; com outros filtros (descricao, codigo, ano, EAN, tipo) aparecem os itens soltos.
+- Cada item mostra na ficha o botao "Grupo de itens: NOME". Um item so pode estar em um grupo.

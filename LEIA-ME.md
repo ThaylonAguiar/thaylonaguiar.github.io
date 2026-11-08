@@ -133,3 +133,5 @@ Itens novos são sempre criados completos.
 ## v48 - Botao "Colunas" movido para o topo, ao lado de "+ Novo".
 
 ## v49 - Desfeita a regra da v46: a busca de aplicacao volta a achar pedacos no meio das palavras (ex.: "TORO" acha RENAULT OROCH).
+
+## v50 - Corrigido: filtro de aplicacoes dentro da ficha nao mostrava nada (quebrado desde a v46). Voltou ao codigo original da v45.

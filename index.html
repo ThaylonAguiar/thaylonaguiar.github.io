@@ -302,7 +302,7 @@ function togAp(){AP_ALL=AP_ALL?0:1;fApps();return false}
 function togCd(){CD_ALL=CD_ALL?0:1;fCods();return false}
 function fApps0(){AP_ALL=0;CD_ALL=0;const i=$("#fap");if(i){const v=[($("#fd")||{}).value,($("#fy")||{}).value].map(t=>String(t||"").trim()).filter(Boolean).join(" ");if(v)i.value=v;fApps()}const c=$("#fcd");if(c){const v=String(($("#fk")||{}).value||"").trim();if(v)c.value=v;fCods()}}
 function fApps(){const i=$("#fap"),T=$("#tap");if(!i||!T)return;const q=_n(i.value).split(/\s+/).filter(Boolean),R=[...T.querySelectorAll("tr[data-t]")];let n=0;
- R.forEach(r=>{const hc=r.dataset.c||(r.dataset.c=cmpB(r.dataset.t)),ok=q.every(w=>/^\d{4}$/.test(w)?(+r.dataset.de||0)<=+w&&+w<=+r.dataset.at:hasQ(hc,w.replace(/-/g,"")));if(ok)n++;r.style.display=(ok||AP_ALL||!q.length)?"":"none";
+ R.forEach(r=>{const hc=r.dataset.c||(r.dataset.c=r.dataset.t.replace(/[\s\-]+/g,"")),ok=q.every(w=>/^\d{4}$/.test(w)?(+r.dataset.de||0)<=+w&&+w<=+r.dataset.at:hc.includes(w.replace(/-/g,"")));if(ok)n++;r.style.display=(ok||AP_ALL||!q.length)?"":"none";
   [...r.children].forEach((td,k)=>{const o=td.dataset.o,H=[];if(q.length&&ok)q.forEach(w=>{if(/^\d{4}$/.test(w)){if(k==2||k==3)H.push([0,o.length])}else if(k!=2&&k!=3){H.push(..._rLit(o,w));if(w.includes("-"))H.push(..._rCl(o,w.replace(/-/g,"")))}});td.innerHTML=_hlr(o,H)})});
  $("#fac").textContent=q.length?(n?n+" de "+R.length+" aplicações":"Nenhuma aplicação encontrada"):R.length+" aplicações";
  const g=$("#fatg");if(g){g.style.display=q.length&&n&&n<R.length?"":"none";g.textContent=AP_ALL?"mostrar só a busca":"mostrar tudo"}}

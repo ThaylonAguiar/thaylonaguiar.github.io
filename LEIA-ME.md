@@ -135,3 +135,6 @@ Itens novos são sempre criados completos.
 ## v49 - Desfeita a regra da v46: a busca de aplicacao volta a achar pedacos no meio das palavras (ex.: "TORO" acha RENAULT OROCH).
 
 ## v50 - Corrigido: filtro de aplicacoes dentro da ficha nao mostrava nada (quebrado desde a v46). Voltou ao codigo original da v45.
+
+## v51 - Busca de aplicacao por campo
+- Cada palavra buscada precisa estar DENTRO de um unico campo (marca, modelo ou obs; ou o titulo). Nao junta mais marca+modelo: "FIATUNO" nao acha nada e "TORO" nao acha RENAULT OROCH. "FIAT UNO" (com espaco) continua achando, pois cada palavra esta em um campo. Vale para o filtro Aplicacao do topo e para o filtro dentro da ficha.

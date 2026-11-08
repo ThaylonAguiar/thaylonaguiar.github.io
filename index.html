@@ -302,7 +302,7 @@ function togAp(){AP_ALL=AP_ALL?0:1;fApps();return false}
 function togCd(){CD_ALL=CD_ALL?0:1;fCods();return false}
 function fApps0(){AP_ALL=0;CD_ALL=0;const i=$("#fap");if(i){const v=[($("#fd")||{}).value,($("#fy")||{}).value].map(t=>String(t||"").trim()).filter(Boolean).join(" ");if(v)i.value=v;fApps()}const c=$("#fcd");if(c){const v=String(($("#fk")||{}).value||"").trim();if(v)c.value=v;fCods()}}
 function fApps(){const i=$("#fap"),T=$("#tap");if(!i||!T)return;const q=_n(i.value).split(/\s+/).filter(Boolean),R=[...T.querySelectorAll("tr[data-t]")];let n=0;
- R.forEach(r=>{const hc=r.dataset.c||(r.dataset.c=r.dataset.t.replace(/[\s\-]+/g,"")),ok=q.every(w=>/^\d{4}$/.test(w)?(+r.dataset.de||0)<=+w&&+w<=+r.dataset.at:hc.includes(w.replace(/-/g,"")));if(ok)n++;r.style.display=(ok||AP_ALL||!q.length)?"":"none";
+ R.forEach(r=>{const hc=r._hf||(r._hf=[0,1,4].map(k=>_n(r.children[k].dataset.o||"").replace(/[\s\-]+/g,""))),ok=q.every(w=>/^\d{4}$/.test(w)?(+r.dataset.de||0)<=+w&&+w<=+r.dataset.at:hc.some(c=>c.includes(w.replace(/-/g,""))));if(ok)n++;r.style.display=(ok||AP_ALL||!q.length)?"":"none";
   [...r.children].forEach((td,k)=>{const o=td.dataset.o,H=[];if(q.length&&ok)q.forEach(w=>{if(/^\d{4}$/.test(w)){if(k==2||k==3)H.push([0,o.length])}else if(k!=2&&k!=3){H.push(..._rLit(o,w));if(w.includes("-"))H.push(..._rCl(o,w.replace(/-/g,"")))}});td.innerHTML=_hlr(o,H)})});
  $("#fac").textContent=q.length?(n?n+" de "+R.length+" aplicações":"Nenhuma aplicação encontrada"):R.length+" aplicações";
  const g=$("#fatg");if(g){g.style.display=q.length&&n&&n<R.length?"":"none";g.textContent=AP_ALL?"mostrar só a busca":"mostrar tudo"}}
@@ -445,7 +445,7 @@ function carText(x){const a=parse(x).apps;return norm(x.t+" "+(a.length?a.map(p=
 const cpt=s=>norm(s).replace(/[^A-Z0-9]/g,"");
 function codeKeys(x){const k=new Set(),r=cpt(x.r);if(r)k.add(r);parse(x).cods.forEach(c=>{const l=cpt(c[0]+c[1]);if(l)k.add(l);String(c[1]).split(/[,;:\/|]/).forEach(s=>{const z=cpt(s);if(z)k.add(z)})});return[...k]}
 function filt(){
- const i=($("#fi").value||"").trim().replace(/^0+/,""),t=normT($("#ft").value),g=$("#fg").value,sg=$("#fs").value,q=norm($("#fd").value).replace(/#/g,"").trim(),kc=norm($("#fk").value).replace(/[^A-Z0-9]/g,""),y=+$("#fy").value||0,ke=($("#fe").value||"").replace(/\D/g,""),qc=cmpA(q),tk=q.split(/\s+/).filter(Boolean).map(cmpA),rowOk=h=>hasQ(h,qc)||tk.every(w=>hasQ(h,w));
+ const i=($("#fi").value||"").trim().replace(/^0+/,""),t=normT($("#ft").value),g=$("#fg").value,sg=$("#fs").value,q=norm($("#fd").value).replace(/#/g,"").trim(),kc=norm($("#fk").value).replace(/[^A-Z0-9]/g,""),y=+$("#fy").value||0,ke=($("#fe").value||"").replace(/\D/g,""),qc=cmpA(q),tk=q.split(/\s+/).filter(Boolean).map(cmpA),rowOk=F=>F.some(f=>f.includes(qc))||tk.every(w=>F.some(f=>f.includes(w)));
  return[...M.values()].filter(x=>{
   if(g&&x.g!=g)return false;if(sg&&x.sg!=sg)return false;if(i&&!(/^\d+$/.test(i)&&x.id.includes(i))&&!norm(x.r).includes(norm(i))&&!(cpt(i)&&cpt(x.r).includes(cpt(i))))return false;
   if(TSEL){if(x._ty===undefined)x._ty=typeKey(x);if(x._ty!==TSEL)return false}else if(t){if(x._tk===undefined)x._tk=normT(x.t);if(!x._tk.startsWith(t))return false}
@@ -453,8 +453,9 @@ function filt(){
   if(kc){if(!x._k)x._k=codeKeys(x);if(!x._k.some(s=>s.includes(kc)))return false}
   if(y||q){
    if(y){const a=parse(x).apps.filter(p=>p.de<=y&&y<=p.at&&(p.de||p.at<9999||true));
-    if(!a.some(p=>!q||rowOk(cmpB(p.ma+" "+p.mo+" "+p.ob))))return false}
-   else{if(!x._nc)x._nc=cmpB(carText(x));if(!hasQ(x._nc,qc)){if(!x._rc)x._rc=[];parse(x).apps.forEach(p=>{x._rc.push(cmpB(p.ma+" "+p.mo+" "+p.ob));let b=p.mo.split(/\s+/),k=b.findIndex(w=>/^\d/.test(w));b=(k>0?b.slice(0,k):b).join(" ");(p.ob.match(/\+[^,)\]]+/g)||[]).forEach(t=>{x._rc.push(cmpB(b+" "+t.slice(1)));x._rc.push(cmpB(p.ma+" "+b+" "+t.slice(1)))})});if(!x._rc.some(rowOk))return false}}}
+    if(!a.some(p=>!q||rowOk([cmpA(p.ma),cmpA(p.mo),cmpA(p.ob)])))return false}
+   else{if(!x._nf){const ap=parse(x).apps;x._nf=[cmpA(x.t)];x._rc=[];if(ap.length)ap.forEach(p=>{x._nf.push(cmpA(p.ma),cmpA(p.mo),cmpA(p.ob));let b=p.mo.split(/\s+/),k=b.findIndex(w=>/^\d/.test(w));b=(k>0?b.slice(0,k):b).join(" ");(p.ob.match(/\+[^,)\]]+/g)||[]).forEach(t=>{x._rc.push([cmpA(p.ma),cmpA(b),cmpA(t.slice(1))])})});else splitCod(x.d)[0].split(/\r?\n/).filter(l=>!/^[^#:]{1,40}:\s*\S/.test(l)).forEach(l=>x._nf.push(cmpA(l)))}
+    if(!rowOk(x._nf)&&!x._rc.some(rowOk))return false}}
   return true}).sort((a,b)=>(isOff(a)-isOff(b))||a.t.replace(/^[~@]+/,"").localeCompare(b.t.replace(/^[~@]+/,"")))}
 var RF=0;try{RF=localStorage.getItem("rf")=="1"?1:0}catch(e){}
 var _f0=filt;filt=function(){const L=_f0.apply(this,arguments);if(RF)L.sort((a,b)=>(isOff(a)-isOff(b))||String(a.r||"~").localeCompare(String(b.r||"~"),"pt",{numeric:true,sensitivity:"base"}));return L};

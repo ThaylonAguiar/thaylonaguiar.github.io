@@ -55,7 +55,7 @@
   }
 
   /* ---------- status ---------- */
-  var VERSION = "v45", lastErr = "";
+  var VERSION = "v49", lastErr = "";
   var state = "init";
   var testMode = false, tdata = null, testPh = [], gShow = false;
   function visitor() { return !testMode && localStorage.getItem("signed") !== "1"; }
@@ -165,6 +165,31 @@
       .then(function (j) { var m = j && j.user && j.user.emailAddress; if (m) localStorage.setItem("hint", m); })
       .catch(function () {});
   }
+  /* renovacao silenciosa SEM popup: iframe invisivel com prompt=none (o popup do GIS era bloqueado pelo Chrome do celular) */
+  function silentIframe(id) {
+    return new Promise(function (ok, no) {
+      var f = document.createElement("iframe"), done = false;
+      f.name = "silentauth"; f.style.cssText = "display:none;width:0;height:0;border:0";
+      function end(err, r) {
+        if (done) return; done = true; clearTimeout(to); window.removeEventListener("message", on);
+        try { f.remove(); } catch (e) {}
+        if (err) return no(Object.assign(new Error(err), { auth: true }));
+        tok = r.t; tokExp = Date.now() + (r.e - 60) * 1000;
+        try { localStorage.setItem("tok", JSON.stringify({ t: tok, exp: tokExp })); localStorage.setItem("signed", "1"); } catch (e) {}
+        ok(tok);
+      }
+      function on(ev) {
+        if (ev.origin !== location.origin || !ev.data || ev.data.silentAuth !== 1) return;
+        var q = new URLSearchParams(String(ev.data.hash || "").replace(/^#/, "")), t = q.get("access_token");
+        if (t) end(null, { t: t, e: +q.get("expires_in") || 3600 }); else end("login");
+      }
+      var to = setTimeout(function () { end("tempo esgotado"); }, 12000);
+      window.addEventListener("message", on);
+      var hint = ""; try { hint = localStorage.getItem("hint") || ""; } catch (e) {}
+      f.src = "https://accounts.google.com/o/oauth2/v2/auth?client_id=" + encodeURIComponent(id) + "&redirect_uri=" + encodeURIComponent(location.origin + "/") + "&response_type=token&scope=" + encodeURIComponent(SCOPE) + "&prompt=none&state=silent" + (hint ? "&login_hint=" + encodeURIComponent(hint) : "");
+      document.body.appendChild(f);
+    });
+  }
   function getToken(interactive) {
     if (tok && tokExp > Date.now() + 60000) return Promise.resolve(tok);
     if (pend && (!interactive || pendI)) return pend;
@@ -173,6 +198,7 @@
         if (!interactive && localStorage.getItem("signed") !== "1") throw Object.assign(new Error("login"), { auth: true });
         var id = CID();
         if (!id) throw Object.assign(new Error("Falta o Client ID"), { code: "cid" });
+        if (!interactive) return await silentIframe(id);
         await loadGis();
         return await new Promise(function (ok, no) {
           var done = false;

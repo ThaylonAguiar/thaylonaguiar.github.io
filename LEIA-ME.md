@@ -121,3 +121,15 @@ Itens novos são sempre criados completos.
 - Link **"Grupos de itens: AGRUPADOS/SOLTOS (trocar)"** ao lado de "limpar filtros": SOLTOS volta ao comportamento antigo (todos os itens soltos).
 - Buscando so por titulo/referencia, o grupo substitui seus itens se o nome/ref do grupo bater; com outros filtros (descricao, codigo, ano, EAN, tipo) aparecem os itens soltos.
 - Cada item mostra na ficha o botao "Grupo de itens: NOME". Um item so pode estar em um grupo.
+
+## v46 - Correcao da busca de aplicacao
+- Antes a busca juntava marca+modelo sem espacos, entao "TORO" achava "RENAULT OROCH" (RENAUL**T OROC**H). Agora o texto buscado precisa COMECAR no inicio de uma palavra (pode atravessar palavras: "OROCH1.6" e "RENAULTOROCH" continuam funcionando; "TORO" so acha TORO). Vale para o filtro Aplicacao do topo e para o filtro dentro da ficha.
+- Efeito colateral: busca que comeca no meio de uma palavra (ex.: "6V" dentro de "16V") nao encontra mais.
+
+## v47 - Fim do spam de "Pop-up blocked" no celular
+- A renovacao automatica do login (a cada ~1h) abria um popup do Google sem toque do usuario; o Chrome do celular bloqueava e avisava toda hora. Agora a renovacao e feita em um iframe invisivel (sem popup). Se o Google nao permitir renovar em silencio, o app mostra "Sem login (toque)" e voce toca uma vez (esse toque abre o login normalmente, sem bloqueio). Nao aparece mais o aviso de popup.
+- Dica: no Chrome do celular, se o aviso aparecer uma ultima vez, toque em "Always show" para o site thaylonaguiar.github.io.
+
+## v48 - Botao "Colunas" movido para o topo, ao lado de "+ Novo".
+
+## v49 - Desfeita a regra da v46: a busca de aplicacao volta a achar pedacos no meio das palavras (ex.: "TORO" acha RENAULT OROCH).

@@ -138,3 +138,7 @@ Itens novos são sempre criados completos.
 
 ## v51 - Busca de aplicacao por campo
 - Cada palavra buscada precisa estar DENTRO de um unico campo (marca, modelo ou obs; ou o titulo). Nao junta mais marca+modelo: "FIATUNO" nao acha nada e "TORO" nao acha RENAULT OROCH. "FIAT UNO" (com espaco) continua achando, pois cada palavra esta em um campo. Vale para o filtro Aplicacao do topo e para o filtro dentro da ficha.
+
+## v52 - Fotos acompanham a mudanca de referencia
+- Ao editar um item e trocar a REFERENCIA, as fotos (e a chave de fotos) agora vao junto para a nova referencia; nada fica perdido na referencia antiga.
+- Para fotos que JA ficaram perdidas (ex.: MTE4098 -> MTE4153): abra o item novo (sem fotos); aparece "Fotos sem item (referencia antiga?): MTE4098 (N)". Toque no nome e confirme para trazer as fotos para o item.

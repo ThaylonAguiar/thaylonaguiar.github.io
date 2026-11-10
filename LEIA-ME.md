@@ -142,3 +142,6 @@ Itens novos são sempre criados completos.
 ## v52 - Fotos acompanham a mudanca de referencia
 - Ao editar um item e trocar a REFERENCIA, as fotos (e a chave de fotos) agora vao junto para a nova referencia; nada fica perdido na referencia antiga.
 - Para fotos que JA ficaram perdidas (ex.: MTE4098 -> MTE4153): abra o item novo (sem fotos); aparece "Fotos sem item (referencia antiga?): MTE4098 (N)". Toque no nome e confirme para trazer as fotos para o item.
+
+## v53 - Busca de aplicacao: cada palavra tem que estar na MESMA linha de aplicacao
+- Antes, "207 1.4" achava itens com "207" em uma linha e "1.4" em outra (ex.: pastilha com 207 1.6 e 206 1.4). Agora o item so aparece se existir uma aplicacao (marca/modelo/obs) que tenha todas as palavras, igual ao filtro dentro da ficha.

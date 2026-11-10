@@ -461,8 +461,8 @@ function filt(){
   if(y||q){
    if(y){const a=parse(x).apps.filter(p=>p.de<=y&&y<=p.at&&(p.de||p.at<9999||true));
     if(!a.some(p=>!q||rowOk([cmpA(p.ma),cmpA(p.mo),cmpA(p.ob)])))return false}
-   else{if(!x._nf){const ap=parse(x).apps;x._nf=[cmpA(x.t)];x._rc=[];if(ap.length)ap.forEach(p=>{x._nf.push(cmpA(p.ma),cmpA(p.mo),cmpA(p.ob));let b=p.mo.split(/\s+/),k=b.findIndex(w=>/^\d/.test(w));b=(k>0?b.slice(0,k):b).join(" ");(p.ob.match(/\+[^,)\]]+/g)||[]).forEach(t=>{x._rc.push([cmpA(p.ma),cmpA(b),cmpA(t.slice(1))])})});else splitCod(x.d)[0].split(/\r?\n/).filter(l=>!/^[^#:]{1,40}:\s*\S/.test(l)).forEach(l=>x._nf.push(cmpA(l)))}
-    if(!rowOk(x._nf)&&!x._rc.some(rowOk))return false}}
+   else{if(!x._nf){const ap=parse(x).apps;x._nf=[cmpA(x.t)];x._rc=[];x._ar=[];if(ap.length)ap.forEach(p=>{x._ar.push([cmpA(p.ma),cmpA(p.mo),cmpA(p.ob)]);let b=p.mo.split(/\s+/),k=b.findIndex(w=>/^\d/.test(w));b=(k>0?b.slice(0,k):b).join(" ");(p.ob.match(/\+[^,)\]]+/g)||[]).forEach(t=>{x._rc.push([cmpA(p.ma),cmpA(b),cmpA(t.slice(1))])})});else splitCod(x.d)[0].split(/\r?\n/).filter(l=>!/^[^#:]{1,40}:\s*\S/.test(l)).forEach(l=>x._nf.push(cmpA(l)))}
+    if(x._ar.length?!(x._ar.some(rowOk)||x._rc.some(rowOk)):!rowOk(x._nf))return false}}
   return true}).sort((a,b)=>(isOff(a)-isOff(b))||a.t.replace(/^[~@]+/,"").localeCompare(b.t.replace(/^[~@]+/,"")))}
 var RF=0;try{RF=localStorage.getItem("rf")=="1"?1:0}catch(e){}
 var _f0=filt;filt=function(){const L=_f0.apply(this,arguments);if(RF)L.sort((a,b)=>(isOff(a)-isOff(b))||String(a.r||"~").localeCompare(String(b.r||"~"),"pt",{numeric:true,sensitivity:"base"}));return L};

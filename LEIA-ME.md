@@ -145,3 +145,38 @@ Itens novos são sempre criados completos.
 
 ## v53 - Busca de aplicacao: cada palavra tem que estar na MESMA linha de aplicacao
 - Antes, "207 1.4" achava itens com "207" em uma linha e "1.4" em outra (ex.: pastilha com 207 1.6 e 206 1.4). Agora o item so aparece se existir uma aplicacao (marca/modelo/obs) que tenha todas as palavras, igual ao filtro dentro da ficha.
+
+## v54 - Etiquetas: mais opcoes
+- Na tela Etiquetas: links "todos para P / todos para M / todos para G" (envia para o tamanho os itens ainda sem tamanho).
+- **Edicao manual**: link "✎ edicao manual (todas)" em ITENS e "✎ Manual" em cada coluna (P, M, G). Abre uma etiqueta por vez com a LINHA 1 pronta (MARCA: codigo [MONTADORAS]), a TABELA de aplicacoes do item ao lado para consulta e as linhas 2 e 3 em branco para voce digitar (use *asteriscos* para negrito em motor e ano). Tem previa (linha 1 fonte 16, demais fonte 14), botoes Anterior / Proxima, "Preencher automatico" e, na ultima, "Concluir e gerar Word" (une todas em um unico Word). Da para trocar o tamanho P/M/G da etiqueta ali mesmo.
+- **So codigos e montadoras (Word)**: gera um Word so com a linha 1 (marca em negrito + codigo + montadoras) em fonte 24, 2 colunas na mesma grade do seu modelo, para etiquetar caixas.
+- Tamanho das etiquetas P = o do seu modelo (2 colunas, linhas de 1531 twips); fontes: linha 1 = 16, demais = 14.
+
+## v55 - Etiquetas: editor manual preciso
+- Previa no tamanho real do Word (P 10,9 cm / M 6,4 cm / G 21 cm de largura util), fonte Cambria/Caladea: a linha quebra onde quebrara no Word e mostra quantas linhas cada texto ocupa.
+- Montadora [ ] da linha 1 preenchida sozinha conforme os carros digitados; CITROEN + PEUGEOT viram CIT./PEUG. (tambem no automatico). Editar o colchete manualmente pausa o automatico.
+- Sugestoes de carros ao digitar nas linhas 2 e 3.
+- Ao abrir Manual, campos vazios; etiquetas nao editadas voltam ao automatico ao sair.
+
+## v56
+- Editor manual de etiquetas: sugestoes de carros e montadora automatica usam so as aplicacoes do proprio item (nao mais o catalogo todo).
+
+## v57
+- Etiqueta manual: lista de sugestoes abaixo do campo (so carros do item), setas + Enter escolhem e ja inserem ", "; chips mantidos.
+- Aba TITULO: setas + Enter tambem escolhem a sugestao.
+- Tela manual nao fecha mais ao clicar fora nem com Esc; so em "Voltar a lista".
+
+## v58
+- Sugestoes de carro aceitam numeros (ex.: 206).
+- Botao "Pre-visualizar" (lista) e "Previa do Word" (editor manual): mostra P/M/G nos tamanhos reais antes de baixar (previa aproximada, feita pelo app).
+- Previa da linha no editor agora centralizada, como no Word.
+
+## v59
+- Campo OBSERVACOES na ficha do item (entre Codigos/EAN e Produtos relacionados) e no PDF/imagem: tudo que nao for MONTADORA/aplicacoes nem CODIGOS, na ordem em que foi escrito. Um titulo como "CODIGOS DOS COMPONENTES:" (com ":" e sem valores) e o que vem depois dele ate um novo "CODIGOS" passam a ser observacoes.
+- Cadastro/edicao: sugestoes ao digitar no campo de descricao. Linha sem # -> montadoras (ex.: F -> FIAT), escolher insere "FIAT:" e quebra a linha; "#" -> carros da montadora da secao (ex.: FIAT: #p -> PALIO 1.0 8V...), insere com 3 espacos para os anos; depois de CODIGOS -> marcas de codigo (M -> MTE), insere "MTE: ". Setas + Enter escolhem; Esc fecha; Enter sem selecionar quebra a linha normalmente.
+
+## v60
+- Corrigido: sugestoes do campo de descricao agora ligadas ao formulario ativo (Novo item / Editar).
+
+## v61
+- Sugestoes de carros: so CARRO + MOTOR + VALVULAS (descarta anos, >, parenteses e o resto), sem repetir; ordem alfabetica e motor/valvulas do menor para o maior (1.0 8V, 1.0 12V, 1.0 16V).

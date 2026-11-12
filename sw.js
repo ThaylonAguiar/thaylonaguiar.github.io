@@ -1,6 +1,6 @@
 /* Service worker: guarda o app para abrir offline e serve as fotos (/_blob/ID) vindas do Drive. */
-const V="v53";
-const SHELL = ["./", "index.html", "drive.js", "jszip.min.js", "config.js", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
+const V="v61";
+const SHELL = ["./", "index.html", "drive.js", "jszip.min.js", "config.js", "manifest.webmanifest", "icon-192.png", "icon-512.png","caladea-r.ttf","caladea-b.ttf"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open("shell-" + V).then(c => Promise.all(SHELL.map(u => c.add(new Request(u, { cache: "reload" }))))).then(() => self.skipWaiting()));

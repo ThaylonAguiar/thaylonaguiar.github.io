@@ -183,3 +183,10 @@ Itens novos são sempre criados completos.
 
 ## v62
 - TITULOS A-Z: botoes "Mesclar titulos" e "Editar titulo". Alteram so o nome padrao (antes dos parenteses e do "-") de todos os itens do titulo, preservando (detalhes) e o restante; cada item ganha uma versao no historico. Nao fecha ao clicar fora enquanto o painel de edicao esta aberto.
+
+## v63
+- Etiqueta trancada: fica salva dentro do item (colecao "lab") e, ao reabrir Etiquetas, volta exatamente como foi salva (texto, tamanho e foto). Trancar/destrancar: no cartao da etiqueta, no editor manual, "Trancar todas/Destrancar todas", ou na ficha do item (gera com o texto automatico atual). Ao baixar o Word, todas as etiquetas dimensionadas sao trancadas automaticamente. Itens com etiqueta trancada mostram o cadeado na lista.
+- Botoes de Baixar/Pre-visualizar/Fechar agora ficam no topo (fixos) da tela de etiquetas.
+
+## v64
+- Etiqueta criada/editada fica SALVA no item automaticamente (editor manual e cartoes), mesmo sem trancar; ao reabrir, volta como foi feita. "Trancar" protege: etiqueta trancada nao aceita edicao, troca de tamanho nem "preencher automatico" ate destrancar (continua salva). "voltar ao automatico" descarta a versao salva (so se destrancada). Baixar o Word tranca todas as dimensionadas.

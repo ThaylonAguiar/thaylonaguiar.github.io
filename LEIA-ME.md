@@ -180,3 +180,6 @@ Itens novos são sempre criados completos.
 
 ## v61
 - Sugestoes de carros: so CARRO + MOTOR + VALVULAS (descarta anos, >, parenteses e o resto), sem repetir; ordem alfabetica e motor/valvulas do menor para o maior (1.0 8V, 1.0 12V, 1.0 16V).
+
+## v62
+- TITULOS A-Z: botoes "Mesclar titulos" e "Editar titulo". Alteram so o nome padrao (antes dos parenteses e do "-") de todos os itens do titulo, preservando (detalhes) e o restante; cada item ganha uma versao no historico. Nao fecha ao clicar fora enquanto o painel de edicao esta aberto.

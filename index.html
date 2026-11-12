@@ -312,6 +312,28 @@ function dPick(i){const ta=$("#xd"),c=DS;if(!c||!c.out[i])return;const nm=c.out[
  let ins;if(c.kind=="m"){ins=nm+(nm=="C\u00d3DIGOS"||!tail.trim()?":":"")+(tail.trim()?"":"\n")}else if(c.kind=="c")ins="#"+nm+(tail.trim()?"":"   ");else ins=nm+": ";
  const nv=v.slice(0,c.ls)+ins+rest;ta.value=nv;const cp=c.ls+ins.length;ta.focus();try{ta.setSelectionRange(cp,cp)}catch(e){}$("#lsg").style.display="none";DS=null;
  ta.dispatchEvent(new Event("input",{bubbles:true}))}
+/* ===== TITULOS: mesclar / editar ===== */
+let TM=null,TMS=new Set(),TP=null;
+function typeLabelG(x){const g=GER;GER=true;try{return typeLabel(x)}finally{GER=g}}
+function renT(t,nb){t=String(t||"");const pf=t.match(/^[^A-Za-z0-9À-ÿ]*/)[0],b=t.slice(pf.length);let d=0,i=-1;for(let k=0;k<b.length;k++){const c=b[k];if(c=="(")d++;else if(c==")")d=Math.max(0,d-1);else if(c=="-"&&!d){i=k;break}}
+ const head=i<0?b:b.slice(0,i),rest=b.slice(head.length),p=head.indexOf("(");let nh;
+ if(p<0)nh=nb+(head.match(/\s*$/)[0]);
+ else{const tail=head.slice(p),ws=head.slice(0,p).match(/\s*$/)[0];if(tail.replace(/\([^)]*\)/g,"").trim()==="")nh=nb+ws+tail;else nh=nb+ws+(head.match(/\([^)]*\)/g)||[]).join("")+(head.match(/\s*$/)[0])}
+ return pf+nh+rest}
+function tmCln(s){return String(s||"").toUpperCase().replace(/\s+/g," ").trim()}
+function tmItems(){const K=new Set(TP.keys);return[...M.values()].filter(x=>K.has(norm(typeLabelG(x))))}
+function tmSet(m){if(document.body.classList.contains("ro"))return toast("Modo visitante: somente consulta. Entre com o Google para alterar títulos.");if(!GER)togT();TM=TM==m?null:m;TMS=new Set();TP=null;TL=typeList();titR()}
+function tmRow(i){const e=TL[i];if(TM=="edit")return tmForm([e.k]);if(TMS.has(e.k))TMS.delete(e.k);else TMS.add(e.k);titR()}
+function tmForm(keys){TP={keys:[...keys]};const E=TL.filter(e=>keys.includes(e.k)).sort((a,b)=>b.n-a.n),mg=E.length>1;
+ $("#tc").innerHTML=`<h2>${mg?"Mesclar títulos":"Editar título"}</h2><p class="mu">${mg?"Os outros títulos passam a usar o escolhido. ":""}Muda só o nome padrão (antes dos parênteses e do "-"). Os detalhes entre ( ) e o resto do título ficam como estão.</p>${mg?"":`<div class="mu" style="margin:6px 0">${esc(E[0].l)} (${E[0].n})</div>`}${mg?`<p style="margin:8px 0 4px"><b>Qual título permanece?</b></p>${E.map((e,i)=>`<label style="display:flex;gap:8px;align-items:center;margin:2px 0"><input type="radio" name="tmr" ${i?"":"checked"} onchange="tmFill(${i})" style="width:auto"> ${esc(e.l)} <span class="mu">(${e.n})</span></label>`).join("")}<input id="tmn" type="hidden" value="${esc(E[0].l)}">`:`<label>Novo título<input id="tmn" value="${esc(E[0].l)}" oninput="tmPrev()" autocomplete="off"></label>`}<div id="tmp" style="margin:8px 0"></div><div class="row"><button class="btn p" onclick="tmApply()">Aplicar</button><button class="btn" onclick="TP=null;titR()">Voltar</button></div>`;
+ TP.E=E;tmPrev()}
+function tmFill(i){$("#tmn").value=TP.E[i].l;tmPrev()}
+function tmPrev(){const nb=tmCln($("#tmn").value),it=tmItems(),ch=nb?it.filter(x=>renT(x.t,nb)!=x.t):[];
+ $("#tmp").innerHTML=!nb?'<span class="mu">Digite o novo título.</span>':`<b>${ch.length}</b> de ${it.length} itens serão alterados.`+ch.slice(0,3).map(x=>`<div class="mu" style="margin-top:4px">${esc(x.t)}<br>→ <span style="color:var(--fg,inherit)">${esc(renT(x.t,nb))}</span></div>`).join("")}
+async function tmApply(){const nb=tmCln($("#tmn").value);if(!nb)return toast("Digite o novo título.");const ch=tmItems().filter(x=>renT(x.t,nb)!=x.t);if(!ch.length)return toast("Nada a alterar.");
+ if(!await askC("Alterar o título de "+ch.length+" iten(s) para "+nb+"? (fica no histórico de versões de cada item)"))return;
+ let n=0;for(const x of ch){const t=renT(x.t,nb),o={t,r:x.r,g:x.g,sg:x.sg||"",e:x.e||"",d:x.d,del:false};if(!await W(()=>db.doc("items/"+x.id).set(o)))break;await addVer(x.id,o,"Título alterado em lote",x);M.set(x.id,Object.assign({},x,{t}));n++;if(n%20==0)toast("Alterando "+n+" de "+ch.length+"…")}
+ _rcN=-1;if(TSEL){TSEL="";$("#ft").value="";$("#ft").classList.remove("ex")}TP=null;TM=null;TMS=new Set();TL=typeList();titR();shown=60;render();toast(n+" título(s) alterado(s).")}
 async function labCodes(){
  const dl=typeof claude!="undefined"?await claude.use("downloads"):null;
  if(!dl||typeof JSZip=="undefined")return toast("Download indisponível: abra o link em uma aba normal do navegador, logado.");
@@ -404,7 +426,7 @@ let dn=null;
 addEventListener("mousedown",e=>{dn=e.target});
 addEventListener("click",e=>{const t=e.target;if(t===dn&&t.classList&&t.classList.contains("ov"))ovClose(t.id)});
 addEventListener("keydown",e=>{if(e.key!="Escape")return;for(const id of["cf","tv","lv","gv","rv","dv"]){const el=$("#"+id);if(el&&el.style.display=="block"){ovClose(id);break}}});
-function ovClose(id){if(id=="lv"&&typeof MAN!=="undefined"&&MAN)return;if(id=="cf")$("#cn").click();else if(id=="dv")closeD();else if(id=="fv")return;else $("#"+id).style.display="none"}
+function ovClose(id){if(id=="tv"&&typeof TP!=="undefined"&&TP)return;if(id=="lv"&&typeof MAN!=="undefined"&&MAN)return;if(id=="cf")$("#cn").click();else if(id=="dv")closeD();else if(id=="fv")return;else $("#"+id).style.display="none"}
 
 function setCols(n){document.documentElement.style.setProperty("--c",n);document.querySelector(".wrap").style.maxWidth=+n>1?"none":"900px";try{localStorage.setItem("cols",n)}catch(e){}}
 {let c0="1";try{c0=localStorage.getItem("cols")||"1"}catch(e){}$("#cl").value=c0;setCols(c0)}
@@ -698,11 +720,11 @@ function tsug(){const b=$("#tsg"),q=normT($("#ft").value);if(!q||TSEL){b.style.d
  b.innerHTML=L.map(i=>`<div class="sgi" onclick="pickT(${i})"><span>${esc(TL[i].l)}</span><span class="mu">${TL[i].n}</span></div>`).join("");b.style.display="block"}
 function pickT(i){const e=TL[i];if(!e)return;$("#ft").value=e.l;TSEL=e.k;$("#ft").classList.add("ex");$("#tsg").style.display="none";$("#tv").style.display="none";shown=60;render();window.scrollTo(0,0)}
 function pickL(l){$("#ft").value=l;TSEL="";$("#ft").classList.remove("ex");$("#tv").style.display="none";shown=60;render();window.scrollTo(0,0)}
-function openTit(){TL=typeList();tLet="";titR();$("#tv").style.display="block"}
-function titR(){const ls=[...new Set(TL.map(e=>e.k[0]).filter(Boolean))];
+function openTit(){TL=typeList();tLet="";TM=null;TMS=new Set();TP=null;titR();$("#tv").style.display="block"}
+function titR(){if(TP)return;const ls=[...new Set(TL.map(e=>e.k[0]).filter(Boolean))];
  const chip=(l,t)=>`<button class="btn lc${tLet==l?" on":""}" onclick="tLet='${l}';titR()">${t}</button>`;
- let h=`<h2>Títulos</h2><p class="mu">Toque em um título para ver só esse tipo de peça. Toque em uma letra para ver os que começam com ela.</p><div class="lb">${chip("","Todos")}${ls.map(l=>chip(l,l)).join("")}</div>`,last="";
- TL.forEach((e,i)=>{const L=e.k[0];if(tLet&&L!=tLet)return;if(L!=last){last=L;h+=`<h3>${L} <a href="#" onclick="pickL('${L}');return false" style="font-size:12px;color:var(--ac);font-weight:400">ver todos que começam com ${L}</a></h3>`}h+=`<button class="trow" onclick="pickT(${i})"><span>${esc(e.l)}</span><span class="mu">${e.n}</span></button>`});
+ let h=`<h2>Títulos</h2><p class="mu">${TM=="edit"?"Toque no título que quer editar.":TM=="merge"?"Marque 2 ou mais títulos para unir em um só.":"Toque em um título para ver só esse tipo de peça. Toque em uma letra para ver os que começam com ela."}</p><div class="row" style="margin:0 0 8px"><button class="btn${TM=="merge"?" p":""}" onclick="tmSet('merge')">Mesclar títulos</button><button class="btn${TM=="edit"?" p":""}" onclick="tmSet('edit')">Editar título</button>${TM=="merge"?`<button class="btn p" ${TMS.size>1?"":"disabled"} onclick="tmForm([...TMS])">Mesclar selecionados (${TMS.size})</button>`:""}${TM?`<button class="btn" onclick="TM=null;TMS=new Set();titR()">Cancelar</button>`:""}</div><div class="lb">${chip("","Todos")}${ls.map(l=>chip(l,l)).join("")}</div>`,last="";
+ TL.forEach((e,i)=>{const L=e.k[0];if(tLet&&L!=tLet)return;if(L!=last){last=L;h+=`<h3>${L} <a href="#" onclick="pickL('${L}');return false" style="font-size:12px;color:var(--ac);font-weight:400">ver todos que começam com ${L}</a></h3>`}h+=`<button class="trow" style="${TMS.has(e.k)?"border-color:var(--ac);background:var(--ac2)":""}" onclick="${TM?`tmRow(${i})`:`pickT(${i})`}"><span>${TM=="merge"?(TMS.has(e.k)?"☑ ":"☐ "):""}${esc(e.l)}</span><span class="mu">${e.n}</span></button>`});
  $("#tc").innerHTML=h}
 function setFlt(h){document.body.classList.toggle("fh",h);$("#bflt").textContent="Filtros "+(h?"▾":"▴");try{localStorage.setItem("fh",h?"1":"0")}catch(e){}}
 function togFlt(){setFlt(!document.body.classList.contains("fh"))}

@@ -226,3 +226,19 @@ Itens novos são sempre criados completos.
 
 ## v76
 - Titulos: volta ao comportamento da v74 (detalhado edita o trecho todo, com parenteses) e ganha o botao "Titulo: GERAL/DETALHADO (trocar)" dentro da propria janela de Titulos.
+
+## v77 - edicao na propria tela
+- Titulo: botao direito (ou segurar) no titulo do item = edita direto no campo; Enter salva, Esc cancela.
+- Tabela de aplicacoes: icone de chave inglesa abre a tabela como texto no lugar da tabela; icone de disquete salva e volta a tabela normal (chave inglesa de novo cancela).
+- Celulas Modelo / De / Ate / Obs.: botao direito (ou segurar) edita a celula; Enter salva na linha do item. Em Obs. o menu tem Editar e Adicionar em VERSOES. Linhas com varias faixas de ano: usar a chave inglesa.
+- Codigos: botao + abre area para escrever MARCA: codigos (Enter = nova linha, varias marcas; Ctrl+Enter ou disquete salva) e adiciona ao fim da lista; chave inglesa edita a lista inteira em texto; botao direito na marca ou no codigo edita a celula.
+- Todas as edicoes ficam no historico de versoes do item.
+
+## v78
+- Ao lado do titulo do item: lupa (pesquisa o titulo no Google), icone de imagem (Google Imagens com o titulo) e ! (avisos e mini guia do padrao: #, @, !, +, ~, MONTADORA:, CODIGOS:, EAN:, OBSERVACAO:). O guia tambem esta em Extras > Guia / avisos.
+
+## v79
+- O botao ! (avisos e guia do padrao) saiu da tela do item e ficou no topo de Novo item / Editar item, ao lado do titulo.
+
+## v80
+- Guia: texto quebra dentro da janela (sem sair da pagina), botao X no canto superior direito no lugar dos botoes Fechar. Corrigido o bloco branco no titulo de Novo item.

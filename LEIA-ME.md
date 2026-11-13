@@ -190,3 +190,15 @@ Itens novos são sempre criados completos.
 
 ## v64
 - Etiqueta criada/editada fica SALVA no item automaticamente (editor manual e cartoes), mesmo sem trancar; ao reabrir, volta como foi feita. "Trancar" protege: etiqueta trancada nao aceita edicao, troca de tamanho nem "preencher automatico" ate destrancar (continua salva). "voltar ao automatico" descarta a versao salva (so se destrancada). Baixar o Word tranca todas as dimensionadas.
+
+## v65/v66
+- Codigos: caixa "ordem alfabetica" (preferencia global do visualizador, vale para todos os itens).
+
+## v67
+- Codigos: em cada marca, dois icones (lupa = Google, foto = Google Imagens) que pesquisam TITULO (antes do "-") + MARCA + CODIGO, ex.: BATERIA ZETTA 48AH. Os botoes gerais de busca continuam como estavam.
+
+## v68
+- Codigos: clicar em um codigo pesquisa no Google "MARCA CODIGO" (para ORIGINAL, so o codigo). Fica so o icone de foto por marca (Google Imagens: titulo + marca + 1o codigo).
+
+## v69
+- Clicar no codigo: a busca inclui sempre a marca (inclusive ORIGINAL).

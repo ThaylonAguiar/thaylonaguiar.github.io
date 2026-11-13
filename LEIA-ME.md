@@ -242,3 +242,6 @@ Itens novos são sempre criados completos.
 
 ## v80
 - Guia: texto quebra dentro da janela (sem sair da pagina), botao X no canto superior direito no lugar dos botoes Fechar. Corrigido o bloco branco no titulo de Novo item.
+
+## v81
+- Tela do item: Editar (chave inglesa), Desativar (bloqueio) / Ativar (check) e Fechar (X) agora ficam no topo, ao lado da lupa e do icone de imagem. Excluir fica sozinho no fim da pagina.

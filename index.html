@@ -313,7 +313,7 @@ function dCtx(ta){const pos=ta.selectionStart==null?ta.value.length:ta.selection
  const top=(M2,q,fn)=>{[...M2.values()].filter(e=>q==""||norm(e.n).startsWith(q)||(q.length>=2&&norm(e.n).includes(" "+q))).sort((a,b)=>b.c-a.c||(a.n<b.n?-1:1)).slice(0,12).forEach(fn)};
  if(mode=="c"){if(t&&!/[:]/.test(t)&&/^[A-Za-z\u00c0-\u00ff0-9 .\-]{1,24}$/.test(t)){kind="b";top(V.br,norm(t),e=>out.push([e.n,e.c+"\u00d7"]))}}
  else if(mode=="a"){
-  if(t[0]=="#"){if(!/\s{2,}|>/.test(t)){kind="c";const q=norm(t.slice(1)),mk=norm(ma.split("/")[0]),pool=new Map();
+  if(t[0]=="#"){if(!/\s{2,}|>/.test(t)){kind="c";const fl=cur.replace(/^\s+/,"")+ta.value.slice(pos).split("\n")[0],cm=fl.slice(1).search(/\s{2,}|\s\d{4}\s*>|\s>/),q=norm(cm<0?fl.slice(1):fl.slice(1,1+cm)).trim(),mk=norm(ma.split("/")[0]),pool=new Map();
     const add=(m,c)=>c.forEach((e,k)=>{const o=pool.get(m+"|"+k);if(!o)pool.set(m+"|"+k,{n:e.n,b:e.b,en:e.en,v:e.v,c:e.c,h:m})});
     if(mk&&V.car.has(mk))add("",V.car.get(mk));else V.car.forEach((c,m)=>add(V.ma.get(m)?V.ma.get(m).n:m,c));
     {const CO=new Intl.Collator("pt");[...pool.values()].filter(e=>q==""||norm(e.n).startsWith(q)||(q.length>=2&&norm(e.n).includes(" "+q))).sort((a,b)=>CO.compare(a.b,b.b)||a.en-b.en||a.v-b.v).slice(0,80).forEach(e=>out.push([e.n,e.h||(V.ma.get(mk)?V.ma.get(mk).n:ma)]))}}}
@@ -326,25 +326,31 @@ function dSug(ta){const ls0=$("#lsg"),c=dCtx(ta);DS=c;if(!c.out.length){ls0.styl
  ls0.style.left=Math.max(4,Math.min(r.left+8,innerWidth-270))+"px";ls0.style.width=Math.min(Math.max(r.width-16,260),420)+"px";
  if(innerHeight-y<230){ls0.style.top="";ls0.style.bottom=(innerHeight-(y-lh))+"px";ls0.style.maxHeight=Math.max(120,y-lh-12)+"px"}else{ls0.style.bottom="";ls0.style.top=(y+2)+"px";ls0.style.maxHeight=Math.min(300,innerHeight-y-12)+"px"}
  ls0.innerHTML=c.out.map((o,i)=>`<div class="sgi" onclick="dPick(${i})"><span>${esc(o[0])}</span><span class="mu">${esc(o[1])}</span></div>`).join("");ls0.style.display="block"}
-function dPick(i){const ta=$("#xd"),c=DS;if(!c||!c.out[i])return;const nm=c.out[i][0],v=ta.value,rest=v.slice(c.pos),eol=rest.indexOf("\n"),tail=eol<0?rest:rest.slice(0,eol);
- let ins;if(c.kind=="m"){ins=nm+(nm=="C\u00d3DIGOS"||!tail.trim()?":":"")+(tail.trim()?"":"\n")}else if(c.kind=="c")ins="#"+nm+(tail.trim()?"":"   ");else ins=nm+": ";
- const nv=v.slice(0,c.ls)+ins+rest;ta.value=nv;const cp=c.ls+ins.length;ta.focus();try{ta.setSelectionRange(cp,cp)}catch(e){}$("#lsg").style.display="none";DS=null;
+function dPick(i){const ta=$("#xd"),c=DS;if(!c||!c.out[i])return;const nm=c.out[i][0],v=ta.value,rest=v.slice(c.pos),eol=rest.indexOf("\n"),ev=c.pos+(eol<0?rest.length:eol),line=v.slice(c.ls,ev);
+ let cl,ins;
+ if(c.kind=="c"){const m=line.slice(1).search(/\s{2,}|\s\d{4}\s*>|\s>/);cl=m<0?line.length:1+m;ins="#"+nm+(line.slice(cl).trim()?"":"   ")}
+ else{const co=line.indexOf(":");cl=co<0?line.length:co;const rm=line.slice(cl);if(c.kind=="m")ins=nm+(rm.trim()?"":":\n");else ins=nm+(rm.trim()?"":": ")}
+ const nv=v.slice(0,c.ls)+ins+v.slice(c.ls+cl);ta.value=nv;const cp=c.ls+ins.length;ta.focus();try{ta.setSelectionRange(cp,cp)}catch(e){}$("#lsg").style.display="none";DS=null;
  ta.dispatchEvent(new Event("input",{bubbles:true}))}
+document.addEventListener("mousedown",e=>{const l=$("#lsg");if(!l||l.style.display=="none")return;if(e.target.closest("#lsg")||/^(TEXTAREA|INPUT)$/.test(e.target.tagName))return;l.style.display="none"},true);
+document.addEventListener("focusin",e=>{const l=$("#lsg");if(!l||l.style.display=="none")return;if(!/^(TEXTAREA|INPUT)$/.test(e.target.tagName)&&!e.target.closest("#lsg"))l.style.display="none"});
 /* ===== TITULOS: mesclar / editar ===== */
-let TM=null,TMS=new Set(),TP=null;
+let TM=null,TMS=new Set(),TP=null,TMF=true;
 function typeLabelG(x){const g=GER;GER=true;try{return typeLabel(x)}finally{GER=g}}
 function renT(t,nb){t=String(t||"");const pf=t.match(/^[^A-Za-z0-9À-ÿ]*/)[0],b=t.slice(pf.length);let d=0,i=-1;for(let k=0;k<b.length;k++){const c=b[k];if(c=="(")d++;else if(c==")")d=Math.max(0,d-1);else if(c=="-"&&!d){i=k;break}}
  const head=i<0?b:b.slice(0,i),rest=b.slice(head.length),p=head.indexOf("(");let nh;
+ if(!GER&&TMF)return pf+nb+rest;
  if(p<0)nh=nb+(head.match(/\s*$/)[0]);
  else{const tail=head.slice(p),ws=head.slice(0,p).match(/\s*$/)[0];if(tail.replace(/\([^)]*\)/g,"").trim()==="")nh=nb+ws+tail;else nh=nb+ws+(head.match(/\([^)]*\)/g)||[]).join("")+(head.match(/\s*$/)[0])}
  return pf+nh+rest}
 function tmCln(s){return String(s||"").toUpperCase().replace(/\s+/g," ").trim()}
-function tmItems(){const K=new Set(TP.keys);return[...M.values()].filter(x=>K.has(norm(typeLabelG(x))))}
-function tmSet(m){if(document.body.classList.contains("ro"))return toast("Modo visitante: somente consulta. Entre com o Google para alterar títulos.");if(!GER)togT();TM=TM==m?null:m;TMS=new Set();TP=null;TL=typeList();titR()}
+function tmItems(){const K=new Set(TP.keys);return[...M.values()].filter(x=>K.has(norm(typeLabel(x))))}
+function tmSet(m){if(document.body.classList.contains("ro"))return toast("Modo visitante: somente consulta. Entre com o Google para alterar títulos.");TM=TM==m?null:m;TMS=new Set();TP=null;TL=typeList();titR()}
 function tmRow(i){const e=TL[i];if(TM=="edit")return tmForm([e.k]);if(TMS.has(e.k))TMS.delete(e.k);else TMS.add(e.k);titR()}
 function tmForm(keys){TP={keys:[...keys]};const E=TL.filter(e=>keys.includes(e.k)).sort((a,b)=>b.n-a.n),mg=E.length>1;
- $("#tc").innerHTML=`<h2>${mg?"Mesclar títulos":"Editar título"}</h2><p class="mu">${mg?"Os outros títulos passam a usar o escolhido. ":""}Muda só o nome padrão (antes dos parênteses e do "-"). Os detalhes entre ( ) e o resto do título ficam como estão.</p>${mg?"":`<div class="mu" style="margin:6px 0">${esc(E[0].l)} (${E[0].n})</div>`}${mg?`<p style="margin:8px 0 4px"><b>Qual título permanece?</b></p>${E.map((e,i)=>`<label style="display:flex;gap:8px;align-items:center;margin:2px 0"><input type="radio" name="tmr" ${i?"":"checked"} onchange="tmFill(${i})" style="width:auto"> ${esc(e.l)} <span class="mu">(${e.n})</span></label>`).join("")}<input id="tmn" type="hidden" value="${esc(E[0].l)}">`:`<label>Novo título<input id="tmn" value="${esc(E[0].l)}" oninput="tmPrev()" autocomplete="off"></label>`}<div id="tmp" style="margin:8px 0"></div><div class="row"><button class="btn p" onclick="tmApply()">Aplicar</button><button class="btn" onclick="TP=null;titR()">Voltar</button></div>`;
+ $("#tc").innerHTML=`<h2>${mg?"Mesclar títulos":"Editar título"}</h2><p class="mu">${mg?"Os outros títulos passam a usar o escolhido. ":""}${GER?'Muda só o nome padrão (antes dos parênteses e do "-"). Os detalhes entre ( ) e o resto do título ficam como estão.':'Modo DETALHADO: troca todo o trecho antes do "-", inclusive o que está entre ( ). O resto do título fica como está.'}</p>${mg?"":`<div class="mu" style="margin:6px 0">${esc(E[0].l)} (${E[0].n})</div>`}${mg?`<p style="margin:8px 0 4px"><b>Qual título permanece?</b></p>${E.map((e,i)=>`<label style="display:flex;gap:8px;align-items:center;margin:2px 0"><input type="radio" name="tmr" ${i?"":"checked"} onchange="tmFill(${i})" style="width:auto"> ${esc(e.l)} <span class="mu">(${e.n})</span></label>`).join("")}<input id="tmn" type="hidden" value="${esc(E[0].l)}">`:`<label>Novo título<input id="tmn" value="${esc(E[0].l)}" oninput="tmPrev()" autocomplete="off"></label>`}<div id="tmp" style="margin:8px 0"></div><div class="row"><button class="btn p" onclick="tmApply()">Aplicar</button><button class="btn" onclick="TP=null;titR()">Voltar</button></div>`;
  TP.E=E;tmPrev()}
+function tmWh(f){TMF=!!f;$("#tmn").value=f?TP.E[0].l:TP.E[0].l.replace(/\s*\([^)]*\)/g,"").trim();tmPrev()}
 function tmFill(i){$("#tmn").value=TP.E[i].l;tmPrev()}
 function tmPrev(){const nb=tmCln($("#tmn").value),it=tmItems(),ch=nb?it.filter(x=>renT(x.t,nb)!=x.t):[];
  $("#tmp").innerHTML=!nb?'<span class="mu">Digite o novo título.</span>':`<b>${ch.length}</b> de ${it.length} itens serão alterados.`+ch.slice(0,3).map(x=>`<div class="mu" style="margin-top:4px">${esc(x.t)}<br>→ <span style="color:var(--fg,inherit)">${esc(renT(x.t,nb))}</span></div>`).join("")}
@@ -493,7 +499,7 @@ function vLine(l,tk,add){if(!vAppL(l))return[l,0];let c=0;const o=l.replace(/\((
 function vScan(tok,add){const tk=vk(tok),R=[];if(!tk)return R;M.forEach(x=>{if(!x.d)return;let c=0;const ex=[];const nd=vMapD(x.d,l=>{const r=vLine(l,tk,add);if(r[1]){c+=r[1];if(ex.length<2)ex.push([l.trim(),r[0].trim()])}return r[0]});if(c)R.push({x,d:nd,c,ex})});return R}
 function vList(){const m=new Map();M.forEach(x=>{if(!x.d)return;vMapD(x.d,l=>{if(!vAppL(l))return l;(l.match(/\([^)]*\)/g)||[]).forEach(g=>g.slice(1,-1).split(vSp).forEach(p=>{p=p.trim();if(p[0]!="@")return;const n=p.replace(/^@\s*/,"").trim(),k=vk(n);if(!k)return;let e=m.get(k);if(!e){e={k,l:n.toUpperCase(),it:new Set(),n:0};m.set(k,e)}e.it.add(x.id);e.n++}));return l})});return[...m.values()].sort((a,b)=>a.l.localeCompare(b.l,"pt"))}
 function vRo(){if(document.body.classList.contains("ro")){toast("Modo visitante: somente consulta. Entre com o Google para alterar.");return true}return false}
-function vShow(h){$("#tc").innerHTML=h;$("#tv").style.display="block"}
+function vShow(h){$("#tc").innerHTML=h;$("#tv").style.zIndex="35";$("#tv").style.display="block"}
 function vAsk(tok){if(vRo())return;vShow(`<h2>Adicionar em VERSÕES</h2><p class="mu">Toda aplicação do catálogo com essa palavra dentro dos parênteses recebe o @ e passa a aparecer no botão VERSÕES. Ajuste o texto se precisar.</p><label>Palavra / versão<input id="vtk" value="${esc(tok)}" oninput="vPrev(1)" autocomplete="off"></label><div id="vpv" style="margin:8px 0"></div><div class="row"><button class="btn p" onclick="vDo(1)">Adicionar em todos</button><button class="btn" onclick="$('#tv').style.display='none'">Cancelar</button></div>`);vPrev(1)}
 function vPrev(add){const t=$("#vtk").value,R=vScan(t,add),n=R.reduce((a,e)=>a+e.c,0);$("#vpv").innerHTML=!vk(t)?'<span class="mu">Digite a versão.</span>':R.length?`<b>${n}</b> aplicação(ões) em <b>${R.length}</b> item(ns) serão alteradas.`+R.slice(0,6).map(e=>`<div class="mu" style="margin-top:6px;font-size:12px"><b style="color:var(--fg)">${esc(e.x.t)}</b><br>${esc(e.ex[0][0])}<br>→ ${esc(e.ex[0][1])}</div>`).join("")+(R.length>6?`<div class="mu" style="margin-top:4px">…e mais ${R.length-6} item(ns)</div>`:""):'<span class="mu">Nada a alterar (já está em versões ou não foi encontrada).</span>'}
 async function vDo(add,t0){const t=t0||$("#vtk").value,R=vScan(t,add);if(!R.length)return toast("Nada a alterar.");if(!await askC((add?"Adicionar em VERSÕES: ":"Remover de VERSÕES: ")+vk(t)+" em "+R.length+" item(ns)? (fica no histórico de versões de cada item)"))return;
@@ -783,6 +789,7 @@ function tClean(t){return String(t||"").replace(/^[^A-Za-z0-9À-ÿ]+/,"")}
 var GER=(function(){try{return localStorage.getItem("tgeral")!=="0"}catch(e){return true}})();
 function typeLabel(x){const t=tClean(x.t);let d=0,i=-1;for(let k=0;k<t.length;k++){const c=t[k];if(c=="(")d++;else if(c==")")d=Math.max(0,d-1);else if(c=="-"&&!d){i=k;break}}let r=(i>0?t.slice(0,i):t);if(GER)r=r.replace(/\s*\([^)]*\)/g,"");return r.replace(/\s+/g," ").trim()}
 function togT(){GER=!GER;try{localStorage.setItem("tgeral",GER?"1":"0")}catch(e){}M.forEach(x=>{x._ty=undefined});TSEL="";$("#ft").classList.remove("ex");shown=60;render();tsug();tmUI()}
+function tgGD(){togT();TMS=new Set();TP=null;TL=typeList();tLet="";titR()}
 function tmUI(){const a=document.getElementById("tmode");if(a)a.textContent="Título: "+(GER?"GERAL":"DETALHADO")+" (trocar)"}
 function typeKey(x){return norm(typeLabel(x))}
 function normT(s){return norm(s).replace(/^[^A-Z0-9]+/,"").replace(/\s+/g," ").replace(/^\s+/,"")}
@@ -801,7 +808,7 @@ function pickL(l){$("#ft").value=l;TSEL="";$("#ft").classList.remove("ex");$("#t
 function openTit(){TL=typeList();tLet="";TM=null;TMS=new Set();TP=null;titR();$("#tv").style.display="block"}
 function titR(){if(TP)return;const ls=[...new Set(TL.map(e=>e.k[0]).filter(Boolean))];
  const chip=(l,t)=>`<button class="btn lc${tLet==l?" on":""}" onclick="tLet='${l}';titR()">${t}</button>`;
- let h=`<h2>Títulos</h2><p class="mu">${TM=="edit"?"Toque no título que quer editar.":TM=="merge"?"Marque 2 ou mais títulos para unir em um só.":"Toque em um título para ver só esse tipo de peça. Toque em uma letra para ver os que começam com ela."}</p><div class="row" style="margin:0 0 8px"><button class="btn${TM=="merge"?" p":""}" onclick="tmSet('merge')">Mesclar títulos</button><button class="btn${TM=="edit"?" p":""}" onclick="tmSet('edit')">Editar título</button>${TM=="merge"?`<button class="btn p" ${TMS.size>1?"":"disabled"} onclick="tmForm([...TMS])">Mesclar selecionados (${TMS.size})</button>`:""}${TM?`<button class="btn" onclick="TM=null;TMS=new Set();titR()">Cancelar</button>`:""}</div><div class="lb">${chip("","Todos")}${ls.map(l=>chip(l,l)).join("")}</div>`,last="";
+ let h=`<h2>Títulos</h2><p class="mu">${TM=="edit"?"Toque no título que quer editar.":TM=="merge"?"Marque 2 ou mais títulos para unir em um só.":"Toque em um título para ver só esse tipo de peça. Toque em uma letra para ver os que começam com ela."}</p><div class="row" style="margin:0 0 8px"><button class="btn${TM=="merge"?" p":""}" onclick="tmSet('merge')">Mesclar títulos</button><button class="btn${TM=="edit"?" p":""}" onclick="tmSet('edit')">Editar título</button><button class="btn" onclick="tgGD()">Título: ${GER?"GERAL":"DETALHADO"} (trocar)</button>${TM=="merge"?`<button class="btn p" ${TMS.size>1?"":"disabled"} onclick="tmForm([...TMS])">Mesclar selecionados (${TMS.size})</button>`:""}${TM?`<button class="btn" onclick="TM=null;TMS=new Set();titR()">Cancelar</button>`:""}</div><div class="lb">${chip("","Todos")}${ls.map(l=>chip(l,l)).join("")}</div>`,last="";
  TL.forEach((e,i)=>{const L=e.k[0];if(tLet&&L!=tLet)return;if(L!=last){last=L;h+=`<h3>${L} <a href="#" onclick="pickL('${L}');return false" style="font-size:12px;color:var(--ac);font-weight:400">ver todos que começam com ${L}</a></h3>`}h+=`<button class="trow" style="${TMS.has(e.k)?"border-color:var(--ac);background:var(--ac2)":""}" onclick="${TM?`tmRow(${i})`:`pickT(${i})`}"><span>${TM=="merge"?(TMS.has(e.k)?"☑ ":"☐ "):""}${esc(e.l)}</span><span class="mu">${e.n}</span></button>`});
  $("#tc").innerHTML=h}
 function setFlt(h){document.body.classList.toggle("fh",h);$("#bflt").textContent="Filtros "+(h?"▾":"▴");try{localStorage.setItem("fh",h?"1":"0")}catch(e){}}

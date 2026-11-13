@@ -215,3 +215,14 @@ Itens novos são sempre criados completos.
 ## v72
 - Versoes automaticas: toda palavra que esta em VERSOES (tem @ em algum item) aparece como VERSOES em qualquer outro item que a contenha entre parenteses, mesmo sem o @ (itens antigos e novos). Ao adicionar, o @ tambem e gravado em todos os itens.
 - Funciona tambem nos itens antigos (linhas "MODELO 16/... (3C, TRENDLINE - MEC.)"); " - MEC./AUT." e tratado como separador.
+
+## v73
+- Janela de confirmar versoes (Adicionar/Remover em VERSOES) agora abre na frente do item.
+- Lista de sugestoes do cadastro: ao escolher um carro, SUBSTITUI o carro/motor/valvulas da linha (anos e resto permanecem), em vez de acrescentar (T-CROSS nao vira T-CROSSCROSS). A busca considera o texto todo do carro, mesmo com o cursor no meio.
+- A lista fecha ao clicar fora do campo de texto.
+
+## v74
+- Titulos: Editar/Mesclar titulo nao muda mais o filtro para GERAL. No modo DETALHADO o titulo editado/mesclado inclui o trecho entre ( ) (troca tudo antes do "-"); no GERAL continua mudando so o nome padrao.
+
+## v76
+- Titulos: volta ao comportamento da v74 (detalhado edita o trecho todo, com parenteses) e ganha o botao "Titulo: GERAL/DETALHADO (trocar)" dentro da propria janela de Titulos.

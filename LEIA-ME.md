@@ -202,3 +202,16 @@ Itens novos são sempre criados completos.
 
 ## v69
 - Clicar no codigo: a busca inclui sempre a marca (inclusive ORIGINAL).
+
+## v70
+- Tabela de aplicacoes, coluna Obs.: tag @NOME (ex.: @TRENDLINE, @ADVENTURE) vira o botao VERSOES (fica sempre em primeiro); passar o mouse ou clicar mostra a lista.
+- Combustivel: bolinha colorida (Alcool = branco, Gasolina = laranja, Flex = verde; Alcool+Gasolina = branco/laranja; Gasolina+Flex = laranja/verde; os tres = vermelho). Mouse/clique mostra os nomes. Detecta automaticamente [ALC.] [GAS.] [FLEX] [ALC./GAS.] etc. e tambem as tags !alcool !gasolina !flex.
+
+## v71
+- Versoes em lote: na tabela de aplicacoes, clique com o botao direito (ou segure o dedo) sobre uma palavra dentro dos parenteses da coluna Obs. > "Adicionar em VERSOES". Vale so a palavra tocada (separadores: virgula e /). Abre uma previa com quantos itens/aplicacoes serao alterados (texto editavel) e, ao confirmar, poe @ em todos os itens (fica no historico de versoes de cada item).
+- Extras > Versoes: lista de todas as versoes (@) com contagem; "Remover" tira o @ de todos os itens.
+- @ agora termina em virgula, / ou parenteses (ex.: @ELX MPI/@RST = duas versoes; "@ELX RT" continua inteiro).
+
+## v72
+- Versoes automaticas: toda palavra que esta em VERSOES (tem @ em algum item) aparece como VERSOES em qualquer outro item que a contenha entre parenteses, mesmo sem o @ (itens antigos e novos). Ao adicionar, o @ tambem e gravado em todos os itens.
+- Funciona tambem nos itens antigos (linhas "MODELO 16/... (3C, TRENDLINE - MEC.)"); " - MEC./AUT." e tratado como separador.

@@ -1,5 +1,5 @@
 /* Service worker: guarda o app para abrir offline e serve as fotos (/_blob/ID) vindas do Drive. */
-const V="v69";
+const V="v72";
 const SHELL = ["./", "index.html", "drive.js", "jszip.min.js", "config.js", "manifest.webmanifest", "icon-192.png", "icon-512.png","caladea-r.ttf","caladea-b.ttf"];
 
 self.addEventListener("install", e => {

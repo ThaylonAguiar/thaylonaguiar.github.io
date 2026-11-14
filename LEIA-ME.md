@@ -284,3 +284,8 @@ Itens novos são sempre criados completos.
 ## v92
 - Orçamento > Imprimir: o recibo agora imprime numa janela própria (80 mm x altura exata do conteúdo, 1 página, sem papel em branco, sem cabeçalho/rodapé do navegador). Permita pop-ups para o site na primeira vez.
 - Quantidade do item: setinhas ▲▼ (e teclas ↑↓), mínimo 1.
+
+## v93
+- Corrigido o botão Versões no menu Extras (aparecia o código no lugar do botão).
+- Impressão do orçamento: o tamanho da página (80 mm x altura do recibo, margem 0) vai fixo no HTML da janela de impressão.
+- Se o navegador ainda imprimir cabeçalho/rodapé ou papel em branco: na janela de impressão, Mais definições > Margens: Nenhuma, desmarcar "Cabeçalhos e rodapés" e escolher o papel Receipt/RP80 do driver.

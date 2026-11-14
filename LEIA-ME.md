@@ -276,3 +276,7 @@ Itens novos são sempre criados completos.
 ## v90
 - Orçamento: impressão 80 mm em retrato, com a folha ajustada ao tamanho real do conteúdo, letras menores, sem linhas tracejadas nem o título "ORÇAMENTO:", e com espaço antes de data e ID.
 - Imagem do WhatsApp menor e sem sobrepor valores grandes (colunas se ajustam ao maior valor).
+
+## v91
+- Orçamento > Imprimir: abre uma prévia só com o recibo (80 mm, tamanho do conteúdo) e o botão Imprimir; a impressão sai desse mesmo recibo.
+- Removidas as palavras CARRO e ORÇAMENTO (imagem e papel).

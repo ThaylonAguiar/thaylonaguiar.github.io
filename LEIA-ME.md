@@ -251,3 +251,6 @@ Itens novos são sempre criados completos.
 
 ## v83
 - Codigos: a caixa "ordem alfabetica" virou um botao de lista (☰) ao lado da lupa. Cinza = ordem do item; vermelho = ordem alfabetica ligada (preferencia global, como antes). Ao alternar, a tela mantem a posicao da rolagem.
+
+## v84
+- Alternar a ordem alfabetica (e salvar edicoes na tela) nao apaga mais os campos de busca de Aplicacoes e Codigos nem o estado da lupa.

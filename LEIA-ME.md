@@ -293,3 +293,8 @@ Itens novos são sempre criados completos.
 ## v94
 - Orçamento > Imprimir: volta a imprimir de dentro do app (sem abrir janela do navegador), com margem zero e sem forçar tamanho de página, para o recibo sair do topo do papel e sem cabeçalho/rodapé do navegador.
 - O comprimento do papel é do driver: na janela de impressão escolha o papel de recibo (RP80/Receipt, comprimento variável).
+
+## v95
+- Extras > 📦 Encomenda: carro, itens (nome, quantidade, valor do distribuidor), lista alfabética com coluna "V. original" (botão direito altera e recalcula tudo), valores por forma de pagamento (distribuidor + %) e total geral.
+- Botão % Porcentagens: edita nomes e % (padrão 50/55/60/70/80); "Salvar como padrão" vale para as próximas. Cada encomenda guarda as % usadas.
+- Salvar (ID próprio, coleção "enc"), WhatsApp (imagem), Imprimir (80 mm, mesma prévia do orçamento), Encomendas salvas com busca. Campo Entrega (padrão "Em até 3 dias úteis").

@@ -266,3 +266,9 @@ Itens novos são sempre criados completos.
 
 ## v88
 - Itens desativados EM ESTOQUE ficam sem o risco no título (continuam no final da lista, com o ~).
+
+## v89
+- Extras > 🧾 Orçamento: janela com carro, adicionar item (produto, qtd, valor unitário, +), lista em ordem alfabética, total, observações.
+- Botão direito (ou segurar) em item/quantidade/valor altera; ✕ vermelho exclui; o total é sempre calculado.
+- Salvar (ID de 6 dígitos, coleção "orc" no Drive), WhatsApp (imagem), Imprimir (80 mm, TM-T20: escolha a impressora na janela de impressão). WhatsApp e Imprimir salvam antes.
+- 📂 Orçamentos salvos: busca por carro, peça ou número; mais recente primeiro; clicar abre para editar (salvar mantém o mesmo ID).

@@ -1193,14 +1193,14 @@ function img(o){const W_=680,P=26,F='"Segoe UI",Arial,sans-serif',cv=document.cr
  const L=rows.map(({x})=>o.pct.map(r=>({u:un(x,r),t:un(x,r)*x.q})));
  L.forEach(a=>a.forEach(z=>{wu=Math.max(wu,c.measureText(fm(z.u)).width);wt=Math.max(wt,c.measureText(fm(z.t)).width)}));T.forEach(t=>{wt=Math.max(wt,c.measureText(fm(t)).width)});wu+=26;wt+=26;
  const xt=W_-P,xu=xt-wt,cn=xu-wu-P-8;c.font="700 21px "+F;
- const hd=rows.map(({x},k)=>wrap(c,String(k+1).padStart(2,"0")+") "+x.n+" ("+String(x.q).padStart(2,"0")+" un.)",W_-P*2)),cr=wrap(c,o.carro||"-",W_-P*2),ob=o.obs?wrap(c,o.obs,W_-P*2):[];
- const N=o.pct.length,NI=o.soma?1:N,mult=!!o.soma;
+ const hd=rows.map(({x},k)=>wrap(c,String(k+1).padStart(2,"0")+") "+x.n+" ("+String(x.q).padStart(2,"0")+")",o.soma?cn:W_-P*2)),cr=wrap(c,o.carro||"-",W_-P*2),ob=o.obs?wrap(c,o.obs,W_-P*2):[];
+ const N=o.pct.length,NI=o.soma?0:N,mult=!!o.soma;
  const H=100+30+cr.length*26+(o.ent?30:0)+14+30+hd.reduce((s,l)=>s+l.length*26+10+NI*28+14,0)+(mult?44+N*28+14:0)+(ob.length?36+ob.length*24+6:0)+56;cv.width=W_;cv.height=H;
  c.fillStyle="#fff";c.fillRect(0,0,W_,H);c.fillStyle="#1a1d21";c.fillRect(0,0,W_,92);c.fillStyle="#fff";c.textAlign="center";c.font="700 27px "+F;c.fillText(HDR[0],W_/2,38);c.font="400 16px "+F;c.fillText(HDR[1],W_/2,63);c.fillText(HDR[2],W_/2,83);
  let y=132;c.textAlign="left";c.fillStyle="#111";c.font="700 22px "+F;cr.forEach((l,k)=>c.fillText(l,P,y+k*26));y+=cr.length*26-6;
  if(o.ent){c.fillStyle="#555";c.font="400 17px "+F;c.fillText("ENTREGA: "+o.ent.toUpperCase(),P,y+18);y+=30}
  y+=10;c.fillStyle="#eee";c.fillRect(P,y,W_-P*2,30);c.fillStyle="#444";c.font="700 14px "+F;c.textAlign="left";c.fillText("FORMA DE PAGAMENTO",P+8,y+20);c.textAlign="right";c.fillText("V. UNIT.",xu-8,y+20);c.fillText("V. TOTAL",xt-8,y+20);y+=30;
- rows.forEach(({x},k)=>{y+=6;c.textAlign="left";c.fillStyle="#111";c.font="700 21px "+F;hd[k].forEach((t,j)=>c.fillText(t,P+4,y+22+j*26));y+=hd[k].length*26+4;
+ rows.forEach(({x},k)=>{y+=6;c.textAlign="left";c.fillStyle="#111";c.font="700 21px "+F;hd[k].forEach((t,j)=>c.fillText(t,P+4,y+22+j*26));if(o.soma){c.textAlign="right";c.fillStyle="#111";c.font="400 19px "+F;c.fillText(fm(L[k][0].u),xu-8,y+22);c.font="700 19px "+F;c.fillText(fm(L[k][0].t),xt-8,y+22)}y+=hd[k].length*26+4;
   o.pct.slice(0,NI).forEach((r,m)=>{c.textAlign="left";c.fillStyle="#333";c.font="400 18px "+F;c.fillText(r.n,P+14,y+20);c.textAlign="right";c.font="400 19px "+F;c.fillText(fm(L[k][m].u),xu-8,y+20);c.fillStyle="#111";c.font="700 19px "+F;c.fillText(fm(L[k][m].t),xt-8,y+20);y+=28});
   y+=8;c.fillStyle="#ddd";c.fillRect(P,y,W_-P*2,1)});
  if(mult){y+=8;c.fillStyle="#1a1d21";c.fillRect(P,y,W_-P*2,36);c.fillStyle="#fff";c.textAlign="left";c.font="700 18px "+F;c.fillText("TOTAL GERAL",P+12,y+25);y+=36;
@@ -1212,13 +1212,14 @@ window.enWpp=async()=>{if(!await enSave())return;try{toast("Gerando imagem…");
  if(navigator.clipboard&&window.ClipboardItem){try{await navigator.clipboard.write([new ClipboardItem({"image/png":b})]);toast("Imagem copiada: cole (Ctrl+V) no WhatsApp.");return}catch(e){}}
  await _save(null,b,nm)}catch(e){toast("Não foi possível gerar a imagem: "+(e.message||e))}};
 /* ---- impressão ---- */
-window.enPrint=async()=>{if(!await enSave())return;const o=own(),rows=srt(o),T=tots(o),
+window.enPrint=async()=>{if(!await enSave())return;const o=own(),rows=srt(o),T=tots(o),CG=(o.soma?[56,20,24]:[44,28,28]).map(w=>'<col style="width:'+w+'%">').join(""),
  h='<!doctype html><html><head><meta charset="utf-8"><title>Encomenda '+o.id+'</title><style id="pg">@page{margin:0}*{box-sizing:border-box}html,body{margin:0}body{width:72mm;margin:0 4mm;padding:3mm 0 6mm;font:700 9px/1.3 "Courier New",Courier,monospace;color:#000}.c{text-align:center}.b{font-size:11px}table{width:100%;border-collapse:collapse}th{text-align:left;font-size:8px;border-bottom:1px solid #000;padding:1px 0}td{vertical-align:top;padding:1px 0}table.f{table-layout:fixed}td.r,th.r{text-align:right;white-space:nowrap;padding-left:5px}.it{margin-top:7px}.tg{margin-top:9px;font-size:10px;border-top:1px solid #000;padding-top:3px}.sp{height:6mm}</style></head><body>'+
  '<div class="c b">'+esc(HDR[0])+'</div><div class="c">'+esc(HDR[1])+'</div><div class="c">'+esc(HDR[2])+'</div><br>'+
  '<div style="font-size:10px">'+esc(o.carro||"-")+'</div>'+(o.ent?'<div>ENTREGA: '+esc(o.ent.toUpperCase())+'</div>':"")+'<br>'+
- '<table class="f"><colgroup><col style="width:44%"><col style="width:28%"><col style="width:28%"></colgroup><tr><th>TITULO</th><th class="r">V.UNIT.</th><th class="r">V.TOTAL</th></tr></table>'+
- rows.map(({x},k)=>'<div class="it">'+String(k+1).padStart(2,"0")+') '+esc(x.n)+' ('+String(x.q).padStart(2,"0")+' un.)</div>'+'<table class="f"><colgroup><col style="width:44%"><col style="width:28%"><col style="width:28%"></colgroup>'+o.pct.slice(0,o.soma?1:o.pct.length).map(r=>'<tr><td class="n">'+esc(r.n)+'</td><td class="r">'+fm(un(x,r))+'</td><td class="r">'+fm(un(x,r)*x.q)+'</td></tr>').join("")+'</table>').join("")+
- (o.soma?'<div class="tg">TOTAL GERAL</div>'+'<table class="f"><colgroup><col style="width:44%"><col style="width:28%"><col style="width:28%"></colgroup>'+o.pct.map((r,m)=>'<tr><td class="n">'+esc(r.n)+'</td><td class="r"></td><td class="r">'+fm(T[m])+'</td></tr>').join("")+'</table>':"")+
+ '<table class="f"><colgroup>'+CG+'</colgroup><tr><th>TITULO</th><th class="r">V.UNIT.</th><th class="r">V.TOTAL</th></tr></table>'+
+ rows.map(({x},k)=>{const nm=String(k+1).padStart(2,"0")+') '+esc(x.n)+' ('+String(x.q).padStart(2,"0")+')',cgp='<table class="f"><colgroup>'+CG+'</colgroup>';
+  return o.soma?'<div class="it">'+cgp+'<tr><td class="n">'+nm+'</td><td class="r">'+fm(un(x,o.pct[0]))+'</td><td class="r">'+fm(un(x,o.pct[0])*x.q)+'</td></tr></table></div>':'<div class="it">'+nm+'</div>'+cgp+o.pct.map(r=>'<tr><td class="n">'+esc(r.n)+'</td><td class="r">'+fm(un(x,r))+'</td><td class="r">'+fm(un(x,r)*x.q)+'</td></tr>').join("")+'</table>'}).join("")+
+ (o.soma?'<div class="tg">TOTAL GERAL</div>'+'<table class="f"><colgroup>'+CG+'</colgroup>'+o.pct.map((r,m)=>'<tr><td class="n">'+esc(r.n)+'</td><td class="r"></td><td class="r">'+fm(T[m])+'</td></tr>').join("")+'</table>':"")+
  (o.obs?'<div style="margin-top:6px">OBS: '+esc(o.obs)+'</div>':"")+
  '<div class="sp"></div><div>DATA: '+dt(Date.now())+'</div><div>ENC. '+o.id+'</div></body></html>';prev(h)};
 /* ---- lista ---- */

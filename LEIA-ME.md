@@ -302,3 +302,7 @@ Itens novos são sempre criados completos.
 ## v96
 - Encomenda: botão 💵 (cinza = desligado: cada item com todas as formas de pagamento e SEM total; verde = ligado: itens só no PIX/dinheiro e total no fim com todas as formas). A escolha fica salva em cada encomenda.
 - Botões simplificados em Orçamento e Encomenda: 🖨 imprimir, 📂 salvos, ➕ novo, % porcentagens (os nomes aparecem ao passar o mouse).
+
+## v97
+- Encomenda: quantidade agora aparece como (01) em vez de (01 un.).
+- Com o botão 💵 ligado, cada item sai numa linha só: "01) NOME (01)   valor unitário   valor total" (sem a linha PIX OU DINHEIRO). Desligado, continua com todas as formas de pagamento.

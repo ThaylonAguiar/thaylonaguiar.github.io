@@ -306,3 +306,6 @@ Itens novos são sempre criados completos.
 ## v97
 - Encomenda: quantidade agora aparece como (01) em vez de (01 un.).
 - Com o botão 💵 ligado, cada item sai numa linha só: "01) NOME (01)   valor unitário   valor total" (sem a linha PIX OU DINHEIRO). Desligado, continua com todas as formas de pagamento.
+
+## v98
+- Encomenda: removida a numeração "01)" dos itens (recibo e imagem). A ordem continua alfabética.

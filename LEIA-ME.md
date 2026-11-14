@@ -272,3 +272,7 @@ Itens novos são sempre criados completos.
 - Botão direito (ou segurar) em item/quantidade/valor altera; ✕ vermelho exclui; o total é sempre calculado.
 - Salvar (ID de 6 dígitos, coleção "orc" no Drive), WhatsApp (imagem), Imprimir (80 mm, TM-T20: escolha a impressora na janela de impressão). WhatsApp e Imprimir salvam antes.
 - 📂 Orçamentos salvos: busca por carro, peça ou número; mais recente primeiro; clicar abre para editar (salvar mantém o mesmo ID).
+
+## v90
+- Orçamento: impressão 80 mm em retrato, com a folha ajustada ao tamanho real do conteúdo, letras menores, sem linhas tracejadas nem o título "ORÇAMENTO:", e com espaço antes de data e ID.
+- Imagem do WhatsApp menor e sem sobrepor valores grandes (colunas se ajustam ao maior valor).

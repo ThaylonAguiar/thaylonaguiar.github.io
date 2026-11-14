@@ -280,3 +280,7 @@ Itens novos são sempre criados completos.
 ## v91
 - Orçamento > Imprimir: abre uma prévia só com o recibo (80 mm, tamanho do conteúdo) e o botão Imprimir; a impressão sai desse mesmo recibo.
 - Removidas as palavras CARRO e ORÇAMENTO (imagem e papel).
+
+## v92
+- Orçamento > Imprimir: o recibo agora imprime numa janela própria (80 mm x altura exata do conteúdo, 1 página, sem papel em branco, sem cabeçalho/rodapé do navegador). Permita pop-ups para o site na primeira vez.
+- Quantidade do item: setinhas ▲▼ (e teclas ↑↓), mínimo 1.

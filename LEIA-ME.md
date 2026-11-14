@@ -289,3 +289,7 @@ Itens novos são sempre criados completos.
 - Corrigido o botão Versões no menu Extras (aparecia o código no lugar do botão).
 - Impressão do orçamento: o tamanho da página (80 mm x altura do recibo, margem 0) vai fixo no HTML da janela de impressão.
 - Se o navegador ainda imprimir cabeçalho/rodapé ou papel em branco: na janela de impressão, Mais definições > Margens: Nenhuma, desmarcar "Cabeçalhos e rodapés" e escolher o papel Receipt/RP80 do driver.
+
+## v94
+- Orçamento > Imprimir: volta a imprimir de dentro do app (sem abrir janela do navegador), com margem zero e sem forçar tamanho de página, para o recibo sair do topo do papel e sem cabeçalho/rodapé do navegador.
+- O comprimento do papel é do driver: na janela de impressão escolha o papel de recibo (RP80/Receipt, comprimento variável).

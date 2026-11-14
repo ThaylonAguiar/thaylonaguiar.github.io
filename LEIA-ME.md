@@ -245,3 +245,9 @@ Itens novos são sempre criados completos.
 
 ## v81
 - Tela do item: Editar (chave inglesa), Desativar (bloqueio) / Ativar (check) e Fechar (X) agora ficam no topo, ao lado da lupa e do icone de imagem. Excluir fica sozinho no fim da pagina.
+
+## v82
+- Tabela de aplicacoes e Codigos: os links "mostrar tudo / mostrar so a busca" foram trocados por um botao de lupa na ponta direita do titulo. Cinza = sem filtrar (mostra tudo); vermelho = filtrando (so o que a busca achou). Clique alterna quando quiser; ao digitar na busca ele liga sozinho.
+
+## v83
+- Codigos: a caixa "ordem alfabetica" virou um botao de lista (☰) ao lado da lupa. Cinza = ordem do item; vermelho = ordem alfabetica ligada (preferencia global, como antes). Ao alternar, a tela mantem a posicao da rolagem.

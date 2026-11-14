@@ -257,3 +257,12 @@ Itens novos são sempre criados completos.
 
 ## v85
 - Na seção Códigos, a referência do item (ex.: MTE3041) aparece em destaque ao lado dos botões, para facilitar comparar com o código buscado.
+
+## v86
+- Itens desativados ganham o botão 📦 (entre ✅/🚫 e ✕): cinza = sem estoque, dourado = peça guardada em estoque fora da prateleira. O aviso do topo mostra "EM ESTOQUE". Ao reativar o item a marca é zerada.
+
+## v87
+- Item desativado EM ESTOQUE: na lista aparece 📦 ao lado do título e o título fica dourado (card sem o cinza); no detalhe o título também fica dourado.
+
+## v88
+- Itens desativados EM ESTOQUE ficam sem o risco no título (continuam no final da lista, com o ~).

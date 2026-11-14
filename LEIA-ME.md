@@ -254,3 +254,6 @@ Itens novos são sempre criados completos.
 
 ## v84
 - Alternar a ordem alfabetica (e salvar edicoes na tela) nao apaga mais os campos de busca de Aplicacoes e Codigos nem o estado da lupa.
+
+## v85
+- Na seção Códigos, a referência do item (ex.: MTE3041) aparece em destaque ao lado dos botões, para facilitar comparar com o código buscado.

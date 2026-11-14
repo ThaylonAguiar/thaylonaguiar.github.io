@@ -298,3 +298,7 @@ Itens novos são sempre criados completos.
 - Extras > 📦 Encomenda: carro, itens (nome, quantidade, valor do distribuidor), lista alfabética com coluna "V. original" (botão direito altera e recalcula tudo), valores por forma de pagamento (distribuidor + %) e total geral.
 - Botão % Porcentagens: edita nomes e % (padrão 50/55/60/70/80); "Salvar como padrão" vale para as próximas. Cada encomenda guarda as % usadas.
 - Salvar (ID próprio, coleção "enc"), WhatsApp (imagem), Imprimir (80 mm, mesma prévia do orçamento), Encomendas salvas com busca. Campo Entrega (padrão "Em até 3 dias úteis").
+
+## v96
+- Encomenda: botão 💵 (cinza = desligado: cada item com todas as formas de pagamento e SEM total; verde = ligado: itens só no PIX/dinheiro e total no fim com todas as formas). A escolha fica salva em cada encomenda.
+- Botões simplificados em Orçamento e Encomenda: 🖨 imprimir, 📂 salvos, ➕ novo, % porcentagens (os nomes aparecem ao passar o mouse).

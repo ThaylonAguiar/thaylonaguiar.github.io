@@ -317,3 +317,7 @@ Itens novos são sempre criados completos.
 ## v100
 - Extras > 🤖 Códigos via GPT: (1) escolhe os itens (marcados p/ etiqueta ou lista atual), gera pedidos prontos de até N itens com as regras e o formato de resposta; copia e cola no ChatGPT. (2) cola a resposta do GPT, o app mostra o que é novo por item (ignora o que já existe e itens não encontrados), e aplica só os itens marcados. Cada alteração fica no histórico de versões do item.
 - Formato de resposta: "ID: 000123 / REF: ABC123 / MARCA: COD1, COD2 / --- ". Marca existente recebe os códigos novos na mesma linha; marca nova entra no fim da lista, em ordem alfabética.
+
+## v101
+- Códigos via GPT: nova opção "Por título" (ex.: AXIAL DE DIRECAO): pega todos os itens ATIVOS cujo título começa com o texto (lista de tipos com contagem). Pedidos de até 100 itens (padrão 40).
+- "Pular itens já consultados": depois de analisar/aplicar, cada item (com código novo ou sem novidade) fica marcado como consultado e não entra nos próximos pedidos. Dá para zerar a lista.

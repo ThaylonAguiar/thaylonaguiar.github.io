@@ -365,3 +365,6 @@ Itens novos são sempre criados completos.
 - O EAN do GPT agora entra no bloco `EAN:` no formato `CODIGO: NUMERO` (ex.: `MTE3030: 889038283823`), e não mais pela marca.
 - Se o item não tem o bloco `EAN:`, ele é criado (duas linhas em branco depois de CÓDIGOS, como nos seus itens).
 - Linha do GPT sem código é ignorada (aparece em "linhas ignoradas").
+
+## v110
+- Removido o 🤖 do título do item (lista e dentro do item). O 🤖 fica só no nome do carro adicionado pelo GPT, e a tag CHAT-GPT continua.

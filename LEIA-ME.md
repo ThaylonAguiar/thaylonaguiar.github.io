@@ -309,3 +309,7 @@ Itens novos são sempre criados completos.
 
 ## v98
 - Encomenda: removida a numeração "01)" dos itens (recibo e imagem). A ordem continua alfabética.
+
+## v99
+- Lupas de Aplicações e Códigos agora são só manuais: a busca nunca liga a lupa sozinha. Cinza (padrão) = mostra a lista inteira com o que bate destacado; vermelha = mostra só o que a busca achou. A escolha fica salva neste navegador.
+- X dentro dos campos de busca de Aplicações e Códigos (aparece só com texto) para apagar a busca.

@@ -346,3 +346,6 @@ Itens novos são sempre criados completos.
 - Informação extra (versão, restrição, medida etc.) vem em campo separado (INFO) e NÃO entra no OBS: fica guardada à parte e aparece na tag azul **CHAT-GPT** (passe o mouse ou toque). Há tag na linha do carro (coluna Obs.) e, para info geral da peça, ao lado de "Versão · histórico".
 - Item com dados do GPT mostra 🤖 no início do título (na lista e dentro do item). O título gravado não muda.
 - Nomes como Volkswagen/Chevrolet vindos do GPT são convertidos para VW/GM e entram no bloco certo da montadora (ou criam um novo).
+
+## v106
+- Rótulo da caixa de aplicações no "Códigos via GPT" corrigido: "carros novos, motor/válvula e anos".

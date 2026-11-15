@@ -321,3 +321,6 @@ Itens novos são sempre criados completos.
 ## v101
 - Códigos via GPT: nova opção "Por título" (ex.: AXIAL DE DIRECAO): pega todos os itens ATIVOS cujo título começa com o texto (lista de tipos com contagem). Pedidos de até 100 itens (padrão 40).
 - "Pular itens já consultados": depois de analisar/aplicar, cada item (com código novo ou sem novidade) fica marcado como consultado e não entra nos próximos pedidos. Dá para zerar a lista.
+
+## v102
+- Códigos via GPT: o pedido começa com "TAREFA (execute agora...)" e há o botão 💬 Copiar comando curto, para colar na caixa de mensagem junto com o pedido (o ChatGPT transforma texto longo em anexo "Pasted text" e, sem comando, não executa).

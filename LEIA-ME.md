@@ -380,3 +380,7 @@ Itens novos são sempre criados completos.
 
 ## v114
 - Códigos via GPT: cada pedido ganhou o botão "☐ Marcar enviado" (vira "✅ Enviado" em verde e o pedido fica esmaecido). A marca fica salva neste navegador, ligada aos itens do pedido (continua marcada mesmo fechando a janela). "Zerar consultados" também limpa as marcas.
+
+## v115
+- Corrigido o "Itens por pedido" no Códigos via GPT: ao mudar o número e clicar direto em Copiar pedido, o clique se perdia (a janela era redesenhada no meio do clique) e ficava copiado o pedido anterior. Agora o botão sempre lê o número atual do campo antes de copiar, e o campo atualiza a lista sem perder o foco.
+- O botão de copiar agora mostra "✅ Copiado (N itens)" para você conferir a quantidade.

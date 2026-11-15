@@ -313,3 +313,7 @@ Itens novos são sempre criados completos.
 ## v99
 - Lupas de Aplicações e Códigos agora são só manuais: a busca nunca liga a lupa sozinha. Cinza (padrão) = mostra a lista inteira com o que bate destacado; vermelha = mostra só o que a busca achou. A escolha fica salva neste navegador.
 - X dentro dos campos de busca de Aplicações e Códigos (aparece só com texto) para apagar a busca.
+
+## v100
+- Extras > 🤖 Códigos via GPT: (1) escolhe os itens (marcados p/ etiqueta ou lista atual), gera pedidos prontos de até N itens com as regras e o formato de resposta; copia e cola no ChatGPT. (2) cola a resposta do GPT, o app mostra o que é novo por item (ignora o que já existe e itens não encontrados), e aplica só os itens marcados. Cada alteração fica no histórico de versões do item.
+- Formato de resposta: "ID: 000123 / REF: ABC123 / MARCA: COD1, COD2 / --- ". Marca existente recebe os códigos novos na mesma linha; marca nova entra no fim da lista, em ordem alfabética.

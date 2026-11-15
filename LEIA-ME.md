@@ -352,3 +352,11 @@ Itens novos são sempre criados completos.
 
 ## v107
 - (v106 saiu sem a correção) Rótulo da caixa de aplicações no "Códigos via GPT": "carros novos, motor/válvula e anos".
+
+## v108 — GPT pesquisa EAN (código de barras) das marcas
+- Nova caixa em Extras > Códigos via GPT: "EAN (código de barras) das marcas". Pode ser usada sozinha ou junto com códigos/aplicações.
+- O GPT devolve `EAN: MARCA | CODIGO | NUMERO | CERTEZA | FONTE`, só se o número aparecer escrito numa página junto do código da peça (nunca calculado).
+- O app confere o **dígito verificador** do EAN: número inválido aparece sem caixa e não pode ser aplicado.
+- Avisos na prévia: já cadastrado, marca fora dos códigos do item, mesmo EAN em outro item, provável. Vêm marcados só os CONFIRMADOS, válidos, de marca do item e sem repetição em outros itens.
+- Ao aplicar, entra no bloco EAN do item no formato `MARCA: CODIGO: NUMERO` (cria o bloco se não existir). Fica no histórico de versões.
+- "Consultados" agora também é separado para EAN.

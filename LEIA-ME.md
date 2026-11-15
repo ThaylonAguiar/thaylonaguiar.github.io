@@ -360,3 +360,8 @@ Itens novos são sempre criados completos.
 - Avisos na prévia: já cadastrado, marca fora dos códigos do item, mesmo EAN em outro item, provável. Vêm marcados só os CONFIRMADOS, válidos, de marca do item e sem repetição em outros itens.
 - Ao aplicar, entra no bloco EAN do item no formato `MARCA: CODIGO: NUMERO` (cria o bloco se não existir). Fica no histórico de versões.
 - "Consultados" agora também é separado para EAN.
+
+## v109 — EAN salvo pelo código
+- O EAN do GPT agora entra no bloco `EAN:` no formato `CODIGO: NUMERO` (ex.: `MTE3030: 889038283823`), e não mais pela marca.
+- Se o item não tem o bloco `EAN:`, ele é criado (duas linhas em branco depois de CÓDIGOS, como nos seus itens).
+- Linha do GPT sem código é ignorada (aparece em "linhas ignoradas").

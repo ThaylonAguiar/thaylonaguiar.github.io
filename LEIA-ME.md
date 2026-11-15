@@ -377,3 +377,6 @@ Itens novos são sempre criados completos.
 
 ## v113
 - O 🤖 agora fica pendurado na lateral esquerda do nome do carro (dentro da coluna Modelo, sem ocupar espaço). O texto do Modelo continua alinhado com as linhas sem robô; a coluna Marca volta a ficar limpa.
+
+## v114
+- Códigos via GPT: cada pedido ganhou o botão "☐ Marcar enviado" (vira "✅ Enviado" em verde e o pedido fica esmaecido). A marca fica salva neste navegador, ligada aos itens do pedido (continua marcada mesmo fechando a janela). "Zerar consultados" também limpa as marcas.

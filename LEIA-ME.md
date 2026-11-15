@@ -330,3 +330,12 @@ Itens novos são sempre criados completos.
 - Se o cadastro tem motor/válvula e eles não batem com a busca, o item continua fora (ex.: cadastro DOBLO 1.8 não aparece na busca 1.6).
 - Dentro do item, na tabela de aplicações, a linha "geral" também recebe o !. Toque/passe o mouse no ! para ver a explicação.
 - Buscar só o motor (sem o nome do carro) não traz itens sem motor.
+
+## v104 — GPT também pesquisa aplicações (motor/válvula)
+- Extras > Códigos via GPT agora tem "O que pesquisar": códigos de outras marcas e/ou aplicações (só motor e válvula).
+- Ao pesquisar aplicações, o pedido leva os carros já cadastrados e o GPT devolve linhas `APP: MONTADORA | MODELO | MOTOR | DE | ATE | CERTEZA | FONTE`.
+- Na prévia da resposta, cada carro novo aparece com caixa própria, selo CONFIRMADO/PROVÁVEL, fonte e avisos ("já cadastrado", "carro não consta no cadastro deste item"). Só vêm marcados os CONFIRMADOS de carros já cadastrados no item.
+- Ao aplicar, entra no cadastro uma linha nova `#🤖MODELO MOTOR DE > ATE` dentro do bloco da montadora. O 🤖 no início do nome identifica o que veio do GPT. A linha original do carro (sem motor) é mantida.
+- Se o GPT não informar anos, a linha herda os anos do cadastro do carro.
+- Com a linha 🤖, a busca "DOBLO 1.8 16V" acha o item sem o "!"; as demais buscas continuam achando pelo cadastro geral, com "!".
+- "Consultados" agora é separado para códigos e para aplicações.

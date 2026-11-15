@@ -339,3 +339,10 @@ Itens novos são sempre criados completos.
 - Se o GPT não informar anos, a linha herda os anos do cadastro do carro.
 - Com a linha 🤖, a busca "DOBLO 1.8 16V" acha o item sem o "!"; as demais buscas continuam achando pelo cadastro geral, com "!".
 - "Consultados" agora é separado para códigos e para aplicações.
+
+## v105 — GPT traz carros novos e info extra na tag CHAT-GPT
+- O pedido de aplicações agora também pede CARROS/MODELOS NOVOS que usam a peça (ex.: lançamentos mais recentes que o catálogo), além de motores novos dos carros cadastrados, com anos DE > ATÉ.
+- Na prévia, carros que não estão no item aparecem com o selo CARRO NOVO. Vêm marcados só os CONFIRMADOS; os PROVÁVEIS vêm desmarcados.
+- Informação extra (versão, restrição, medida etc.) vem em campo separado (INFO) e NÃO entra no OBS: fica guardada à parte e aparece na tag azul **CHAT-GPT** (passe o mouse ou toque). Há tag na linha do carro (coluna Obs.) e, para info geral da peça, ao lado de "Versão · histórico".
+- Item com dados do GPT mostra 🤖 no início do título (na lista e dentro do item). O título gravado não muda.
+- Nomes como Volkswagen/Chevrolet vindos do GPT são convertidos para VW/GM e entram no bloco certo da montadora (ou criam um novo).

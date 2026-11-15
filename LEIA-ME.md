@@ -374,3 +374,6 @@ Itens novos são sempre criados completos.
 
 ## v112
 - O 🤖 das linhas adicionadas pelo GPT agora aparece na coluna Marca (depois do nome da montadora), e não mais na frente do modelo, para o Modelo/motor/válvula ficarem alinhados.
+
+## v113
+- O 🤖 agora fica pendurado na lateral esquerda do nome do carro (dentro da coluna Modelo, sem ocupar espaço). O texto do Modelo continua alinhado com as linhas sem robô; a coluna Marca volta a ficar limpa.

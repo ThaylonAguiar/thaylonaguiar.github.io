@@ -371,3 +371,6 @@ Itens novos são sempre criados completos.
 
 ## v111
 - (v110 saiu sem a correção) Removido o 🤖 do título do item (lista e dentro do item). O 🤖 fica só no nome do carro adicionado pelo GPT; a tag CHAT-GPT continua.
+
+## v112
+- O 🤖 das linhas adicionadas pelo GPT agora aparece na coluna Marca (depois do nome da montadora), e não mais na frente do modelo, para o Modelo/motor/válvula ficarem alinhados.

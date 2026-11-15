@@ -349,3 +349,6 @@ Itens novos são sempre criados completos.
 
 ## v106
 - Rótulo da caixa de aplicações no "Códigos via GPT" corrigido: "carros novos, motor/válvula e anos".
+
+## v107
+- (v106 saiu sem a correção) Rótulo da caixa de aplicações no "Códigos via GPT": "carros novos, motor/válvula e anos".

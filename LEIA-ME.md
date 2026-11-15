@@ -324,3 +324,9 @@ Itens novos são sempre criados completos.
 
 ## v102
 - Códigos via GPT: o pedido começa com "TAREFA (execute agora...)" e há o botão 💬 Copiar comando curto, para colar na caixa de mensagem junto com o pedido (o ChatGPT transforma texto longo em anexo "Pasted text" e, sem comando, não executa).
+
+## v103 — Busca geral por motor/válvula (!)
+- Ao buscar carro + motor (ex.: DOBLO 1.6 16V), itens cadastrados só com o carro (sem motor ou sem válvula informados) agora também aparecem, com um **!** vermelho ao lado do título.
+- Se o cadastro tem motor/válvula e eles não batem com a busca, o item continua fora (ex.: cadastro DOBLO 1.8 não aparece na busca 1.6).
+- Dentro do item, na tabela de aplicações, a linha "geral" também recebe o !. Toque/passe o mouse no ! para ver a explicação.
+- Buscar só o motor (sem o nome do carro) não traz itens sem motor.

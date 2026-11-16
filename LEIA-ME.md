@@ -393,3 +393,7 @@ Itens novos são sempre criados completos.
 - Digitar `@` abre a lista das versões já cadastradas (mais usadas primeiro); `@tre` filtra. Se a palavra não existe, aparece "✚ nova versão" (cria como digitado) e, se parecer com uma existente (ex.: @trenldine), "parecida?" sugere a correta.
 - Setas + Enter escolhem; Enter sem escolher mantém o que foi digitado. Esc fecha a lista.
 - Versões (@) escritas fora de parênteses agora entram na lista Extras > Versões. Sem parênteses, separe as tags por vírgula (a versão vai até a próxima vírgula, !, + ou /).
+
+## v118
+- Removida a sugestão "parecida?" na lista do @ (continua "✚ nova versão").
+- Edição rápida na tabela: clicar fora do campo agora SALVA (antes só Enter salvava). Esc continua cancelando.

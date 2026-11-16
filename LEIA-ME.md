@@ -460,3 +460,7 @@ Itens novos são sempre criados completos.
 
 ## v135
 - Etiquetas: os links "todos para P / M / G" viraram botões P, M e G, com fundo cinza claro (cor de papel). Cada um envia todos os itens ainda sem tamanho para aquele tamanho.
+
+## v136 — Modo lista nas etiquetas
+- Novo botão (ícone de duas linhas) na barra das etiquetas: liga/desliga o **modo lista** (1 coluna, folha em retrato). Vermelho = lista ativa; fica salvo no navegador.
+- Vale para Word (Salvar), pré-visualização e PDF. Assim só é preciso cortar as linhas horizontais entre as etiquetas.

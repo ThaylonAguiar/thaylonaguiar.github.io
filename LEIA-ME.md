@@ -397,3 +397,6 @@ Itens novos são sempre criados completos.
 ## v118
 - Removida a sugestão "parecida?" na lista do @ (continua "✚ nova versão").
 - Edição rápida na tabela: clicar fora do campo agora SALVA (antes só Enter salvava). Esc continua cancelando.
+
+## v119
+- Edição rápida na tabela: o texto não fica mais todo selecionado ao clicar (cursor no fim). Só os anos (De / Até) continuam selecionados.

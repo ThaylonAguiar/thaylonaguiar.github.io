@@ -400,3 +400,10 @@ Itens novos são sempre criados completos.
 
 ## v119
 - Edição rápida na tabela: o texto não fica mais todo selecionado ao clicar (cursor no fim). Só os anos (De / Até) continuam selecionados.
+
+## v120 (interface mais limpa)
+- "+ Novo item" virou só o ícone + (vermelho). "Extras" virou só um ícone de grade (verde); o número de itens marcados continua ao lado.
+- Menu Extras: Backup (pergunta: DADOS, IMAGENS ou TUDO), Produtos (Grupos, Grupos de itens, Versões, Mesclar, Etiquetas, Importar lote/pastas de fotos/migração, Guia), Orçamento, Encomenda, Códigos via GPT, Modo TESTE, Atualizar, Sair. Todos com ícone.
+- Abaixo da busca: botões quadrados com ícone — Limpar filtros (vassoura), Título (cinza = GERAL, vermelho = DETALHADO), Grupos de itens (cinza = SOLTOS, vermelho = AGRUPADOS), Marcar todos p/ etiqueta (vermelho quando marcados). As opções de Título e Grupos continuam salvas por navegador.
+- Botão direito (ou segurar o dedo) em qualquer botão novo mostra o que ele faz.
+- Importar migração: serve só para trazer dados exportados do app ANTIGO.

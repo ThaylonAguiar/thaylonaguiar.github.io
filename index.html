@@ -1085,11 +1085,13 @@ async function impLote(f){if(!f)return;$("#lf").value="";
  const ij=[...novos.map(it=>({it,m:"m"})),...ups.filter(u=>u.im).map(u=>({it:u.it,m:u.im}))];
  for(const o of ij){const id=ids.get(nk(o.it.referencia));if(!id)continue;const rr0=M.get(id).r,k=ik(M.get(id)),old=IMG.get(k)||[];if(o.m=="m"&&old.length)continue;const fl=(o.it.fotos||[]).map(p=>({p,e:z.file(p)})).filter(q=>q.e);if(fl.length)jobs.push({k,ref:rr0,fl,old:o.m=="s"?old:[]})}
  let i=0,done=0,okf=0;const badF=[];
+ const HM=new Map(),UC=new Map(),IDH=new Map(),hsh=async ab=>{try{return[...new Uint8Array(await crypto.subtle.digest("SHA-1",ab))].map(b=>b.toString(16).padStart(2,"0")).join("")}catch(er){return""}};
+ const upl=async(o,ref)=>{const ab=await o.e.async("arraybuffer"),h=await hsh(ab);let p=h&&HM.get(h);if(!p){p=(async()=>(await as.upload(await shrink(new Blob([ab],{type:mime(o.p)})),ref)).id)();if(h){HM.set(h,p);p.then(id=>IDH.set(id,h),()=>HM.delete(h))}}const id=await p;UC.set(id,(UC.get(id)||0)+1);return id};
  const wk=async()=>{while(i<jobs.length){const jb=jobs[i++],add=[];let bad=0;
-  for(const o of jb.fl){try{const bl=new Blob([await o.e.async("arraybuffer")],{type:mime(o.p)});add.push((await as.upload(await shrink(bl),jb.ref)).id)}catch(er){bad++}}
-  if(bad){for(const x of add){try{await as.delete(x)}catch(er){}}badF.push(jb.ref)}else if(add.length){if(await W(()=>db.doc("img/"+jb.k).set({ids:add}))){IMG.set(jb.k,add);okf+=add.length;for(const x of jb.old){try{await as.delete(x)}catch(er){}}}}
+  for(const o of jb.fl){try{add.push(await upl(o,jb.ref))}catch(er){bad++}}
+  if(bad){for(const x of add){if((UC.get(x)||1)<=1){HM.delete(IDH.get(x));try{await as.delete(x)}catch(er){}}else UC.set(x,UC.get(x)-1)}badF.push(jb.ref)}else if(add.length){if(await W(()=>db.doc("img/"+jb.k).set({ids:add}))){IMG.set(jb.k,add);okf+=add.length;for(const x of jb.old){if(add.includes(x)||[...IMG].some(([kk,v])=>kk!=jb.k&&v.includes(x)))continue;try{await as.delete(x)}catch(er){}}}}
   done++;toast("Enviando fotos: pasta "+done+" de "+jobs.length+"…")}};
- if(jobs.length)await Promise.all([1,2,3].map(wk));
+ if(jobs.length)await Promise.all([1,2,3,4,5,6,7,8].map(wk));
  await showR("<b>Lote importado.</b><div class=\"mu\" style=\"margin-top:6px\">• Itens criados: "+n+(ups.length?"<br>• Itens atualizados: "+nu:"")+"<br>• Relacionamentos: "+nr+(pend.length?"<br>&nbsp;&nbsp;não encontrados: "+pend.slice(0,8).map(esc).join("; ")+(pend.length>8?"…":""):"")+"<br>• Fotos enviadas: "+okf+(badF.length?"<br>&nbsp;&nbsp;falharam em: "+badF.slice(0,8).map(esc).join(", ")+" (importe as fotos dessas referências depois)":"")+(dups.length?"<br>• Ignorados ("+dups.length+"): "+dups.slice(0,10).map(esc).join("; ")+(dups.length>10?"…":""):"")+"</div>");try{render()}catch(e){}}
 
 function isOff(x){const o=ov.off.get(x.id);return(o?o.v:/^\s*~/.test(x.t||""))?1:0}

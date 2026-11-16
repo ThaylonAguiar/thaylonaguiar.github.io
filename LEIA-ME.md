@@ -423,3 +423,6 @@ Itens novos são sempre criados completos.
 
 ## v125
 - Menu Produtos: removidos "Importar migração" e "Importar pastas de fotos". Ordem: Etiquetas, Importar lote, Mesclar itens, Grupos, Grupos de itens, Versões, Guia / avisos.
+
+## v126
+- Importar lote: envio de fotos com 8 envios simultaneos (antes 3) e fotos identicas enviadas uma vez so (itens reaproveitam o mesmo arquivo). So apaga arquivo de foto antigo/falho se nenhum outro item o usa.

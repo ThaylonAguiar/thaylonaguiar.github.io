@@ -430,3 +430,8 @@ Itens novos são sempre criados completos.
 ## v127
 - Corrigido: a tela de edição (🔧 da tabela de aplicações, 🔧 dos códigos, campos em edição) fechava sozinha. Causa: toda atualização de dados (sincronização com o Drive a cada 25 s, ou qualquer alteração salva) redesenhava o item aberto e destruía o que estava sendo digitado. Agora, enquanto você edita, o item não é redesenhado; ele atualiza quando você salvar ou cancelar.
 - Novo botão 👁 (olho) nos filtros: cinza = mostra só os itens ativos; vermelho = mostra também os desativados. A escolha fica salva neste navegador.
+
+## v128
+- Cadastro mais rápido: motores separados por vírgula viram uma linha por motor ao salvar. Ex.: `#PALIO 1.0 8V, 1.4 8V, 1.6 16V   2015 > 2017 (FLEX)` vira três linhas, cada uma com os mesmos anos e observações. Funciona na edição rápida da célula Modelo, na chave inglesa (tabela de aplicações) e no formulário do item. Linhas de ano que vêm logo abaixo (`2018 > 2019`) são copiadas para cada motor.
+- Só expande quando o texto antes das vírgulas é o nome do carro e todos os trechos depois são motores (começam com `1.0`, `2.0` etc.). Nomes com vírgula que não são motores, como `PALIO CELEBRATION, ECONOMY, FIRE`, não são mexidos.
+- A lista de sugestões do `#` não mostra mais nomes com vírgula.

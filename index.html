@@ -643,17 +643,6 @@ function vTry(e,x,y){const tg=e.target;if(!tg||!tg.closest)return false;
  const td=tg.closest("#tap td");if(td&&td.cellIndex>=1){if(vRo())return true;if(td.cellIndex==4){const tk=vTokAt(td,x,y);if(tk){_ct=td;vMenu(x,y,tk);return true}}cellEdit(td);return true}
  return false}
 document.addEventListener("contextmenu",e=>{if(vTry(e,e.clientX,e.clientY))e.preventDefault()});
-/* v129: botao direito dentro do item aberto -> menu Desativar/Ativar */
-(function(){let m=null;const hide=()=>{if(m)m.style.display="none"};
- document.addEventListener("contextmenu",e=>{const t=e.target,dv=document.getElementById("dv");
-  if(e.defaultPrevented||!dv||dv.style.display!="block"||!t.closest||!t.closest("#dv .pane")||document.body.classList.contains("ro"))return;
-  if(t.closest("input,textarea,select,a,[data-tip],[contenteditable]"))return;
-  const x=typeof cur!="undefined"&&M.get(cur);if(!x)return;e.preventDefault();
-  if(!m){m=document.createElement("div");m.id="cxm";m.style.cssText="position:fixed;z-index:95;background:var(--card);border:1px solid var(--bd,#333);border-radius:10px;padding:6px;box-shadow:0 8px 24px rgba(0,0,0,.45);display:none";document.body.appendChild(m)}
-  const off=isOff(x);m.innerHTML='<button class="btn'+(off?'':' d')+'" style="margin:0;white-space:nowrap">'+(off?"\u2705 Ativar item (F2)":"\ud83d\udeab Desativar item (F2)")+'</button>';
-  m.firstChild.onclick=()=>{hide();togOffItem(x.id)};
-  m.style.display="block";const w=m.offsetWidth,h=m.offsetHeight;m.style.left=Math.max(6,Math.min(innerWidth-w-6,e.clientX))+"px";m.style.top=Math.max(6,Math.min(innerHeight-h-6,e.clientY))+"px"});
- ["click","scroll","keydown","resize"].forEach(n=>window.addEventListener(n,ev=>{if(n=="click"&&m&&m.contains(ev.target))return;hide()},true))})();
 /* v130: F2 desativa/ativa o item aberto */
 document.addEventListener("keydown",e=>{if(e.key!="F2"||e.ctrlKey||e.altKey||e.shiftKey)return;const dv=document.getElementById("dv");if(!dv||dv.style.display!="block"||document.body.classList.contains("ro"))return;const x=typeof cur!="undefined"&&M.get(cur);if(!x)return;e.preventDefault();togOffItem(x.id)});
 var _lp;document.addEventListener("touchstart",e=>{clearTimeout(_lp);const t=e.touches[0];if(!t||e.touches.length>1)return;const tg=e.target;_lp=setTimeout(()=>{vTry({target:tg},t.clientX,t.clientY)},550)},{passive:true});

@@ -441,3 +441,6 @@ Itens novos são sempre criados completos.
 
 ## v130
 - Tecla F2 com um item aberto: desativa ou ativa o item (mesma ação do menu do botão direito, que agora mostra "(F2)").
+
+## v131
+- Removido o menu do botão direito no item (v129). Ficou só a tecla F2 (desativa/ativa o item aberto), pensada para o uso no computador.

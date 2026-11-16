@@ -457,3 +457,6 @@ Itens novos são sempre criados completos.
 - "✎ Manual" virou só uma caneta (nas colunas P/M/G e em "todas").
 - Edição manual: ao sair (✕ ou Concluir), as etiquetas que você editou ficam trancadas (salvas). Ao abrir de novo o Manual, só aparecem as que ainda faltam (as trancadas são puladas). "Voltar à lista" virou o ✕ no canto superior direito.
 - Salvar em PDF abre a janela de impressão do navegador com a prévia; escolha "Salvar como PDF". É a prévia aproximada, não o Word.
+
+## v135
+- Etiquetas: os links "todos para P / M / G" viraram botões P, M e G, com fundo cinza claro (cor de papel). Cada um envia todos os itens ainda sem tamanho para aquele tamanho.

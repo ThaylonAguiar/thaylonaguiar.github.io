@@ -538,7 +538,7 @@ function cellEdit(td){const tr=td.parentNode,x=M.get(cur),col=td.cellIndex,li=tr
  const L=x.d.split("\n"),o=L[+li]||"",cr=/\r$/.test(o)?"\r":"",ol=o.replace(/\r$/,""),cont=/^\s*(\d{4}|X{4}|\?{4})\s*>/.test(ol),de=+tr.dataset.de||0,at=+tr.dataset.at,mo=tr.dataset.mo,ob=tr.dataset.ob;
  if(cont&&col==1)return toast("Para trocar o modelo, edite a linha de cima.");
  const raw=[null,mo,de||"",at==9999?"":at,ob][col];
- inl(td,String(raw),async v=>{let M2=mo,D=de,A=at,B=ob;if(col==1)M2=v.trim();else if(col==2)D=yv(v)=="XXXX"?0:+yv(v);else if(col==3)A=yv(v)=="XXXX"?9999:+yv(v);else B=v.trim();
+ inl(td,String(raw),async v=>{let M2=mo,D=de,A=at,B=ob;if(col==1&&!v.trim()){let n=1;while(L[+li+n]!=null&&/^\s*(\d{4}|X{4}|\?{4})\s*>/.test(L[+li+n].replace(/\r$/,"")))n++;L.splice(+li,n);if(await itemSave(cur,{d:L.join("\n")},"Aplica\u00e7\u00e3o apagada")){toast("Aplica\u00e7\u00e3o apagada (volta pelo hist\u00f3rico)");reopen(cur)}return}if(col==1)M2=v.trim();else if(col==2)D=yv(v)=="XXXX"?0:+yv(v);else if(col==3)A=yv(v)=="XXXX"?9999:+yv(v);else B=v.trim();
   const ys=(D?D:"XXXX")+" > "+(A==9999?"XXXX":A);let nl;
   if(cont)nl=ys+(B?" "+B:"");
   else if(/^\s*#/.test(ol)){const m=ol.match(/^\s*#\s*(.*?)(\s+)(\d{4}|X{4}|\?{4})\s*>/);nl="#"+M2+(D||A!=9999||B?(m?m[2]:"   ")+ys+(B?" "+B:""):"")}

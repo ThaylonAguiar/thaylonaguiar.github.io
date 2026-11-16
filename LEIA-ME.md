@@ -411,3 +411,6 @@ Itens novos são sempre criados completos.
 ## v121
 - Códigos via GPT: a tela lembra onde você parou (itens por título/marcados/lista, texto do título, itens por pedido, caixas "o que pesquisar", pular consultados, incluir desativados) mesmo fechando a tela ou recarregando o app, neste navegador.
 - O texto colado em "Importar a resposta" também fica guardado até você aplicar (depois de aplicar, é limpo).
+
+## v122
+- "Filtros" virou só o ícone de funil. "Ordem: título/referência" virou um botão quadrado (setas): vermelho = ordem por TÍTULO, verde = ordem por REFERÊNCIA. Botão direito / segurar o dedo explica cada um.

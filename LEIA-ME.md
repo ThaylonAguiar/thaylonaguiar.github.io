@@ -444,3 +444,6 @@ Itens novos são sempre criados completos.
 
 ## v131
 - Removido o menu do botão direito no item (v129). Ficou só a tecla F2 (desativa/ativa o item aberto), pensada para o uso no computador.
+
+## v132
+- Edição manual da etiqueta: as fotos do produto aparecem em miniatura no canto direito do cartão do item (até 6). Clicar abre a foto grande com Anterior / Próxima e ✕ no canto superior direito (também funcionam as setas ← → e Esc; clicar fora fecha).

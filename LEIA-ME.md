@@ -438,3 +438,6 @@ Itens novos são sempre criados completos.
 
 ## v129
 - Botão direito (ou segurar o dedo no celular) em qualquer lugar do item aberto mostra um menu com Desativar item / Ativar item, sem precisar subir até o topo. Não aparece sobre campos de texto, links e botões com dica, nem no modo visitante. Fecha ao clicar fora, rolar ou apertar Esc.
+
+## v130
+- Tecla F2 com um item aberto: desativa ou ativa o item (mesma ação do menu do botão direito, que agora mostra "(F2)").

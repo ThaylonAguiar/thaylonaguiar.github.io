@@ -426,3 +426,7 @@ Itens novos são sempre criados completos.
 
 ## v126
 - Importar lote: envio de fotos com 8 envios simultaneos (antes 3) e fotos identicas enviadas uma vez so (itens reaproveitam o mesmo arquivo). So apaga arquivo de foto antigo/falho se nenhum outro item o usa.
+
+## v127
+- Corrigido: a tela de edição (🔧 da tabela de aplicações, 🔧 dos códigos, campos em edição) fechava sozinha. Causa: toda atualização de dados (sincronização com o Drive a cada 25 s, ou qualquer alteração salva) redesenhava o item aberto e destruía o que estava sendo digitado. Agora, enquanto você edita, o item não é redesenhado; ele atualiza quando você salvar ou cancelar.
+- Novo botão 👁 (olho) nos filtros: cinza = mostra só os itens ativos; vermelho = mostra também os desativados. A escolha fica salva neste navegador.

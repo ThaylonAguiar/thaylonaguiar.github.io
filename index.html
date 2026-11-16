@@ -67,14 +67,12 @@ body.fh #fp{display:none}#fsum{display:none;margin-top:6px;align-items:center;ga
 <button class="btn xso" onclick="xc();backupAsk()" data-tip="Backup: salva os dados, as imagens ou tudo em um arquivo no seu aparelho."><i class="ii" data-ic="backup"></i>Backup</button>
 <button class="btn xg" onclick="togSub(event)" data-tip="Produtos: grupos, versões, mesclar, etiquetas, importações e guia."><i class="ii" data-ic="box"></i>Produtos<span class="chev">▾</span></button>
 <div class="xsub" id="xsub">
+<button class="btn" onclick="xc();openLab()" data-tip="Etiquetas: gera as etiquetas dos itens marcados na lista."><i class="ii" data-ic="tag"></i>Etiquetas (<span id="nsel">0</span>)</button>
+<button class="btn" onclick="xc();$('#lf').click()" data-tip="Importar lote: carrega um arquivo .zip de itens novos."><i class="ii" data-ic="upload"></i>Importar lote (.zip)</button>
+<button class="btn" onclick="xc();openMerge()" data-tip="Mesclar itens: junta itens repetidos em um só."><i class="ii" data-ic="merge"></i>Mesclar itens</button>
 <button class="btn" onclick="xc();openGrp()" data-tip="Grupos e subgrupos do catálogo."><i class="ii" data-ic="folder"></i>Grupos</button>
 <button class="btn xso" onclick="xc();openFam()" data-tip="Grupos de itens: famílias de itens que andam juntos."><i class="ii" data-ic="layers"></i>Grupos de itens</button>
 <button class="btn" onclick="xc();openVers()" data-tip="Versões: lista das versões (@) usadas nas aplicações."><i class="ii" data-ic="star"></i>Versões</button>
-<button class="btn" onclick="xc();openMerge()" data-tip="Mesclar itens: junta itens repetidos em um só."><i class="ii" data-ic="merge"></i>Mesclar itens</button>
-<button class="btn" onclick="xc();openLab()" data-tip="Etiquetas: gera as etiquetas dos itens marcados na lista."><i class="ii" data-ic="tag"></i>Etiquetas (<span id="nsel">0</span>)</button>
-<button class="btn" onclick="xc();$('#lf').click()" data-tip="Importar lote: carrega um arquivo .zip de itens novos."><i class="ii" data-ic="upload"></i>Importar lote (.zip)</button>
-<button class="btn" onclick="xc();$('#bf').click()" data-tip="Importar pastas de fotos: envia pastas com fotos (uma pasta por referência)."><i class="ii" data-ic="image"></i>Importar pastas de fotos</button>
-<button class="btn" onclick="xc();$('#mf').click()" data-tip="Importar migração: traz os dados exportados do app ANTIGO. Só serve para essa migração; as fotos não vêm."><i class="ii" data-ic="upload"></i>Importar migração</button>
 <button class="btn" onclick="xc();helpOpen()" data-tip="Guia / avisos: padrão de cadastro e dicas."><i class="ii" data-ic="help"></i>Guia / avisos</button>
 </div>
 <button class="btn" onclick="xc();orOpen()" data-tip="Orçamento."><i class="ii" data-ic="receipt"></i>Orçamento</button>

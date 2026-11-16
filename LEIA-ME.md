@@ -407,3 +407,7 @@ Itens novos são sempre criados completos.
 - Abaixo da busca: botões quadrados com ícone — Limpar filtros (vassoura), Título (cinza = GERAL, vermelho = DETALHADO), Grupos de itens (cinza = SOLTOS, vermelho = AGRUPADOS), Marcar todos p/ etiqueta (vermelho quando marcados). As opções de Título e Grupos continuam salvas por navegador.
 - Botão direito (ou segurar o dedo) em qualquer botão novo mostra o que ele faz.
 - Importar migração: serve só para trazer dados exportados do app ANTIGO.
+
+## v121
+- Códigos via GPT: a tela lembra onde você parou (itens por título/marcados/lista, texto do título, itens por pedido, caixas "o que pesquisar", pular consultados, incluir desativados) mesmo fechando a tela ou recarregando o app, neste navegador.
+- O texto colado em "Importar a resposta" também fica guardado até você aplicar (depois de aplicar, é limpo).

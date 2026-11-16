@@ -387,3 +387,9 @@ Itens novos são sempre criados completos.
 
 ## v116
 - Tabela de aplicações: apagar o nome do modelo (clicar na célula, limpar e Enter) agora apaga a linha inteira da aplicação. Fica no histórico de versões do item.
+
+## v117
+- Digitar `!` na descrição (edição completa) ou na coluna Obs. da tabela (edição rápida) abre a lista de combustíveis: !alcool, !gasolina, !flex.
+- Digitar `@` abre a lista das versões já cadastradas (mais usadas primeiro); `@tre` filtra. Se a palavra não existe, aparece "✚ nova versão" (cria como digitado) e, se parecer com uma existente (ex.: @trenldine), "parecida?" sugere a correta.
+- Setas + Enter escolhem; Enter sem escolher mantém o que foi digitado. Esc fecha a lista.
+- Versões (@) escritas fora de parênteses agora entram na lista Extras > Versões. Sem parênteses, separe as tags por vírgula (a versão vai até a próxima vírgula, !, + ou /).

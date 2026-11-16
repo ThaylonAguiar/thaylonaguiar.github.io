@@ -417,3 +417,6 @@ Itens novos são sempre criados completos.
 
 ## v123
 - Removido o texto "Colunas" ao lado do seletor (fica só o quadrado dos números; botão direito/segurar explica).
+
+## v124
+- Menu Produtos: removidos "Importar migração" e "Importar pastas de fotos". Ordem: Grupos, Grupos de itens, Versões, Etiquetas, Mesclar itens, Importar lote, Guia / avisos.

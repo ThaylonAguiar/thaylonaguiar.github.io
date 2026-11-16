@@ -451,3 +451,9 @@ Itens novos são sempre criados completos.
 ## v133
 - Edição manual da etiqueta: tirei o "(para consulta)" do título. Ao lado do título há um botão de troca: vermelho = tabela de aplicações; verde = códigos do item (marca e códigos, mais EAN se houver). A escolha fica salva neste navegador.
 - Logo abaixo da tabela aparece o quadro "Observações" quando o item tem observações; se não tem, nada aparece.
+
+## v134
+- Tela de etiquetas refeita: botões só com ícone. Salvar (disquete, vermelho) baixa em Word; botão direito (ou segurar no celular) abre "Salvar em PDF" e "Só códigos e montadoras (Word)". Lupa = pré-visualizar; cadeado fechado = trancar todas; cadeado aberto = destrancar todas; vassoura = limpar seleção; ✕ no canto superior direito = fechar.
+- "✎ Manual" virou só uma caneta (nas colunas P/M/G e em "todas").
+- Edição manual: ao sair (✕ ou Concluir), as etiquetas que você editou ficam trancadas (salvas). Ao abrir de novo o Manual, só aparecem as que ainda faltam (as trancadas são puladas). "Voltar à lista" virou o ✕ no canto superior direito.
+- Salvar em PDF abre a janela de impressão do navegador com a prévia; escolha "Salvar como PDF". É a prévia aproximada, não o Word.

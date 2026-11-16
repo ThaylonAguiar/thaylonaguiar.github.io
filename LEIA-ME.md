@@ -435,3 +435,6 @@ Itens novos são sempre criados completos.
 - Cadastro mais rápido: motores separados por vírgula viram uma linha por motor ao salvar. Ex.: `#PALIO 1.0 8V, 1.4 8V, 1.6 16V   2015 > 2017 (FLEX)` vira três linhas, cada uma com os mesmos anos e observações. Funciona na edição rápida da célula Modelo, na chave inglesa (tabela de aplicações) e no formulário do item. Linhas de ano que vêm logo abaixo (`2018 > 2019`) são copiadas para cada motor.
 - Só expande quando o texto antes das vírgulas é o nome do carro e todos os trechos depois são motores (começam com `1.0`, `2.0` etc.). Nomes com vírgula que não são motores, como `PALIO CELEBRATION, ECONOMY, FIRE`, não são mexidos.
 - A lista de sugestões do `#` não mostra mais nomes com vírgula.
+
+## v129
+- Botão direito (ou segurar o dedo no celular) em qualquer lugar do item aberto mostra um menu com Desativar item / Ativar item, sem precisar subir até o topo. Não aparece sobre campos de texto, links e botões com dica, nem no modo visitante. Fecha ao clicar fora, rolar ou apertar Esc.

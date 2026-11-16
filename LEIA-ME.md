@@ -447,3 +447,7 @@ Itens novos são sempre criados completos.
 
 ## v132
 - Edição manual da etiqueta: as fotos do produto aparecem em miniatura no canto direito do cartão do item (até 6). Clicar abre a foto grande com Anterior / Próxima e ✕ no canto superior direito (também funcionam as setas ← → e Esc; clicar fora fecha).
+
+## v133
+- Edição manual da etiqueta: tirei o "(para consulta)" do título. Ao lado do título há um botão de troca: vermelho = tabela de aplicações; verde = códigos do item (marca e códigos, mais EAN se houver). A escolha fica salva neste navegador.
+- Logo abaixo da tabela aparece o quadro "Observações" quando o item tem observações; se não tem, nada aparece.

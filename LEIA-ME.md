@@ -414,3 +414,6 @@ Itens novos são sempre criados completos.
 
 ## v122
 - "Filtros" virou só o ícone de funil. "Ordem: título/referência" virou um botão quadrado (setas): vermelho = ordem por TÍTULO, verde = ordem por REFERÊNCIA. Botão direito / segurar o dedo explica cada um.
+
+## v123
+- Removido o texto "Colunas" ao lado do seletor (fica só o quadrado dos números; botão direito/segurar explica).

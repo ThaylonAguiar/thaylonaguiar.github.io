@@ -464,3 +464,7 @@ Itens novos são sempre criados completos.
 ## v136 — Modo lista nas etiquetas
 - Novo botão (ícone de duas linhas) na barra das etiquetas: liga/desliga o **modo lista** (1 coluna, folha em retrato). Vermelho = lista ativa; fica salvo no navegador.
 - Vale para Word (Salvar), pré-visualização e PDF. Assim só é preciso cortar as linhas horizontais entre as etiquetas.
+
+## v137 — Login sem recarregar a página
+- O botão de login (e o aviso "Sem login") agora abre uma **janela pop-up** do Google em vez de redirecionar a página inteira; você continua exatamente de onde parou (lista, busca, item aberto).
+- Se o navegador bloquear o pop-up, usa o login em tela cheia como antes (plano B).

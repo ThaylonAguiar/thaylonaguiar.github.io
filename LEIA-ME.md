@@ -472,3 +472,7 @@ Itens novos são sempre criados completos.
 ## v138 — Login volta a ser em tela cheia (sem pop-up), mas lembrando onde você estava
 - Desfeita a v137 (pop-up causava spam no celular). O login volta a redirecionar a página.
 - Antes de ir ao Google, o app guarda filtros, rolagem e item aberto; ao voltar, restaura tudo automaticamente.
+
+## v139 — Meus carros (dentro de Títulos)
+- Títulos → botão **Meus carros**: lista de carros por montadora (só a palavra do carro: PALIO, UNO, GOL; "GRAND SIENA", "NEW FIESTA", "SANTA FE" mantêm as duas palavras). Marque os que você trabalha; fica salvo no catálogo (cfg/meuscarros).
+- Escolha um título: mostra quantos itens têm seus carros (ficam), quantos não têm nenhum (candidatos), quantos sem aplicação (não mexe) e quantos já desativados. Botão **Desativar os sem meus carros** (pede confirmação) e **Desfazer** (reativa só os que essa função desativou).

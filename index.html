@@ -1477,4 +1477,51 @@ if(!o||Date.now()-o.t>600000)return;let n=0;const iv=setInterval(()=>{if(++n>80)
  shown=Math.max(shown,o.sh||60);render();
  if(o.cur&&M.has(o.cur)){openItem(o.cur);const dv=$("#dv");if(dv)dv.scrollTop=o.dy||0}
  setTimeout(()=>window.scrollTo(0,o.y||0),50)}catch(e){}},250)})();
+
+/* ===== MEUS CARROS (v139): filtra por título os itens de carros que você não trabalha ===== */
+(function(){
+var MCON=0,MCQ="",MCT="",MCO={};
+const CFG=()=>ov.cfg.get("meuscarros")||{cars:[],auto:[]};
+const mine=()=>new Set(CFG().cars||[]);
+function carKey(mo){let w=norm(mo).replace(/[,;]+$/,"").trim().split(/\s+/);if(!w[0])return"";
+ if(/^(NEW|GRAND|SANTA|PICK)$/.test(w[0])&&w[1])return w[0]+" "+w[1].replace(/[,;]+$/,"");
+ const c=w[0].replace(/[,;]+$/,"");if(/\d\/|\.\.\.|^!|^[^A-Z0-9]|^\d{2}$/.test(c))return"";return c}
+function itemCars(x){const s=new Set();parse(x).apps.forEach(a=>{const k=carKey(a.mo);if(k)s.add(k)});return s}
+function catalog(){const m=new Map();M.forEach(x=>{const seen=new Set();parse(x).apps.forEach(a=>{const k=carKey(a.mo);if(!k||seen.has(k+a.ma))return;seen.add(k+a.ma);const ma=(a.ma||"?").trim()||"?";if(!m.has(ma))m.set(ma,new Map());const e=m.get(ma);e.set(k,(e.get(k)||0)+1)})});
+ return [...m.entries()].sort((a,b)=>a[0]<b[0]?-1:1).map(([ma,e])=>[ma,[...e.entries()].sort((a,b)=>a[0]<b[0]?-1:1)])}
+async function save(o){if(document.body.classList.contains("ro")){toast("Modo visitante: somente consulta.");return false}
+ if(!await W(()=>db.doc("cfg/meuscarros").set(o)))return false;ov.cfg.set("meuscarros",o);return true}
+window.mcOpen=function(){MCON=1;titR()};
+window.mcBack=function(){MCON=0;MCO={};titR()};
+window.mcQ=function(v){MCQ=v;mcR(true);const f=$("#mcq");if(f){f.focus();f.setSelectionRange(v.length,v.length)}};
+window.mcTog=async function(k){const c=CFG(),s=new Set(c.cars||[]);s.has(k)?s.delete(k):s.add(k);await save({cars:[...s].sort(),auto:c.auto||[]});mcR(true)};
+window.mcMa=async function(ma,on){const c=CFG(),s=new Set(c.cars||[]);const e=catalog().find(z=>z[0]==ma);if(!e)return;e[1].forEach(([k])=>on?s.add(k):s.delete(k));await save({cars:[...s].sort(),auto:c.auto||[]});mcR(true)};
+window.mcT=function(v){MCT=v;MCO={};mcR(true)};
+function analyze(){const key=MCT;if(!key)return null;const my=mine(),r={tot:0,keep:[],drop:[],noapp:[],off:[]};
+ M.forEach(x=>{if(typeKey(x)!==key)return;r.tot++;if(isOff(x)){r.off.push(x);return}const cs=itemCars(x);if(!cs.size){r.noapp.push(x);return}[...cs].some(k=>my.has(k))?r.keep.push(x):r.drop.push(x)});return r}
+window.mcApply=async function(){if(document.body.classList.contains("ro"))return toast("Modo visitante: somente consulta.");
+ const r=analyze();if(!r||!r.drop.length)return;if(!await askC("Desativar "+r.drop.length+" item(ns) deste título que não têm nenhum dos seus carros? Dá para desfazer depois."))return;
+ const ids=[];if(!await W(async()=>{for(const x of r.drop){await db.doc("off/"+x.id).set({v:true,est:false});ov.off.set(x.id,{v:true,est:false});ids.push(x.id)}}))return;
+ const c=CFG();await save({cars:c.cars||[],auto:[...new Set([...(c.auto||[]),...ids])]});render();mcR(true);toast(ids.length+" item(ns) desativado(s).")};
+window.mcUndo=async function(){const c=CFG(),r=analyze();const ids=(c.auto||[]).filter(id=>{const x=M.get(id);return x&&typeKey(x)===MCT&&isOff(x)});
+ if(!ids.length)return toast("Nada para desfazer neste título.");if(!await askC("Reativar os "+ids.length+" item(ns) deste título que foram desativados por esta função?"))return;
+ if(!await W(async()=>{for(const id of ids){await db.doc("off/"+id).set({v:false,est:false});ov.off.set(id,{v:false,est:false})}}))return;
+ await save({cars:c.cars||[],auto:(c.auto||[]).filter(i=>!ids.includes(i))});render();mcR(true);toast(ids.length+" item(ns) reativado(s).")};
+window.mcShow=function(w){MCO[w]=!MCO[w];mcR(true)};
+function mcR(keep){const sc=$("#tc").scrollTop,my=mine(),q=norm(MCQ).trim(),cat=catalog(),tl=typeList();
+ let h=`<h2>Meus carros</h2><p class="mu">Marque os carros que você trabalha (só o nome do carro, sem variantes: PALIO vale para Palio Attractive, Palio Weekend…). Fica salvo no catálogo. Depois escolha um título e desative de uma vez os itens que não têm nenhum desses carros.</p><div class="row" style="margin:0 0 8px"><button class="btn" onclick="mcBack()">← Voltar aos títulos</button></div>`;
+ h+=`<h3>1. Escolha o título e aplique</h3><select id="mct" onchange="mcT(this.value)" style="width:100%;margin-bottom:8px"><option value="">— escolha um título —</option>${tl.map(e=>`<option value="${esc(e.k)}"${e.k==MCT?" selected":""}>${esc(e.l)} (${e.n})</option>`).join("")}</select>`;
+ const r=analyze();
+ if(r){const sel=my.size;h+=`<div class="card" style="cursor:default"><div><b>${r.tot}</b> item(ns) neste título · <b style="color:#4caf50">${r.keep.length}</b> com seus carros (ficam) · <b style="color:var(--ac)">${r.drop.length}</b> sem nenhum dos seus carros · ${r.noapp.length} sem aplicação (não mexo) · ${r.off.length} já desativado(s)</div>${sel?"":`<div class="mu" style="margin-top:6px">Você ainda não marcou nenhum carro abaixo: todos os itens apareceriam como “sem seus carros”.</div>`}`;
+  if(r.drop.length){h+=`<div class="mu" style="margin-top:8px">Exemplos que seriam desativados:</div><div class="mu" style="font-size:12px;line-height:1.5">${r.drop.slice(0,12).map(x=>esc(x.r)+" — "+esc([...itemCars(x)].slice(0,4).join(", "))).join("<br>")}${r.drop.length>12?"<br>…":""}</div>`}
+  h+=`<div class="row" style="margin-top:8px"><button class="btn p" ${r.drop.length&&sel?"":"disabled"} onclick="mcApply()">Desativar os ${r.drop.length} sem meus carros</button><button class="btn" onclick="mcUndo()">Desfazer (reativar os que desativei)</button></div></div>`}
+ h+=`<h3>2. Meus carros (${my.size} marcados)</h3><input id="mcq" placeholder="Buscar carro ou montadora" value="${esc(MCQ)}" oninput="mcQ(this.value)" style="width:100%;margin-bottom:6px">`;
+ cat.forEach(([ma,cs])=>{const L=cs.filter(([k])=>!q||k.includes(q)||norm(ma).includes(q));if(!L.length)return;const n=cs.filter(([k])=>my.has(k)).length,open=MCO[ma]!==undefined?MCO[ma]:(n>0||!!q);
+  h+=`<div style="margin:8px 0;border-top:1px solid var(--bd,#2a2f36);padding-top:6px"><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><a href="#" onclick="mcShow('${esc(ma).replace(/'/g,"\\'")}');return false" style="font-weight:700;color:inherit;text-decoration:none">${open?"▾":"▸"} ${esc(ma)} <span class="mu" style="font-weight:400">${n}/${cs.length}</span></a><a href="#" onclick="mcMa('${esc(ma).replace(/'/g,"\\'")}',1);return false" style="font-size:12px;color:var(--ac)">marcar todos</a><a href="#" onclick="mcMa('${esc(ma).replace(/'/g,"\\'")}',0);return false" style="font-size:12px;color:var(--ac)">limpar</a></div>`;
+  if(open)h+=`<div class="lb" style="position:static;padding:6px 0">${L.map(([k,c])=>`<button class="btn lc${my.has(k)?" on":""}" onclick="mcTog('${k.replace(/'/g,"\\'")}')">${esc(k)} <span style="opacity:.6;font-size:11px">${c}</span></button>`).join("")}</div>`;h+=`</div>`});
+ $("#tc").innerHTML=h;if(keep)$("#tc").scrollTop=sc;const f=$("#mcq");if(keep&&q&&document.activeElement!==f){}}
+window.mcR=mcR;
+const _t0=titR;titR=function(){if(MCON){mcR();return}const v=_t0.apply(this,arguments);try{const r=$("#tc .row");if(r&&!r.querySelector(".mcb")){const b=document.createElement("button");b.className="btn mcb";b.textContent="Meus carros";b.onclick=mcOpen;r.appendChild(b)}}catch(e){}return v};
+const _o0=openTit;openTit=function(){MCON=0;MCO={};return _o0.apply(this,arguments)};
+})();
 </script></body></html>

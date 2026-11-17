@@ -481,3 +481,6 @@ Itens novos são sempre criados completos.
 - Títulos: Mesclar / Editar / Geral-Detalhado / Meus carros viram ícones. Mesclar e Editar **ficam ligados** após aplicar (botão "Desligar" para sair).
 - Meus carros: vem pré-marcada a lista de carros e montadoras do usuário (LISTA_CARROS_E_MONTADORAS.txt); a seleção agora vale por montadora (147 da Alfa não conta como 147 da Fiat). VW/Audi/Seat, Hyundai/Kia agrupados. Botão "Usar minha lista" restaura.
 - Orçamento: campos DESCONTO (% ou valor final) e PARCELAS abaixo do TOTAL. Impressão/imagem: TOTAL, A VISTA, PARCELAS N x de valor. Desconto não se aplica às parcelas (usam o valor cheio).
+
+## v141 — Orçamento: A VISTA/PARCELADO junto do TOTAL
+- TOTAL, A VISTA e PARCELADO ficam juntos; os campos DESCONTO e PARCELADO vêm logo abaixo. "PARCELAS" renomeado para "PARCELADO" (tela, imagem e impressão).

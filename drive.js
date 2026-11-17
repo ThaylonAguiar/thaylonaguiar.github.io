@@ -55,7 +55,7 @@
   }
 
   /* ---------- status ---------- */
-  var VERSION = "v137", lastErr = "";
+  var VERSION = "v138", lastErr = "";
   var state = "init";
   var testMode = false, tdata = null, testPh = [], gShow = false;
   function visitor() { return !testMode && localStorage.getItem("signed") !== "1"; }
@@ -333,16 +333,8 @@
     /* Login em tela cheia (sem pop-up): o navegador não bloqueia e funciona igual no celular e no PC. */
     if (!CID()) return configure();
     say("Abrindo o login do Google…");
-    /* 1) janela pop-up: a página NÃO recarrega e você continua de onde parou. 2) se o navegador bloquear, cai no login em tela cheia. */
-    getToken(true).then(function () {
-      try { localStorage.setItem("signed", "1"); } catch (e) {}
-      try { if (typeof applyMode === "function") applyMode(); } catch (e) {}
-      setSt("sync"); sync(); say("Login feito.");
-    }, function (e) {
-      var m = String((e && e.message) || "");
-      if (/popup_closed|access_denied|tempo esgotado/i.test(m)) { say("Login cancelado."); setSt("login"); return; }
-      redirectLogin();
-    });
+    try { if (window.catSaveView) window.catSaveView(); } catch (e) {}
+    redirectLogin();
   }
   function configure() {
     var v = window.prompt("Cole aqui o Client ID do Google (termina com .apps.googleusercontent.com):", CID());

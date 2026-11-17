@@ -1465,4 +1465,16 @@ window.gpApply=async()=>{if(vRo())return;let n=0,c=0,a=0,gi=0,en=0;const DK={};
  document.addEventListener("touchstart",e=>{const el=e.target.closest&&e.target.closest("[data-tip]");if(!el)return;clearTimeout(ts);ts=setTimeout(()=>{lp=Date.now();show(el)},500)},{passive:true});
  ["touchend","touchmove","touchcancel"].forEach(n=>document.addEventListener(n,()=>clearTimeout(ts),{passive:true}));
  document.addEventListener("click",e=>{const el=e.target.closest&&e.target.closest("[data-tip]");if(el&&Date.now()-lp<800){e.stopPropagation();e.preventDefault();show(el)}},true)})();
+
+/* guarda e restaura a tela (filtros, rolagem, item aberto) ao ir/voltar do login do Google */
+window.catSaveView=function(){try{const o={f:{},sh:shown,cur:cur,y:window.scrollY||document.documentElement.scrollTop||0,t:Date.now()};["fi","ft","fg","fs","fd","fk","fy","fe"].forEach(k=>{const e=$("#"+k);if(e)o.f[k]=e.value});const dv=$("#dv");o.dy=dv?dv.scrollTop:0;sessionStorage.setItem("viewst",JSON.stringify(o))}catch(e){}};
+(function(){let o=null;try{o=JSON.parse(sessionStorage.getItem("viewst")||"null");sessionStorage.removeItem("viewst")}catch(e){}
+if(!o||Date.now()-o.t>600000)return;let n=0;const iv=setInterval(()=>{if(++n>80){clearInterval(iv);return}
+ if(!M||!M.size||!$("#fg")||!$("#fg").options.length)return;clearInterval(iv);
+ try{["fi","ft","fd","fk","fy","fe"].forEach(k=>{const e=$("#"+k);if(e&&o.f[k]!=null)e.value=o.f[k]});
+ const g=$("#fg");if(g&&o.f.fg!=null){g.value=o.f.fg;if(g.onchange)g.onchange()}
+ render();const s=$("#fs");if(s&&o.f.fs!=null){s.value=o.f.fs}
+ shown=Math.max(shown,o.sh||60);render();
+ if(o.cur&&M.has(o.cur)){openItem(o.cur);const dv=$("#dv");if(dv)dv.scrollTop=o.dy||0}
+ setTimeout(()=>window.scrollTo(0,o.y||0),50)}catch(e){}},250)})();
 </script></body></html>

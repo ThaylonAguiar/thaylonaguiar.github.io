@@ -468,3 +468,7 @@ Itens novos são sempre criados completos.
 ## v137 — Login sem recarregar a página
 - O botão de login (e o aviso "Sem login") agora abre uma **janela pop-up** do Google em vez de redirecionar a página inteira; você continua exatamente de onde parou (lista, busca, item aberto).
 - Se o navegador bloquear o pop-up, usa o login em tela cheia como antes (plano B).
+
+## v138 — Login volta a ser em tela cheia (sem pop-up), mas lembrando onde você estava
+- Desfeita a v137 (pop-up causava spam no celular). O login volta a redirecionar a página.
+- Antes de ir ao Google, o app guarda filtros, rolagem e item aberto; ao voltar, restaura tudo automaticamente.

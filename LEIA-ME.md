@@ -492,3 +492,11 @@ Itens novos são sempre criados completos.
 - Olho dos desativados: botão direito = **só os desativados** (fundo verde); botão direito de novo volta ao normal. Clique normal alterna ativos / ativos+desativados (vermelho).
 - Botão de etiqueta (tag): clique marca/desmarca todos da lista; contador na bolinha verde. Botão direito: **GERAR ETIQUETAS** e **LIMPAR ETIQUETAS** (apaga toda a seleção, não só a tela). "Etiquetas" saiu do menu Extra > Produtos.
 - Extra > **Faltas**: nome da falta (vazio = "FALTA"; o que diferencia é o ID nº 000001…), busca do item por referência, código similar ou título, quantidade e observação. Toque no item abre a tabela dele só para consulta (sem editar). Botão direito na quantidade/observação edita. ✓ marca como já pedido (vai para o final); ✕ remove. Salvar, faltas salvas (📂), nova (➕), imagem (WhatsApp), impressão TM-T20 (80 mm, com prévia) e impressora comum (A4). Itens já pedidos saem no fim, em "JÁ PEDIDOS".
+
+## v144 — Faltas: correção dos botões, setas, fora do catálogo, consulta simples
+- **Correção**: depois de abrir um item, os botões ✓/✕ da Faltas paravam de funcionar (id duplicado com a tela do item). Ids da Faltas renomeados.
+- Quantidade com setas ▲▼ (mínimo 1), na linha de adicionar e em cada item da lista.
+- Ao buscar/escolher um item que já está na falta aparece "⚠ já está na falta (Q. n)" e a linha é destacada.
+- Itens fora do catálogo: última sugestão "+ Adicionar “texto” (fora do catálogo)" (ou o botão + com o texto digitado). Ficam salvos; botão direito no nome renomeia.
+- Imagem, TM-T20 e A4: referência + título curto (antes do "-") + montadora.
+- Tocar no item abre tela simples só de consulta: fotos, tabela de carros, códigos, EAN e relacionados (navega entre relacionados, botão ← volta).

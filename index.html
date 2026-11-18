@@ -61,6 +61,21 @@ body.fh #fp{display:none}#fsum{display:none;margin-top:6px;align-items:center;ga
 .ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;vertical-align:middle}.ii{display:inline-block;margin-right:10px;line-height:0}.xm .btn{display:block}.xm .xg{font-weight:700}.xm .chev{float:right;opacity:.6}.xsub{display:none;margin:0 0 4px 16px;border-left:2px solid var(--bd);padding-left:4px}.xsub.on{display:block}
 .top #bnew{padding:8px 10px;line-height:0}.top #bnew .ic,#bext .ic{width:22px;height:22px;stroke-width:2.5}.top #bext{padding:8px 10px;line-height:0;background:#1f9d5a;border-color:#1f9d5a;color:#fff}#bext #xb{font-size:12px;line-height:1;margin-left:4px;vertical-align:middle;font-weight:700}
 @media print{body.lprint>*:not(#pvw){display:none!important}body.lprint #pvw{position:static!important;display:block!important;background:#fff!important;overflow:visible!important;height:auto!important}body.lprint #pvc{max-height:none!important;overflow:visible!important;padding:0!important}body.lprint #pvc .row,body.lprint #pvc>p{display:none!important}body.lprint #pvz{zoom:1!important}@page{size:landscape;margin:8mm}}.sqs{display:flex;gap:6px;margin-left:auto}.sq{width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--bd);border-radius:8px;background:var(--bd);color:var(--fg);padding:0;cursor:pointer}.sq .ic{width:20px;height:20px}.sq.on{background:var(--ac);border-color:var(--ac);color:#fff}.sq.eg{background:#1f9d5a;border-color:#1f9d5a;color:#fff}.sq.gr{background:#1f9d5a;border-color:#1f9d5a;color:#fff}.top #bflt{padding:8px 10px}#bflt .ic{width:22px;height:22px}
+#cf{z-index:60}
+#lov{display:none;position:fixed;inset:0;z-index:25;background:var(--bg);flex-direction:column;padding:8px 10px;gap:6px;box-sizing:border-box}
+#lov .lh{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#lov .lgrid{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#lov .lpn{display:flex;flex-direction:column;min-height:0;border:1px solid var(--bd);border-radius:10px;background:var(--card)}
+#lov .lpt{padding:8px 10px;border-bottom:1px solid var(--bd);font-weight:700}
+#lov .lsc{overflow:auto;flex:1;padding:4px 8px}
+#lov .lri{border-bottom:1px solid rgba(128,128,128,.25);padding:5px 2px}
+#lov .lri.sel{background:var(--ac2)}#lov .lri.ex{opacity:.45}
+#lov .lrh{display:flex;gap:6px;align-items:center;cursor:pointer}
+#lov .lrt{flex:1;min-width:0}
+#lov .lar{background:none;border:0;color:inherit;font-size:16px;cursor:pointer;padding:0 4px;width:auto}
+#lov .lrd{padding:6px 4px 8px 26px}
+#lov .lb2{padding:2px 8px;font-size:12px;flex:none}
+@media (max-width:800px){#lov .lgrid{grid-template-columns:1fr;grid-auto-rows:minmax(0,1fr)}}
 </style></head><body>
 <header><div class="top" style="position:relative"><div class="tl"><h1>Catálogo<span class="hl"> · Menor Preço Auto Peças</span></h1><span id="st">○ Sem sincronização</span></div><label style="display:flex;align-items:center;gap:6px;font-size:14px;color:var(--mut)" data-tip="Colunas: quantos cards por linha na lista."><select id="cl" aria-label="Colunas" onchange="setCols(this.value)" style="width:auto;padding:8px"><option>1</option><option>2</option><option>3</option><option>4</option></select></label><button class="btn p" id="bnew" onclick="openForm()" data-tip="Novo item: cadastrar um item no catálogo." aria-label="Novo item"><i data-ic="plus" style="line-height:0"></i></button><button class="btn" id="gbtn" style="display:none;padding:8px 10px" title="Entrar com o Google" aria-label="Entrar com o Google" onclick="catMode.gSign()"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.6 5.9c4.4-4.1 7-10.1 7-17.6z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.5-.8-3-.8-4.7s.3-3.2.8-4.7l-7.9-6.1C.9 16.4 0 20.100 0 24s.9 7.600 2.600 10.800l7.900-6.100z"/><path fill="#34A853" d="M24 48c6.500 0 11.900-2.100 15.900-5.800l-7.600-5.900c-2.100 1.400-4.800 2.300-8.300 2.300-6.300 0-11.600-4.100-13.500-9.800l-7.900 6.100C6.500 42.600 14.600 48 24 48z"/></svg></button><button class="btn" id="bflt" onclick="togFlt()" data-tip="Filtros: mostra ou esconde os campos de busca." aria-label="Filtros" style="line-height:0"><i data-ic="filter" style="line-height:0"></i></button><button class="btn" id="bext" onclick="togExt(event)" data-tip="Extras: backup, produtos, orçamento, encomenda e outras ferramentas." aria-label="Extras"><i data-ic="grid" style="line-height:0"></i><span id="xb"></span></button>
 <div class="xm" id="xm">
@@ -68,7 +83,7 @@ body.fh #fp{display:none}#fsum{display:none;margin-top:6px;align-items:center;ga
 <button class="btn xg" onclick="togSub(event)" data-tip="Produtos: grupos, versões, mesclar, etiquetas, importações e guia."><i class="ii" data-ic="box"></i>Produtos<span class="chev">▾</span></button>
 <div class="xsub" id="xsub">
 <span id="nsel" style="display:none">0</span>
-<button class="btn" onclick="xc();$('#lf').click()" data-tip="Importar lote: carrega um arquivo .zip de itens novos."><i class="ii" data-ic="upload"></i>Importar lote (.zip)</button>
+<button class="btn" onclick="xc();loOpen()" data-tip="Importar lote (F1): tela para conferir e importar lotes .zip."><i class="ii" data-ic="upload"></i>Importar lote (.zip)</button>
 <button class="btn" onclick="xc();openMerge()" data-tip="Mesclar itens: junta itens repetidos em um só."><i class="ii" data-ic="merge"></i>Mesclar itens</button>
 <button class="btn" onclick="xc();openGrp()" data-tip="Grupos e subgrupos do catálogo."><i class="ii" data-ic="folder"></i>Grupos</button>
 <button class="btn xso" onclick="xc();openFam()" data-tip="Grupos de itens: famílias de itens que andam juntos."><i class="ii" data-ic="layers"></i>Grupos de itens</button>
@@ -84,7 +99,7 @@ body.fh #fp{display:none}#fsum{display:none;margin-top:6px;align-items:center;ga
 <button class="btn xv" onclick="xc();atualizarApp()" data-tip="Atualizar: limpa o cache e carrega a versão mais nova do app."><i class="ii" data-ic="refresh"></i>Atualizar</button>
 <button class="btn xso xnt" onclick="xc();catMode.signOut()" data-tip="Sair da conta (volta ao modo visitante)."><i class="ii" data-ic="logout"></i>Sair</button>
 </div>
-<input id="bf" type="file" webkitdirectory multiple class="vh" onchange="bulk2(this.files)"><input id="pf" type="file" accept="image/*" multiple class="vh" onchange="addPh(this.files)"><input id="lf" type="file" accept=".zip,application/zip" class="vh" onchange="impLote(this.files[0])"><input id="mf" type="file" accept=".json,application/json" class="vh" onchange="impMig(this.files[0])"></div>
+<input id="bf" type="file" webkitdirectory multiple class="vh" onchange="bulk2(this.files)"><input id="pf" type="file" accept="image/*" multiple class="vh" onchange="addPh(this.files)"><input id="lf" type="file" accept=".zip,application/zip" multiple class="vh" onchange="impLoteMany(this.files)"><input id="mf" type="file" accept=".json,application/json" class="vh" onchange="impMig(this.files[0])"></div>
 <div id="fp"><div class="fl"><input id="fi" autocomplete="off" autocapitalize="characters" placeholder="ID / Referência" oninput="shown=60;render()"><input id="ft" autocomplete="off" placeholder="Título" oninput="TSEL='';this.classList.remove('ex');shown=60;render();tsug()" onfocus="tsug()" onkeydown="sgKey(event,'#tsg',0)" onblur="setTimeout(function(){$('#tsg').style.display='none'},400)"><select id="fg" onchange="shown=60;$('#fs').value='';render()"></select><select id="fs" onchange="shown=60;render()"></select><input id="fd" placeholder="Aplicação" oninput="shown=60;render()"><input id="fk" autocomplete="off" autocapitalize="characters" placeholder="Código" oninput="shown=60;render()"><input id="fy" type="number" inputmode="numeric" placeholder="Ano" oninput="shown=60;render()"><input id="fe" inputmode="numeric" autocomplete="off" placeholder="EAN" oninput="shown=60;render()"></div>
 <div class="m"><span id="cnt"></span><span class="sqs"><button type="button" class="sq" id="brf" onclick="togRF()" data-tip="Ordem da lista" aria-label="Ordem da lista: título ou referência"><i data-ic="sort" style="line-height:0"></i></button><button type="button" class="sq" id="bclr" onclick="clr()" data-tip="Limpar filtros: apaga todos os campos de busca de uma vez." aria-label="Limpar filtros"><i data-ic="broom" style="line-height:0"></i></button><button type="button" class="sq" id="tmode" onclick="togT()" data-tip="Título GERAL" aria-label="Título geral/detalhado"><i data-ic="type" style="line-height:0"></i></button><button type="button" class="sq" id="tfam" onclick="togFam()" style="display:none" data-tip="Grupos de itens" aria-label="Grupos de itens"><i data-ic="layers" style="line-height:0"></i></button><button type="button" class="sq" id="beye" onclick="togOffV()" oncontextmenu="return togOffOnly(event)" data-tip="Itens desativados: cinza = só mostra os ativos; vermelho = mostra também os desativados; botão direito: verde = só os desativados." aria-label="Mostrar itens desativados"><i data-ic="eye" style="line-height:0"></i></button><button type="button" class="sq" id="mkall" onclick="markAll()" oncontextmenu="return mkMenu(event)" data-tip="Etiquetas: clique marca todos os itens da lista (até 300); clique de novo desmarca. Botão direito: LIMPAR ETIQUETAS ou GERAR ETIQUETAS." aria-label="Marcar todos para etiqueta"><i data-ic="tag" style="line-height:0"></i></button></span></div></div>
 <div class="m" id="fsum"></div></header>
@@ -1105,83 +1120,162 @@ function loMatch(X,it){const o=loCodes(it.descricao),tk=loTk(it.titulo),C=new Ma
   const why=[];if(c.ean.length)why.push("EAN igual");if(c.codes.length)why.push("código "+c.codes.slice(0,3).join(", "));if(sameT)why.push("mesmo tipo");if(i)why.push("aplicações "+i+"/"+o.cars.size);
   out.push({id:c.id,lvl,why:why.join(" · "),sc:(lvl=="forte"?1000:0)+c.codes.length*10+i})});
  return out.sort((a,b)=>b.sc-a.sc).slice(0,4)}
-function reviewLote2(rows,z,warns){return new Promise(res=>{let o=document.getElementById("lrv3");if(!o){o=document.createElement("div");o.id="lrv3";o.className="ov";o.style.zIndex=46;document.body.appendChild(o)}
- let tab=rows.some(r=>r.kind=="c")?"c":"n",lim={n:100,u:100,c:100};const TH=new Map(),NM={n:"Novos",u:"Mesclar (mesma referência)",c:"Códigos coincidem",w:"Avisos"},cnt=k=>k=="w"?warns.length:rows.filter(r=>r.kind==k).length;
- const exH=id=>{const x=M.get(id);return x?esc(x.r)+" — "+esc(x.t):"?"};
- const rowH=(r,i)=>{const it=r.it,off=r.off&&!r.tgt;let ctl="";
-  if(r.kind=="c")ctl=`<select data-a="tgt" data-i="${i}" style="width:100%;margin-top:4px;font-size:12px"><option value="">Criar como item novo</option>${r.cands.map(c=>`<option value="${c.id}"${r.tgt==c.id?" selected":""}>Juntar com ${(M.get(c.id)||{}).r} (${c.lvl}) — ${esc(((M.get(c.id)||{}).t||"").slice(0,60))}</option>`).join("")}</select>`+(r.tgt?`<div class="mu" style="font-size:12px;color:#4caf50">↳ ${exH(r.tgt)}<br>${esc((r.cands.find(c=>c.id==r.tgt)||{}).why||"")}</div>`:`<div class="mu" style="font-size:12px">Suspeita: ${r.cands.map(c=>esc((M.get(c.id)||{}).r)+" ("+c.lvl+": "+esc(c.why)+")").join(" | ")}</div>`);
-  if(r.kind=="u")ctl=`<div class="mu" style="font-size:12px">${esc(r.up.tag)} · ID ${r.up.id}</div>`;
-  const offB=r.kind!="u"&&!r.tgt?`<button type="button" class="btn" data-a="off" data-i="${i}" style="padding:2px 8px;font-size:12px;${off?"background:#c62828;color:#fff":""}">${off?"🚫 desativado":"🚫 desativar"}</button>`:"";
-  return`<div class="lr3" style="display:flex;gap:8px;align-items:flex-start;border-bottom:1px solid rgba(128,128,128,.3);padding:6px 0;${r.inc?"":"opacity:.45"}"><input type="checkbox" data-a="inc" data-i="${i}" ${r.inc?"checked":""} style="margin-top:6px"><img data-p="${esc((it.fotos||[])[0]||"")}" style="width:70px;height:70px;object-fit:contain;background:#fff;flex:none;border-radius:4px" onclick="const w=this.style.width=='70px';this.style.width=w?'100%':'70px';this.style.height=w?'auto':'70px'"><div style="min-width:0;flex:1"><b>${esc(it.referencia)}</b> ${off?'<span class="chip" style="background:#c62828;color:#fff">DESATIVADO</span>':""}<div class="mu" style="font-size:12px">${esc(String(it.titulo).replace(/^\s*~+\s*/,""))}</div>${ctl}</div><div style="flex:none">${offB}</div></div>`};
- const draw=()=>{const sc=(o.querySelector("#lr3l")||{}).scrollTop||0,inc=rows.filter(r=>r.inc),nn=inc.filter(r=>r.kind=="n"||(r.kind=="c"&&!r.tgt)),nu=inc.filter(r=>r.kind=="u"||(r.kind=="c"&&r.tgt)),no=nn.filter(r=>r.off).length;
-  let list="";if(tab=="w")list=warns.length?warns.map(w=>`<div class="mu" style="padding:4px 0;border-bottom:1px solid rgba(128,128,128,.3)">${esc(w)}</div>`).join(""):'<p class="mu">Nenhum aviso.</p>';
-  else{const R=rows.map((r,i)=>({r,i,g:loTk(r.it.titulo)})).filter(x=>x.r.kind==tab).sort((a,b)=>a.g<b.g?-1:a.g>b.g?1:String(a.r.it.referencia).localeCompare(String(b.r.it.referencia),"pt",{numeric:true})),sh=R.slice(0,lim[tab]);let last=null;
-   const cg={};R.forEach(x=>{cg[x.g]=(cg[x.g]||0)+1});
-   sh.forEach(x=>{if(x.g!==last){last=x.g;list+=`<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:10px 0 2px;position:sticky;top:0;background:var(--card);padding:4px 0;z-index:1"><b>${esc(x.g||"(sem tipo)")}</b> <span class="mu">${cg[x.g]}</span><button type="button" class="btn" data-a="gi" data-g="${esc(x.g)}" data-v="1" style="padding:2px 8px;font-size:12px">marcar</button><button type="button" class="btn" data-a="gi" data-g="${esc(x.g)}" data-v="0" style="padding:2px 8px;font-size:12px">desmarcar</button>${tab!="u"?`<button type="button" class="btn" data-a="go" data-g="${esc(x.g)}" data-v="1" style="padding:2px 8px;font-size:12px">🚫 desativar todos</button><button type="button" class="btn" data-a="go" data-g="${esc(x.g)}" data-v="0" style="padding:2px 8px;font-size:12px">✅ ativar todos</button>`:""}</div>`}list+=rowH(x.r,x.i)});
-   if(R.length>sh.length)list+=`<div style="text-align:center;margin:8px"><button type="button" class="btn" data-a="more">mostrar mais (${R.length-sh.length} restantes)</button></div>`;if(!R.length)list='<p class="mu">Nenhum item nesta aba.</p>'}
-  o.innerHTML=`<div class="pane" style="max-width:900px"><h2>Prévia do lote</h2><div class="mu">Nada é gravado até você confirmar. Desmarque o que não quer. Em <b>Códigos coincidem</b> escolha entre juntar com o item existente ou criar novo. 🚫 importa o item já desativado (título com ~).</div><div class="lb" style="position:static;padding:6px 0">${["c","n","u","w"].map(k=>`<button type="button" class="btn lc${tab==k?" on":""}" data-a="tab" data-k="${k}">${NM[k]} ${cnt(k)}</button>`).join("")}</div><div class="row" style="margin:4px 0"><button type="button" class="btn" data-a="all" data-v="1">marcar todos da aba</button><button type="button" class="btn" data-a="all" data-v="0">desmarcar todos da aba</button></div><div id="lr3l" style="max-height:58vh;overflow:auto">${list}</div><div class="row" style="position:sticky;bottom:0;background:var(--card);padding-top:6px;align-items:center"><button type="button" class="btn p" data-a="ok">Continuar: ${nn.length} novo(s)${no?" ("+no+" desativado(s))":""} · ${nu.length} mesclar</button><button type="button" class="btn" data-a="cancel">Cancelar</button></div></div>`;
-  const l=o.querySelector("#lr3l");if(l)l.scrollTop=sc;
-  o.querySelectorAll("img[data-p]").forEach(async im=>{const p=im.dataset.p,e=p&&z.file(p);if(!e){im.style.visibility="hidden";return}if(!TH.has(p))TH.set(p,e.async("blob").then(b=>URL.createObjectURL(b)).catch(()=>""));const u=await TH.get(p);if(u)im.src=u})};
- o.onchange=e=>{const t=e.target,a=t.dataset.a;if(!a)return;const r=rows[+t.dataset.i];if(a=="inc"){r.inc=t.checked?1:0;draw()}else if(a=="tgt"){r.tgt=t.value;draw()}};
- o.onclick=e=>{const t=e.target.closest("[data-a]");if(!t)return;const a=t.dataset.a;if(a=="tab"){tab=t.dataset.k;draw()}
-  else if(a=="off"){const r=rows[+t.dataset.i];r.off=r.off?0:1;draw()}
-  else if(a=="gi"||a=="go"){const v=+t.dataset.v;rows.forEach(r=>{if(r.kind==tab&&loTk(r.it.titulo)==t.dataset.g){if(a=="gi")r.inc=v;else if(!r.tgt)r.off=v}});draw()}
-  else if(a=="all"){const v=+t.dataset.v;rows.forEach(r=>{if(r.kind==tab)r.inc=v});draw()}
-  else if(a=="more"){lim[tab]+=100;draw()}
-  else if(a=="ok"){o.style.display="none";o.innerHTML="";res(rows)}
-  else if(a=="cancel"){o.style.display="none";o.innerHTML="";res(null)}};
- o.style.display="block";draw()})}
-async function impLote(f){if(!f)return;$("#lf").value="";
+/* ===== LOTE v146: tela persistente (F1) ===== */
+var LS={rows:[],lotes:[],warns:[],seq:0,ui:{tab:"n"}},ZIPS=new Map(),LSL=false,TG=new Map(),PC=new Map(),LX={mm:false,pri:"old",sel:null,exp:new Set(),lim:{n:60,c:60,u:60},R:{i:"",t:"",a:"",k:"",e:"",lim:40},chkL:null,chkR:null,fq:""};
+const LNM={n:"Novos",c:"Códigos coincidem",u:"Mesclar",w:"Avisos"};
+const LDB={db:null,open(){return this.db||(this.db=new Promise((ok,no)=>{const q=indexedDB.open("lotes_v1",1);q.onupgradeneeded=()=>q.result.createObjectStore("kv");q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)}))},
+ async get(k){const d=await this.open();return new Promise((ok,no)=>{const r=d.transaction("kv").objectStore("kv").get(k);r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)})},
+ async set(k,v){const d=await this.open();return new Promise((ok,no)=>{const t=d.transaction("kv","readwrite");t.objectStore("kv").put(v,k);t.oncomplete=()=>ok();t.onerror=()=>no(t.error)})},
+ async del(k){const d=await this.open();return new Promise((ok,no)=>{const t=d.transaction("kv","readwrite");t.objectStore("kv").delete(k);t.oncomplete=()=>ok();t.onerror=()=>no(t.error)})}};
+async function lsLoad(){if(LSL)return;try{const s=await LDB.get("state");if(s)LS=Object.assign(LS,s)}catch(e){}LSL=true}
+var _lst;function lsSave(){clearTimeout(_lst);_lst=setTimeout(async()=>{try{await LDB.set("state",LS)}catch(e){toast("Não foi possível guardar a lista do lote neste navegador.")}},300)}
+async function lsZip(id){if(ZIPS.has(id))return ZIPS.get(id);try{const b=await LDB.get("zip:"+id);if(b){const z=await JSZip.loadAsync(b);ZIPS.set(id,z);return z}}catch(e){}return null}
+function loByRk(){const m=new Map();M.forEach((x,id)=>{const k=nk(x.r);if(k&&!m.has(k))m.set(k,id)});return m}
+function loPA(r){if(!PC.has(r.k))PC.set(r.k,parse({d:String(r.it.descricao||"")}));return PC.get(r.k)}
+function loMk(it,id,via,op,pri){const t=String(it.titulo||"").trim(),ex=M.get(id);if(!ex)return null;const ds=String(it.descricao||"").trim(),o2=it.substituir===true&&!via?{a:"s",c:"s",o:"s"}:(via?{a:op.a=="s"?"m":op.a,c:op.c=="s"?"m":op.c,o:op.o=="s"?"m":op.o}:op),
+ mg=mergeDesc(ex.d,ds,o2),cA=mergeDesc(ex.d,ds,{a:o2.a,c:"n",o:"n"})[1],cC=mergeDesc(ex.d,ds,{a:"n",c:o2.c,o:"n"})[1],cO=mergeDesc(ex.d,ds,{a:"n",c:"n",o:o2.o})[1],
+ tnew=via?(pri=="new"&&t?t.replace(/^\s*~+\s*/,""):""):(o2.a=="s"&&t?t:""),tch=!!tnew&&tnew!=ex.t,hasI=(IMG.get(ik(ex))||[]).length,fl=(it.fotos||[]).length,
+ im=fl&&(op.i=="s"||(op.i=="m"&&!hasI))?op.i:null,tx=mg[1]||tch,w=[];
+ if(tch)w.push("título");if(cA)w.push("aplicações");if(cC)w.push("códigos");if(cO)w.push("observações");if(im)w.push(im=="s"&&hasI?"fotos (substitui)":"fotos");
+ if(tx||im)return{it,id,d:mg[0],ex,tx,im,t:tnew||ex.t,via:!!via,op,tag:(via?"JUNTA COM "+ex.r+": ":"ATUALIZA: ")+(w.join(", ")||"texto")};return null}
+function loRefresh(){const byRk=loByRk(),IDX=loIdx();TG.clear();
+ LS.rows.forEach(r=>{const id=byRk.get(nk(r.it.referencia));
+  if(id){r.kind="u";r.eid=id;r.cands=[{id,lvl:"mesma referência",why:"mesma referência"}];r.tgt="";r.man=0;return}
+  if(r.kind=="u"){r.kind="n";r.eid="";r.cands=[]}
+  if(r.tgt&&!M.has(r.tgt)){r.tgt="";r.man=0}
+  if(r.man)return;
+  const c=loMatch(IDX,r.it);r.cands=c;r.kind=c.length?"c":"n";r.tgt=c.length&&c[0].lvl=="forte"?c[0].id:""})}
+function loCnt(k){return k=="w"?LS.warns.length:LS.rows.filter(r=>r.kind==k).length}
+function loDet(a,r){const T=(h,c)=>c?h:"";
+ return (a.apps.length?`<div class="sc"><table><tr><th>Marca</th><th>Modelo</th><th>De</th><th>Até</th><th>Obs.</th></tr>${a.apps.map(p=>`<tr><td>${esc(p.ma)}</td><td>${esc(p.mo)}</td><td>${p.de||(p.at<9999?"…":"")}</td><td>${p.at==9999?"…":p.at}</td><td>${esc(p.ob)}</td></tr>`).join("")}</table></div>`:'<div class="mu">Sem aplicações.</div>')
+ +(a.cods.length?`<div class="sc" style="margin-top:6px"><table>${a.cods.map(c=>`<tr><th>${esc(c[0])}</th><td style="white-space:normal">${esc(c[1])}</td></tr>`).join("")}</table></div>`:'<div class="mu">Sem códigos.</div>')
+ +(a.eans.length?`<div style="margin-top:6px"><b>EAN</b> ${a.eans.map(e=>esc((e[0]?e[0]+": ":"")+e[1])).join(" · ")}</div>`:'<div class="mu">Sem EAN.</div>')
+ +(a.notes.length?`<div class="nt" style="margin-top:6px"><b>Observações</b><br>${a.notes.map(esc).join("<br>")}</div>`:"")
+ +(r&&(r.it.fotos||[]).length?`<div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">${(r.it.fotos||[]).slice(0,4).map(p=>`<img data-l="${r.l}" data-p="${esc(p)}" style="width:90px;height:90px;object-fit:contain;background:#fff;border-radius:4px" onclick="this.style.width=this.style.width=='90px'?'260px':'90px';this.style.height=this.style.width=='90px'?'90px':'auto'">`).join("")}</div>`:"")}
+async function loImgs(root){for(const im of root.querySelectorAll("img[data-p]")){if(im.src)continue;const key=im.dataset.l+"|"+im.dataset.p;try{if(!TG.has(key)){const z=await lsZip(+im.dataset.l),e=z&&z.file(im.dataset.p);TG.set(key,e?URL.createObjectURL(await e.async("blob")):"")}const u=TG.get(key);if(u)im.src=u;else im.style.visibility="hidden"}catch(e){}}}
+function loTag(r){if(r.kind!="u")return"";if(!TG.has("t"+r.k)){const u=loMk(r.it,r.eid,false,r.op);TG.set("t"+r.k,u?u.tag:"nada novo (já completo)")}return TG.get("t"+r.k)}
+function loLRow(r){const it=r.it,open=LX.exp.has(r.k),off=r.off&&!r.tgt,tgtx=r.tgt&&M.get(r.tgt);
+ const lt=(LS.lotes.find(l=>l.id==r.l)||{}).nome||"";
+ return`<div class="lri${LX.sel==r.k?" sel":""}${r.inc?"":" ex"}"><div class="lrh" data-a="sel" data-k="${r.k}">${LX.mm&&r.kind!="u"?`<input type="checkbox" style="width:auto" data-a="cl" data-k="${r.k}" ${LX.chkL==r.k?"checked":""}>`:""}<button type="button" class="lar" data-a="exp" data-k="${r.k}">${open?"▾":"▸"}</button><div class="lrt"><b>${esc(it.referencia)}</b> <span>${esc(String(it.titulo).replace(/^\s*~+\s*/,""))}</span>${off?' <span class="chip" style="background:#c62828;color:#fff">DESATIVADO</span>':""}${tgtx?` <span class="chip" style="background:#1a7f37;color:#fff">JUNTAR → ${esc(tgtx.r)} (principal: ${r.pri=="new"?"lote":"cadastro"})</span>`:""}${r.kind=="u"?` <span class="mu" style="font-size:12px">${esc(loTag(r))}</span>`:""}<div class="mu" style="font-size:11px">${esc(lt)}</div></div>${r.kind!="u"&&!r.tgt?`<button type="button" class="btn lb2" data-a="off" data-k="${r.k}" title="Entrar desativado" style="${off?"background:#c62828;color:#fff":""}">🚫</button>`:""}<button type="button" class="btn lb2" data-a="inc" data-k="${r.k}" title="${r.inc?"Tirar da importação (continua na lista)":"Voltar para a importação"}">${r.inc?"✕":"↩"}</button></div>${open?`<div class="lrd">${loDet(loPA(r),r)}</div>`:""}</div>`}
+function loRRow(id,c,r){const x=M.get(id);if(!x)return"";const open=LX.exp.has("R"+id),on=r&&r.tgt==id;
+ return`<div class="lri"><div class="lrh" data-a="exp" data-k="R${id}">${LX.mm?`<input type="checkbox" style="width:auto" data-a="cr" data-k="${id}" ${LX.chkR==id?"checked":""} onclick="event.stopPropagation()">`:""}<button type="button" class="lar" data-a="exp" data-k="R${id}">${open?"▾":"▸"}</button><div class="lrt"><b>${esc(x.r)}</b> <span>${esc(x.t)}</span>${isOff(x)?' <span class="chip" style="background:#c62828;color:#fff">DESATIVADO</span>':""}${c&&c.why?`<div style="font-size:12px;color:#4caf50">${esc(c.lvl)} · ${esc(c.why)}</div>`:""}</div>${r&&r.kind!="u"&&c?(on?`<button type="button" class="btn lb2" data-a="unjoin" data-k="${r.k}">desfazer</button>`:`<button type="button" class="btn lb2" data-a="join" data-k="${r.k}" data-id="${id}">Juntar</button>`):""}</div>${open?`<div class="lrd">${loDet(parse(x))}</div>`:""}</div>`}
+function loSearch(){const q=LX.R,qi=nk(q.i),qt=norm(q.t).split(/\s+/).filter(Boolean),qa=norm(q.a).split(/\s+/).filter(Boolean),qk=nk(q.k),qe=q.e.replace(/\D/g,"");if(!(qi||qt.length||qa.length||qk||qe))return null;
+ const out=[];for(const x of M.values()){if(qi&&!(nk(x.r).includes(qi)||x.id.includes(qi)))continue;const nt=norm(x.t);if(qt.length&&!qt.every(w=>nt.includes(w)))continue;
+  if(qa.length||qk||qe){const a=parse(x);if(qa.length){const s=a.apps.map(p=>norm(p.ma+" "+p.mo+" "+p.ob)).join("|");if(!qa.every(w=>s.includes(w)))continue}if(qk&&!a.cods.some(c=>nk(c[1]).includes(qk)))continue;if(qe&&!a.eans.some(e=>String(e[1]).includes(qe)))continue}out.push(x)}
+ return out.sort((a,b)=>a.t<b.t?-1:a.t>b.t?1:0)}
+function loShell(){const o=document.createElement("div");o.id="lov";
+ o.innerHTML=`<div class="lh"><h2 style="margin:0;flex:1">IMPORTAR LOTE <span id="lo_tn" class="mu" style="font-size:14px"></span></h2><button class="btn p" data-a="imp">IMPORTAR (.ZIP)</button><button class="btn" data-a="hist">VER HISTÓRICO</button><button class="btn" data-a="close">✕ Fechar (Esc)</button></div>
+ <div class="lh" id="lo_tabs"></div><div class="lh" id="lo_act"></div>
+ <div class="lgrid" id="lo_grid"><div class="lpn"><div class="lpt" style="display:flex;gap:8px;align-items:center"><span id="lo_lt" style="flex:1">Do lote</span><input id="lo_fq" placeholder="filtrar a lista…" style="width:150px;padding:4px 8px"></div><div class="lsc" id="lo_left"></div></div>
+ <div class="lpn" id="lo_rp"><div class="lpt">Cadastro (catálogo atual)</div><div style="padding:6px 8px;display:grid;grid-template-columns:repeat(5,1fr);gap:4px"><input id="lo_si" placeholder="ID / Ref"><input id="lo_st" placeholder="Título"><input id="lo_sa" placeholder="Aplicação"><input id="lo_sk" placeholder="Código"><input id="lo_se" placeholder="EAN"></div><div class="lsc" id="lo_right"></div></div></div>`;
+ document.body.appendChild(o);
+ [["si","i"],["st","t"],["sa","a"],["sk","k"],["se","e"]].forEach(p=>o.querySelector("#lo_"+p[0]).oninput=e=>{LX.R[p[1]]=e.target.value;LX.R.lim=40;loRight()});
+ o.querySelector("#lo_fq").oninput=e=>{LX.fq=e.target.value;loLeft()};
+ o.onclick=loClick;o.onchange=e=>{const t=e.target,a=t.dataset.a;if(a=="cl"){LX.chkL=t.checked?t.dataset.k:null;loAct()}else if(a=="cr"){LX.chkR=t.checked?t.dataset.k:null;loAct()}}}
+function loTabs(){$("#lo_tabs").innerHTML=["n","c","u","w"].map(k=>`<button type="button" class="btn lc${LS.ui.tab==k?" on":""}" data-a="tab" data-k="${k}">${LNM[k]} ${loCnt(k)}</button>`).join("");$("#lo_tn").textContent="· "+LNM[LS.ui.tab]}
+function loAct(){const tab=LS.ui.tab,A=$("#lo_act");if(tab=="w"){A.innerHTML=LS.warns.length?`<button class="btn" data-a="wclr">Limpar avisos</button>`:"";return}
+ const R=LS.rows.filter(r=>r.kind==tab&&r.inc),nn=R.filter(r=>r.kind!="u"&&!r.tgt).length,no=R.filter(r=>r.kind!="u"&&!r.tgt&&r.off).length,nu=R.length-nn;
+ A.innerHTML=`<button class="btn${LX.mm?" on lc":""}" data-a="mm" ${tab=="u"?"disabled":""}>🔀 Mesclar${LX.mm?" (ligado)":""}</button>`+(LX.mm?`<span class="mu">Marque 1 item à esquerda e 1 à direita · principal:</span><button class="btn${LX.pri=="new"?" lc on":""}" data-a="pri" data-v="new">◀ ESQUERDO (lote)</button><button class="btn${LX.pri=="old"?" lc on":""}" data-a="pri" data-v="old">DIREITO (cadastro) ▶</button><button class="btn p" data-a="msave" ${LX.chkL&&LX.chkR?"":"disabled"}>💾 Save</button>`:"")+`<span style="flex:1"></span><button class="btn p" data-a="commit">Importar para o sistema oficial (${LNM[tab]}: ${nn} novo(s)${no?", "+no+" desativado(s)":""} · ${nu} mesclar)</button>`}
+function loLeft(){const tab=LS.ui.tab,L=$("#lo_left");if(!L)return;const sc=L.scrollTop;
+ if(tab=="w"){$("#lo_lt").textContent="Avisos";$("#lo_fq").style.display="none";L.innerHTML=LS.warns.length?LS.warns.map(w=>`<div style="padding:5px 2px;border-bottom:1px solid rgba(128,128,128,.25)">${esc(w.m)} <span class="mu">· ${esc(((LS.lotes.find(l=>l.id==w.l)||{}).nome)||"")}</span></div>`).join(""):'<p class="mu">Nenhum aviso.</p>';return}
+ $("#lo_fq").style.display="";const f=norm(LX.fq).trim();
+ const R=LS.rows.filter(r=>r.kind==tab&&(!f||norm(r.it.referencia+" "+r.it.titulo).includes(f))).sort((a,b)=>((a.off&&!a.tgt)-(b.off&&!b.tgt))||(loTk(a.it.titulo)<loTk(b.it.titulo)?-1:loTk(a.it.titulo)>loTk(b.it.titulo)?1:String(a.it.referencia).localeCompare(String(b.it.referencia),"pt",{numeric:true})));
+ $("#lo_lt").textContent="Do lote · "+LNM[tab]+" ("+R.length+")";const sh=R.slice(0,LX.lim[tab]);
+ L.innerHTML=(sh.map(loLRow).join("")||'<p class="mu">Nenhum item nesta aba. Use IMPORTAR (.ZIP).</p>')+(R.length>sh.length?`<div style="text-align:center;margin:8px"><button class="btn" data-a="more">mostrar mais (${R.length-sh.length})</button></div>`:"");L.scrollTop=sc;loImgs(L)}
+function loRight(){const tab=LS.ui.tab,P=$("#lo_rp"),Rr=$("#lo_right");if(!P)return;P.style.display=tab=="w"?"none":"";$("#lo_grid").style.gridTemplateColumns=tab=="w"?"1fr":"";if(tab=="w")return;const sc=Rr.scrollTop;
+ const r=LS.rows.find(z=>z.k==LX.sel&&z.kind==tab);let h="";
+ if(r&&r.cands&&r.cands.length)h+=`<div class="lpt" style="border:0;padding:4px 0">Coincidências com ${esc(r.it.referencia)}</div>`+r.cands.map(c=>loRRow(c.id,c,r)).join("")+`<div class="mu" style="margin:4px 0">${r.kind!="u"&&!r.tgt?"Sem juntar: será criado como item novo.":""}${r.kind!="u"&&r.tgt?`<button class="btn lb2" data-a="npri" data-k="${r.k}">principal: ${r.pri=="new"?"lote":"cadastro"} (trocar)</button>`:""}</div><hr style="border:0;border-top:1px solid var(--bd)">`;
+ else if(r)h+=`<div class="mu" style="margin:4px 0">Nenhuma coincidência encontrada para ${esc(r.it.referencia)}. Use a busca acima para procurar no cadastro.</div>`;
+ else h+='<div class="mu" style="margin:4px 0">Clique num item da esquerda para ver as coincidências. Use a busca acima para procurar qualquer item do cadastro.</div>';
+ const S=loSearch();if(S){h+=`<div class="mu" style="margin:4px 0">${S.length} resultado(s)</div>`+S.slice(0,LX.R.lim).map(x=>loRRow(x.id,null,r)).join("")+(S.length>LX.R.lim?`<div style="text-align:center;margin:8px"><button class="btn" data-a="rmore">mostrar mais</button></div>`:"")}
+ Rr.innerHTML=h;Rr.scrollTop=sc}
+function loDraw(){if(!$("#lov"))return;loTabs();loAct();loLeft();loRight()}
+async function loOpen(){await lsLoad();loRefresh();if(!$("#lov"))loShell();$("#lov").style.display="flex";document.body.style.overflow="hidden";loDraw();lsSave()}
+function loClose(){const o=$("#lov");if(o)o.style.display="none";document.body.style.overflow="";try{render()}catch(e){}}
+async function loClick(e){const t=e.target.closest("[data-a]");if(!t)return;const a=t.dataset.a,k=t.dataset.k,r=k&&LS.rows.find(z=>z.k==k);
+ if(a=="cl"||a=="cr")return;
+ if(a=="tab"){LS.ui.tab=k;LX.sel=null;LX.chkL=LX.chkR=null;LX.fq="";$("#lo_fq").value="";loDraw();lsSave()}
+ else if(a=="sel"){if(e.target.closest("button,input"))return;LX.sel=k;loRight();loLeft()}
+ else if(a=="exp"){e.stopPropagation();if(LX.exp.has(k))LX.exp.delete(k);else LX.exp.add(k);loLeft();loRight()}
+ else if(a=="off"&&r){r.off=r.off?0:1;lsSave();loDraw()}
+ else if(a=="inc"&&r){r.inc=r.inc?0:1;lsSave();loDraw()}
+ else if(a=="join"&&r){r.tgt=t.dataset.id;r.man=1;r.pri=r.pri||"old";lsSave();loDraw()}
+ else if(a=="unjoin"&&r){r.tgt="";r.man=1;lsSave();loDraw()}
+ else if(a=="npri"&&r){r.pri=r.pri=="new"?"old":"new";lsSave();loDraw()}
+ else if(a=="mm"){LX.mm=!LX.mm;LX.chkL=LX.chkR=null;loDraw()}
+ else if(a=="pri"){LX.pri=t.dataset.v;loAct()}
+ else if(a=="msave"){const rr=LS.rows.find(z=>z.k==LX.chkL);if(!rr||!LX.chkR||!M.has(LX.chkR))return;rr.tgt=LX.chkR;rr.man=1;rr.pri=LX.pri;rr.inc=1;LX.chkL=LX.chkR=null;lsSave();loDraw();toast("Mesclagem registrada (principal: "+(rr.pri=="new"?"lote":"cadastro")+"). Vale ao importar.")}
+ else if(a=="more"){LX.lim[LS.ui.tab]+=60;loLeft()}
+ else if(a=="rmore"){LX.R.lim+=40;loRight()}
+ else if(a=="wclr"){LS.warns=[];lsSave();loDraw()}
+ else if(a=="imp"){$("#lf").click()}
+ else if(a=="hist")loHist();
+ else if(a=="close")loClose();
+ else if(a=="commit")loCommit()}
+function loHist(){let h=document.getElementById("lhv");if(!h){h=document.createElement("div");h.id="lhv";h.className="ov";h.style.zIndex=30;document.body.appendChild(h);h.onclick=async e=>{const t=e.target.closest("[data-a]");if(!t)return;if(t.dataset.a=="hx"){h.style.display="none"}else if(t.dataset.a=="hd"){const id=+t.dataset.id,l=LS.lotes.find(z=>z.id==id);if(!l||!await askC("Descartar os itens pendentes do lote "+l.nome+"? (eles saem da lista; o que já foi importado fica)"))return;const pend=new Set(LS.rows.filter(r=>r.l==id).map(r=>r.k));l.items.forEach(i=>{if(pend.has(i.k))i.st="descartado"});LS.rows=LS.rows.filter(r=>r.l!=id);lsSave();loRefresh();loDraw();loHist()}}}
+ const rows=new Map(LS.rows.map(r=>[r.k,r]));
+ h.innerHTML=`<div class="pane" style="max-width:900px"><h2>Histórico de lotes</h2>${LS.lotes.length?LS.lotes.slice().reverse().map(l=>{const st=i=>rows.has(i.k)?"pendente · aba "+LNM[rows.get(i.k).kind]:i.st+(i.id?" · ID "+i.id:"");const c={};l.items.forEach(i=>{const s=rows.has(i.k)?"pendente":i.st;c[s]=(c[s]||0)+1});
+  return`<details style="border-bottom:1px solid var(--bd);padding:6px 0"><summary><b>${esc(l.nome)}</b> <span class="mu">${new Date(l.data).toLocaleString("pt-BR")} · ${l.items.length} itens · ${Object.entries(c).map(e=>e[1]+" "+e[0]).join(", ")}</span></summary><div style="margin:6px 0"><button class="btn" data-a="hd" data-id="${l.id}">descartar pendentes</button></div><div style="max-height:40vh;overflow:auto">${l.items.map(i=>`<div style="font-size:13px;padding:2px 0"><b>${esc(i.ref)}</b> ${esc(i.titulo)} <span class="mu">— ${esc(st(i))}</span></div>`).join("")}</div></details>`}).join(""):'<p class="mu">Nenhum lote importado ainda.</p>'}<div class="row"><button class="btn" data-a="hx">Fechar</button></div></div>`;h.style.display="block"}
+async function impLoteMany(fs){const a=[...(fs||[])];$("#lf").value="";for(const f of a)await impLote(f)}
+async function impLote(f){if(!f)return;
  if(typeof JSZip=="undefined")return toast("Biblioteca de zip indisponível.");
- let z,j;try{z=await JSZip.loadAsync(f);const e=z.file("lote.json");if(!e)return toast("Este zip não tem o arquivo lote.json.");j=JSON.parse(await e.async("string"))}catch(e){return toast("Arquivo de lote inválido: "+(e.message||e))}
- const L=Array.isArray(j.itens)?j.itens:[];if(!L.length&&!(j.categorias||[]).length)return toast("O lote está vazio.");
+ let z,j,ab;try{ab=await f.arrayBuffer();z=await JSZip.loadAsync(ab);const e=z.file("lote.json");if(!e)return toast("Este zip não tem o arquivo lote.json.");j=JSON.parse(await e.async("string"))}catch(e){return toast("Arquivo de lote inválido: "+(e.message||e))}
+ const L=Array.isArray(j.itens)?j.itens:[];if(!L.length)return toast("O lote está vazio.");
+ await lsLoad();
+ if(LS.lotes.some(l=>l.nome==f.name&&l.size==f.size&&LS.rows.some(r=>r.l==l.id))&&!await askC("O lote "+f.name+" já foi trazido e ainda tem itens pendentes na lista. Trazer de novo?"))return;
  const op=await askLoteOpts(L.length,j.modo=="substituir"?"s":"m");if(!op)return;
- const byRk=new Map();M.forEach((x,id)=>{const k=nk(x.r);if(k&&!byRk.has(k))byRk.set(k,id)});
- let novos=[],ups=[];const dups=[],seen=new Set(),IDX=loIdx();
- const mkUp=(it,id,via)=>{const t=String(it.titulo||"").trim(),ex=M.get(id),ds=String(it.descricao||"").trim(),o2=it.substituir===true&&!via?{a:"s",c:"s",o:"s"}:(via?{a:op.a=="s"?"m":op.a,c:op.c=="s"?"m":op.c,o:op.o=="s"?"m":op.o}:op),
-  mg=mergeDesc(ex.d,ds,o2),cA=mergeDesc(ex.d,ds,{a:o2.a,c:"n",o:"n"})[1],cC=mergeDesc(ex.d,ds,{a:"n",c:o2.c,o:"n"})[1],cO=mergeDesc(ex.d,ds,{a:"n",c:"n",o:o2.o})[1],
-  tch=!via&&o2.a=="s"&&t&&t!=ex.t,hasI=(IMG.get(ik(ex))||[]).length,fl=(it.fotos||[]).length,
-  im=fl&&(op.i=="s"||(op.i=="m"&&!hasI))?op.i:null,tx=mg[1]||tch,w=[];
-  if(cA||tch)w.push("aplicações");if(cC)w.push("códigos");if(cO)w.push("observações");if(im)w.push(im=="s"&&hasI?"fotos (substitui)":"fotos");
-  if(tx||im)return{it,id,d:mg[0],ex,tx,im,t:!via&&o2.a=="s"&&t?t:ex.t,via:!!via,tag:(via?"JUNTA COM "+ex.r+": ":"ATUALIZA: ")+(w.join(", ")||"texto")};return null};
- const rows=[];
- L.forEach(it=>{const t=String(it.titulo||"").trim(),r=String(it.referencia||"").trim(),k=nk(r);if(!t||!k){dups.push((r||"?")+" (sem título ou referência)");return}
-  if(seen.has(k)){dups.push(r+" (repetido no lote)");return}seen.add(k);
-  if(byRk.has(k)){const id=byRk.get(k),u=mkUp(it,id);if(u)rows.push({kind:"u",it,up:u,inc:1});else dups.push(r+" (já existe, nada novo: ID "+id+")");return}
-  const cands=loMatch(IDX,it);rows.push({kind:cands.length?"c":"n",it,cands,inc:1,off:/^\s*~/.test(t)?1:0,tgt:cands.length&&cands[0].lvl=="forte"?cands[0].id:""})});
- if(!rows.length){await showR("<b>Nada para importar.</b><div class=\"mu\">Ignorados ("+dups.length+"):<br>"+dups.slice(0,15).map(esc).join("<br>")+"</div>");return}
- const dec=await reviewLote2(rows,z,dups);if(!dec)return;const part=dec.some(r=>!r.inc);
- dec.forEach(r=>{if(!r.inc)return;if(r.kind=="u"){ups.push(r.up);return}
-  if(r.tgt){const u=mkUp(r.it,r.tgt,1);if(u)ups.push(u);else dups.push(r.it.referencia+" (juntar com "+M.get(r.tgt).r+": nada novo)");return}
-  const tt=String(r.it.titulo).trim().replace(/^\s*~+\s*/,"");novos.push(Object.assign({},r.it,{titulo:r.off?"~"+tt:tt}))});
- const fi=ups.filter(u=>u.im).length;
- const addTax=new Map();let ng=0;novos.forEach(it=>{const g=String(it.grupo||"").trim().toUpperCase(),s=String(it.subgrupo||"").trim();if(!g||g=="SEM GRUPO")return;
-  if(!TAX.has(g)&&!addTax.has(g))ng++;if(!TAX.has(g)||(s&&!TAX.get(g).has(s))){if(!addTax.has(g))addTax.set(g,new Set());if(s)addTax.get(g).add(s)}});
- if(!part)(j.categorias||[]).forEach(c=>{const g=String(c.grupo||"").trim().toUpperCase(),s2=String(c.subgrupo||"").trim();if(!g)return;if(!TAX.has(g)&&!addTax.has(g))ng++;if(!TAX.has(g)||(s2&&!TAX.get(g).has(s2))){if(!addTax.has(g))addTax.set(g,new Set());if(s2)addTax.get(g).add(s2)}});
- const nsub=[...addTax.values()].reduce((a,b)=>a+b.size,0),nf=novos.reduce((a,it)=>a+(it.fotos||[]).length,0);
- if(!novos.length&&!ups.length&&!addTax.size){await showR("<b>Nada para importar.</b><div class=\"mu\">Ignorados ("+dups.length+"):<br>"+dups.slice(0,15).map(esc).join("<br>")+"</div>");return}
- if(!await askH(`Importar <b>${novos.length}</b> item(ns) novos`+(ups.length?` e atualizar <b>${ups.length}</b> existente(s)`:"")+(fi?` · fotos de <b>${fi}</b> existente(s)`:"")+`?<div class="mu">Fotos novas: ${nf} · grupos novos: ${ng} · subgrupos novos: ${nsub}${dups.length?" · ignorados: "+dups.length:""}</div>`+(dups.length?`<div class="mu">Ignorados: ${dups.slice(0,6).map(esc).join("; ")}${dups.length>6?"…":""}</div>`:"")))return;
+ const lid=++LS.seq,lote={id:lid,nome:f.name,size:f.size,data:Date.now(),items:[]},have=new Map(LS.rows.map(r=>[nk(r.it.referencia),r])),seen=new Set(),byRk=loByRk(),IDX=loIdx(),nr=[];let nw=0;
+ const warn=(m)=>{LS.warns.push({l:lid,m});nw++};
+ L.forEach((it,ix)=>{const t=String(it.titulo||"").trim(),r=String(it.referencia||"").trim(),k=nk(r),rk=lid+"_"+ix,li=(why)=>lote.items.push({k:rk,ref:r||"?",titulo:t,st:why});
+  if(!t||!k){warn((r||"?")+" (sem título ou referência)");li("ignorado: sem título/referência");return}
+  if(seen.has(k)){warn(r+" (repetido no lote)");li("ignorado: repetido no lote");return}seen.add(k);
+  if(have.has(k)){warn(r+" (já está na lista, lote "+((LS.lotes.find(l=>l.id==have.get(k).l)||{}).nome||"?")+")");li("ignorado: já na lista");return}
+  const it2=Object.assign({},it,{__l:lid});
+  if(byRk.has(k)){const id=byRk.get(k);if(!loMk(it2,id,false,op)){warn(r+" (já existe, nada novo: ID "+id+")");li("ignorado: nada novo");return}
+   nr.push({k:rk,l:lid,op,kind:"u",it:it2,eid:id,cands:[{id,lvl:"mesma referência",why:"mesma referência"}],inc:1,off:0,tgt:"",man:0,pri:"old"});li("pendente");return}
+  const c=loMatch(IDX,it);nr.push({k:rk,l:lid,op,kind:c.length?"c":"n",it:it2,eid:"",cands:c,inc:1,off:/^\s*~/.test(t)?1:0,tgt:c.length&&c[0].lvl=="forte"?c[0].id:"",man:0,pri:"old"});li("pendente")});
+ try{await LDB.set("zip:"+lid,ab)}catch(e){toast("Aviso: o arquivo não coube no armazenamento do navegador; as fotos podem não ficar guardadas.")}
+ ZIPS.set(lid,z);LS.lotes.push(lote);LS.rows.push(...nr);
+ const cn={n:0,c:0,u:0};nr.forEach(r=>cn[r.kind]++);LS.ui.tab=cn.c?"c":cn.n?"n":cn.u?"u":"w";LX.sel=null;LX.chkL=LX.chkR=null;
+ lsSave();await loOpen();toast(f.name+": "+nr.length+" na lista ("+cn.n+" novos · "+cn.c+" coincidem · "+cn.u+" mesma ref.)"+(nw?" · "+nw+" aviso(s)":""))}
+async function loCommit(){const tab=LS.ui.tab;if(tab=="w")return;const R=LS.rows.filter(r=>r.kind==tab&&r.inc);if(!R.length)return toast("Nada marcado nesta aba.");
+ const nn=R.filter(r=>r.kind!="u"&&!r.tgt).length,no=R.filter(r=>r.kind!="u"&&!r.tgt&&r.off).length;
+ if(!await askH(`Importar para o catálogo oficial (aba <b>${LNM[tab]}</b>): <b>${nn}</b> novo(s)${no?" ("+no+" desativado(s))":""} e <b>${R.length-nn}</b> para mesclar em itens existentes?<div class="mu">Itens tirados da importação (✕) continuam na lista.</div>`))return;
+ await loApply(R)}
+async function loApply(R){
+ const byRk=loByRk(),dups=[],novos=[],ups=[],none=[];for(const l of new Set(R.map(r=>r.l)))await lsZip(l);
+ R.forEach(r=>{if(r.kind=="u"){const u=loMk(r.it,r.eid,false,r.op);if(u){u.r=r;ups.push(u)}else none.push(r);return}
+  if(r.tgt&&M.has(r.tgt)){const u=loMk(r.it,r.tgt,true,r.op,r.pri);if(u){u.r=r;ups.push(u)}else none.push(r);return}
+  const tt=String(r.it.titulo).trim().replace(/^\s*~+\s*/,"");novos.push(Object.assign({},r.it,{titulo:r.off?"~"+tt:tt,__r:r}))});
+ const done=new Map();none.forEach(r=>done.set(r.k,["sem novidade",""]));
+ const addTax=new Map();novos.forEach(it=>{const g=String(it.grupo||"").trim().toUpperCase(),s=String(it.subgrupo||"").trim();if(!g||g=="SEM GRUPO")return;if(!TAX.has(g)||(s&&!TAX.get(g).has(s))){if(!addTax.has(g))addTax.set(g,new Set());if(s)addTax.get(g).add(s)}});
  if(addTax.size)await saveTax(d=>{addTax.forEach((ss,g)=>{d.g[g]=[...new Set([...(d.g[g]||[]),...ss])];delete d.rm[g];ss.forEach(s=>delete d.rm[g+"|"+s])})});
  let nid=Math.max(0,...[...M.keys()].map(Number));const ids=new Map();let n=0;
  for(const it of novos){nid++;const id=String(nid).padStart(6,"0"),g=String(it.grupo||"").trim().toUpperCase()||"SEM GRUPO",s=g=="SEM GRUPO"?"":String(it.subgrupo||"").trim();
   const x={t:String(it.titulo).trim(),r:String(it.referencia).trim(),g,sg:s,e:"",d:String(it.descricao||""),del:false};
-  if(!await W(()=>db.doc("items/"+id).set(x)))break;await addVer(id,x,"Importação de lote (item novo)");M.set(id,{id,t:x.t,r:x.r,d:x.d,g:x.g,sg:x.sg,e:""});ids.set(nk(x.r),id);byRk.set(nk(x.r),id);n++;if(n%20==0)toast("Criando itens "+n+" de "+novos.length+"…")}
- let nu=0;for(const u of ups){ids.set(nk(u.ex.r),u.id);if(u.via){ids.set(nk(u.it.referencia),u.id);byRk.set(nk(u.it.referencia),u.id)}if(!u.tx)continue;const x={t:u.t,r:u.ex.r,g:u.ex.g,sg:u.ex.sg,e:u.ex.e||"",d:u.d,del:false};if(!await W(()=>db.doc("items/"+u.id).set(x)))break;await addVer(u.id,x,"Importação de lote (aplicações "+op.a+" · códigos "+op.c+" · obs. "+op.o+")",u.ex);M.set(u.id,{...u.ex,d:u.d,t:u.t});nu++}
+  if(!await W(()=>db.doc("items/"+id).set(x)))break;await addVer(id,x,"Importação de lote (item novo)");M.set(id,{id,t:x.t,r:x.r,d:x.d,g:x.g,sg:x.sg,e:""});ids.set(nk(x.r),id);byRk.set(nk(x.r),id);done.set(it.__r.k,["importado",id]);n++;if(n%20==0)toast("Criando itens "+n+" de "+novos.length+"…")}
+ let nu=0;for(const u of ups){ids.set(nk(u.ex.r),u.id);if(u.via){ids.set(nk(u.it.referencia),u.id);byRk.set(nk(u.it.referencia),u.id)}
+  if(!u.tx){done.set(u.r.k,[u.via?"mesclado":"atualizado",u.id]);continue}
+  const x={t:u.t,r:u.ex.r,g:u.ex.g,sg:u.ex.sg,e:u.ex.e||"",d:u.d,del:false};if(!await W(()=>db.doc("items/"+u.id).set(x)))break;await addVer(u.id,x,"Importação de lote (aplicações "+u.op.a+" · códigos "+u.op.c+" · obs. "+u.op.o+")",u.ex);M.set(u.id,{...u.ex,d:u.d,t:u.t});done.set(u.r.k,[u.via?"mesclado":"atualizado",u.id]);nu++}
  const todos=novos.concat(ups.map(u=>u.it));
  const pend=[];let nr=0;
  for(const it of todos){const a=ids.get(nk(it.referencia));if(!a)continue;for(const rr of(it.relacionados||[])){const b=byRk.get(nk(rr));if(!b||b==a){pend.push(it.referencia+" → "+rr);continue}await W(()=>db.doc("dir/"+k2(a,b)).set({a,b,del:false}));nr++}}
  const as=await claude.use("assets"),jobs=[],mime=p=>/\.png$/i.test(p)?"image/png":/\.webp$/i.test(p)?"image/webp":"image/jpeg";
- const ij=[...novos.map(it=>({it,m:"m"})),...ups.filter(u=>u.im).map(u=>({it:u.it,m:u.im}))];
- for(const o of ij){const id=ids.get(nk(o.it.referencia));if(!id)continue;const rr0=M.get(id).r,k=ik(M.get(id)),old=IMG.get(k)||[];if(o.m=="m"&&old.length)continue;const fl=(o.it.fotos||[]).map(p=>({p,e:z.file(p)})).filter(q=>q.e);if(fl.length)jobs.push({k,ref:rr0,fl,old:o.m=="s"?old:[]})}
- let i=0,done=0,okf=0;const badF=[];
+ const ij=[...novos.filter(it=>done.has(it.__r.k)).map(it=>({it,m:"m"})),...ups.filter(u=>u.im&&done.has(u.r.k)).map(u=>({it:u.it,m:u.im}))];
+ for(const o of ij){const id=ids.get(nk(o.it.referencia));if(!id)continue;const rr0=M.get(id).r,k=ik(M.get(id)),old=IMG.get(k)||[];if(o.m=="m"&&old.length)continue;const zz=ZIPS.get(o.it.__l);const fl=(o.it.fotos||[]).map(p=>({p,e:zz&&zz.file(p)})).filter(q=>q.e);if(fl.length)jobs.push({k,ref:rr0,fl,old:o.m=="s"?old:[]})}
+ let i=0,dn=0,okf=0;const badF=[];
  const HM=new Map(),UC=new Map(),IDH=new Map(),hsh=async ab=>{try{return[...new Uint8Array(await crypto.subtle.digest("SHA-1",ab))].map(b=>b.toString(16).padStart(2,"0")).join("")}catch(er){return""}};
  const upl=async(o,ref)=>{const ab=await o.e.async("arraybuffer"),h=await hsh(ab);let p=h&&HM.get(h);if(!p){p=(async()=>(await as.upload(await shrink(new Blob([ab],{type:mime(o.p)})),ref)).id)();if(h){HM.set(h,p);p.then(id=>IDH.set(id,h),()=>HM.delete(h))}}const id=await p;UC.set(id,(UC.get(id)||0)+1);return id};
  const wk=async()=>{while(i<jobs.length){const jb=jobs[i++],add=[];let bad=0;
   for(const o of jb.fl){try{add.push(await upl(o,jb.ref))}catch(er){bad++}}
   if(bad){for(const x of add){if((UC.get(x)||1)<=1){HM.delete(IDH.get(x));try{await as.delete(x)}catch(er){}}else UC.set(x,UC.get(x)-1)}badF.push(jb.ref)}else if(add.length){if(await W(()=>db.doc("img/"+jb.k).set({ids:add}))){IMG.set(jb.k,add);okf+=add.length;for(const x of jb.old){if(add.includes(x)||[...IMG].some(([kk,v])=>kk!=jb.k&&v.includes(x)))continue;try{await as.delete(x)}catch(er){}}}}
-  done++;toast("Enviando fotos: pasta "+done+" de "+jobs.length+"…")}};
+  dn++;toast("Enviando fotos: pasta "+dn+" de "+jobs.length+"…")}};
  if(jobs.length)await Promise.all([1,2,3,4,5,6,7,8].map(wk));
- await showR("<b>Lote importado.</b><div class=\"mu\" style=\"margin-top:6px\">• Itens criados: "+n+(ups.length?"<br>• Itens atualizados: "+nu:"")+"<br>• Relacionamentos: "+nr+(pend.length?"<br>&nbsp;&nbsp;não encontrados: "+pend.slice(0,8).map(esc).join("; ")+(pend.length>8?"…":""):"")+"<br>• Fotos enviadas: "+okf+(badF.length?"<br>&nbsp;&nbsp;falharam em: "+badF.slice(0,8).map(esc).join(", ")+" (importe as fotos dessas referências depois)":"")+(dups.length?"<br>• Ignorados ("+dups.length+"): "+dups.slice(0,10).map(esc).join("; ")+(dups.length>10?"…":""):"")+"</div>");try{render()}catch(e){}}
+ LS.lotes.forEach(l=>l.items.forEach(it=>{const d=done.get(it.k);if(d){it.st=d[0];it.id=d[1]}}));
+ LS.rows=LS.rows.filter(r=>!done.has(r.k));lsSave();loRefresh();LX.sel=null;LX.chkL=LX.chkR=null;loDraw();
+ await showR("<b>Importação concluída.</b><div class=\"mu\" style=\"margin-top:6px\">• Itens criados: "+n+(ups.length?"<br>• Itens atualizados/mesclados: "+nu:"")+(none.length?"<br>• Sem novidade (saíram da lista): "+none.length:"")+"<br>• Relacionamentos: "+nr+(pend.length?"<br>&nbsp;&nbsp;não encontrados: "+pend.slice(0,8).map(esc).join("; ")+(pend.length>8?"…":""):"")+"<br>• Fotos enviadas: "+okf+(badF.length?"<br>&nbsp;&nbsp;falharam em: "+badF.slice(0,8).map(esc).join(", ")+" (importe as fotos dessas referências depois)":"")+"</div>");try{render()}catch(e){}}
+addEventListener("keydown",e=>{if(e.key=="F1"&&!e.ctrlKey&&!e.altKey&&!e.shiftKey){e.preventDefault();if(document.body.classList.contains("ro"))return;loOpen()}
+ else if(e.key=="Escape"){const o=document.getElementById("lov");if(o&&o.style.display=="flex"){const cf=$("#cf"),hv=document.getElementById("lhv");if(cf&&cf.style.display=="block")return;if(hv&&hv.style.display=="block"){hv.style.display="none";return}if(["INPUT","TEXTAREA"].includes((document.activeElement||{}).tagName)&&document.activeElement.value){return}loClose()}}},true);
 
 function isOff(x){const o=ov.off.get(x.id);return(o?o.v:/^\s*~/.test(x.t||""))?1:0}
 function offUI(id){const x=M.get(id),b=$("#bof");if(!x||!b)return;const o=isOff(x);b.textContent=o?"ATIVAR":"Desativar";const b2=$("#bof2");if(b2){b2.textContent=o?"✅":"🚫";b2.title=o?"Ativar":"Desativar"}const h=$("#dc").querySelector(".offb");if(h)h.remove();const es=o&&!!(ov.off.get(id)||{}).est,b3=$("#bst"),h2=$("#dc h2");if(h2)h2.classList.toggle("est",es);if(b3){b3.style.display=o?"":"none";b3.style.background=es?"#d4a017":"";b3.style.borderColor=es?"#f0c040":"";b3.title=es?"Em estoque (guardada fora da prateleira) \u00b7 clique para marcar SEM estoque":"Sem estoque \u00b7 clique para marcar que a pe\u00e7a est\u00e1 guardada em estoque"}if(o)$("#dc").insertAdjacentHTML("afterbegin",'<div class="offb">ITEM DESATIVADO'+(es?' \u00b7 \ud83d\udce6 EM ESTOQUE':'')+'</div>')}

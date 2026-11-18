@@ -507,3 +507,12 @@ Itens novos são sempre criados completos.
 - Sinais de correspondência: forte (código/EAN igual, mesmo tipo) e médio (mesmo tipo + aplicações parecidas). Padrão: junta só se "forte".
 - Botão 🚫 desativar por item ou por título (grupo); itens entram com "~" no título.
 - Desmarcar item = não importa. Confirmação final mostra os totais.
+
+## v146 — Tela "Importar lote" persistente (F1)
+- Botão "Importar lote" e a tecla **F1** abrem uma tela cheia. Esc/✕ fecha; ao voltar, continua de onde parou (aba, seleção). A lista fica guardada neste navegador (IndexedDB) até você importar ou descartar.
+- **IMPORTAR (.ZIP)** (aceita vários arquivos): escolhe Substituir/Mesclar/Nada e os itens entram nas abas, somando com o que já estava na lista. **VER HISTÓRICO**: cada lote e o status de cada item (pendente, importado, mesclado, ignorado…), com "descartar pendentes".
+- Abas: **Novos**, **Códigos coincidem**, **Mesclar** (mesma referência de item do cadastro), **Avisos** (repetidos/sem título ou referência/já na lista).
+- Tela dividida: esquerda = itens do lote; direita = coincidências do item selecionado + busca no cadastro (ID/Ref, Título, Aplicação, Código, EAN). A seta ▸ abre a tabela (carros, códigos, EAN, observações e fotos do lote).
+- 🔀 Mesclar: marca 1 item da esquerda e 1 da direita, escolhe o principal (lote ou cadastro) e Save. Na prática o item do lote é somado ao existente (principal = lote também troca o título; a referência/ID/fotos do cadastro permanecem).
+- 🚫 entra desativado (vai para o fim da lista); ✕ tira da importação sem apagar da lista.
+- "Importar para o sistema oficial" importa a aba atual; os importados saem da lista.

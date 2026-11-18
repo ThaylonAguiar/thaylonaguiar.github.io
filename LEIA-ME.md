@@ -500,3 +500,10 @@ Itens novos são sempre criados completos.
 - Itens fora do catálogo: última sugestão "+ Adicionar “texto” (fora do catálogo)" (ou o botão + com o texto digitado). Ficam salvos; botão direito no nome renomeia.
 - Imagem, TM-T20 e A4: referência + título curto (antes do "-") + montadora.
 - Tocar no item abre tela simples só de consulta: fotos, tabela de carros, códigos, EAN e relacionados (navega entre relacionados, botão ← volta).
+
+## v145 — Prévia do lote antes de salvar
+- Após "Importar lote" → opções, abre a **Prévia do lote** (nada é gravado até confirmar).
+- Abas: **Códigos coincidem** (códigos/EAN/carros batem com item existente: escolher "Juntar com…" ou "Criar como novo"), **Novos**, **Mesclar (mesma referência)**, **Avisos**.
+- Sinais de correspondência: forte (código/EAN igual, mesmo tipo) e médio (mesmo tipo + aplicações parecidas). Padrão: junta só se "forte".
+- Botão 🚫 desativar por item ou por título (grupo); itens entram com "~" no título.
+- Desmarcar item = não importa. Confirmação final mostra os totais.

@@ -484,3 +484,6 @@ Itens novos são sempre criados completos.
 
 ## v141 — Orçamento: A VISTA/PARCELADO junto do TOTAL
 - TOTAL, A VISTA e PARCELADO ficam juntos; os campos DESCONTO e PARCELADO vêm logo abaixo. "PARCELAS" renomeado para "PARCELADO" (tela, imagem e impressão).
+
+## v142 — Meus carros: montadoras recolhidas
+- Ao abrir "Meus carros" todas as montadoras vêm fechadas (só abrem ao tocar no nome ou ao buscar). Mostra "marcados/total" em cada uma.

@@ -532,3 +532,8 @@ Itens novos são sempre criados completos.
 
 ## v149
 - Botão de atalho do orçamento: botão direito (ou segurar o dedo no celular) termina e limpa o orçamento, com confirmação, sem abrir a tela.
+
+## v150
+- Importar lote: coincidência agora só por **código** (e EAN); aplicações/carros parecidos não geram mais "coincidem".
+- **Importações de lote** (Produtos › Importações de lote, ou botão na tela F1): lista as importações, com **Desfazer importação** (apaga os itens novos e restaura os mesclados; itens editados depois são preservados). Recupera importações dos últimos 3 dias pelo histórico de versões.
+- Itens novos criados por lote ganham a etiqueta **NOVO** na lista (até "Marcar como vistos") e há filtro "Ver itens novos".

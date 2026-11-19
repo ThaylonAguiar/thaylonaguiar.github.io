@@ -30,6 +30,7 @@ label{display:block;font-size:12px;color:var(--mut);margin-top:10px}
 .wb{font-size:15px;margin-left:8px;padding:0 6px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);cursor:pointer}#vmenu{display:none;flex-direction:column;gap:4px}
 .tht{display:flex;align-items:flex-start;gap:8px}.tht h2{flex:1;margin:0 0 6px}.nof>.row{display:none}.xcl{position:sticky;top:0;float:right;z-index:2;font-size:18px;line-height:1;padding:4px 10px}.ghp td{white-space:normal;overflow-wrap:anywhere;vertical-align:top}.ghp code{overflow-wrap:anywhere}.ghp li{overflow-wrap:anywhere}.tbn{white-space:nowrap;padding-top:2px}.tbn .wb{margin-left:4px}
 .lp{filter:grayscale(1)}.lp.on{background:var(--ac)!important;border-color:var(--ac)!important;filter:none}
+.nwb{background:#16a34a;color:#fff;border-radius:6px;padding:1px 6px;font-size:11px;font-weight:700;vertical-align:middle}
 .chip{display:inline-block;background:var(--ac2);color:var(--ac);border-radius:99px;padding:2px 10px;font-size:12px}
 .chip.b{border:0;margin:3px 4px 3px 0;cursor:pointer;font:inherit;font-size:12px;text-align:left}
 .ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:20;overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 8px) 8px calc(env(safe-area-inset-bottom,0px) + 8px)}
@@ -87,6 +88,7 @@ body.fh #fp{display:none}#fsum{display:none;margin-top:6px;align-items:center;ga
 <div class="xsub" id="xsub">
 <span id="nsel" style="display:none">0</span>
 <button class="btn" onclick="xc();loOpen()" data-tip="Importar lote (F1): tela para conferir e importar lotes .zip."><i class="ii" data-ic="upload"></i>Importar lote (.zip)</button>
+<button class="btn" onclick="xc();impOpen()" data-tip="Importações de lote: ver itens novos e desfazer uma importação."><i class="ii" data-ic="upload"></i>Importações de lote</button>
 <button class="btn" onclick="xc();openMerge()" data-tip="Mesclar itens: junta itens repetidos em um só."><i class="ii" data-ic="merge"></i>Mesclar itens</button>
 <button class="btn" onclick="xc();openGrp()" data-tip="Grupos e subgrupos do catálogo."><i class="ii" data-ic="folder"></i>Grupos</button>
 <button class="btn xso" onclick="xc();openFam()" data-tip="Grupos de itens: famílias de itens que andam juntos."><i class="ii" data-ic="layers"></i>Grupos de itens</button>
@@ -938,7 +940,7 @@ function render(){
  const RR=listRows(),L=RR.rows;$("#cnt").textContent=L.length+" itens"+(RR.nf?" · "+RR.nf+" grupo"+(RR.nf>1?"s":"")+" de itens":"");
  const tf=$("#tfam");if(tf){tf.style.display=FAMS.size?"":"none";tf.classList.toggle("on",!!FGRP);tf.dataset.tip="Grupos de itens: "+(FGRP?"AGRUPADOS (vermelho): itens da mesma família aparecem juntos.":"SOLTOS (cinza): cada item aparece separado.")+" Clique para trocar. Fica salvo neste navegador."}
   const isEst=x=>isOff(x)&&!!(ov.off.get(x.id)||{}).est;
- const icard=(x,sub)=>`<div class="card${isOff(x)?" off":""}${isEst(x)?" est":""}"${sub?' style="margin-left:22px"':""} onclick="openItem('${x.id}')"><label class="ckl" onclick="event.stopPropagation()"><input type="checkbox" ${SEL.has(x.id)?"checked":""} onchange="tg('${x.id}',this.checked)"> etiqueta${lbL(x.id)?" 🔒":""}</label><b>${RF?esc(x.r||"-")+" · "+esc(x.t):esc(x.t)}${isEst(x)?' <span class="stk" title="Em estoque (guardada fora da prateleira)">\ud83d\udce6</span>':""}${x._ls?LSE:""}</b><div class="m">${RF?"":`<span>Ref: ${esc(x.r)||"-"}</span>`}<span class="chip">${esc(x.g)||"SEM GRUPO"}${x.sg?" › "+esc(x.sg):""}</span><span>ID ${x.id}</span></div></div>`;
+ const icard=(x,sub)=>`<div class="card${isOff(x)?" off":""}${isEst(x)?" est":""}"${sub?' style="margin-left:22px"':""} onclick="openItem('${x.id}')"><label class="ckl" onclick="event.stopPropagation()"><input type="checkbox" ${SEL.has(x.id)?"checked":""} onchange="tg('${x.id}',this.checked)"> etiqueta${lbL(x.id)?" 🔒":""}</label><b>${RF?esc(x.r||"-")+" · "+esc(x.t):esc(x.t)}${isEst(x)?' <span class="stk" title="Em estoque (guardada fora da prateleira)">\ud83d\udce6</span>':""}${x._ls?LSE:""}${nwSet().has(x.id)?' <span class="nwb" title="Item novo importado por lote">NOVO</span>':""}</b><div class="m">${RF?"":`<span>Ref: ${esc(x.r)||"-"}</span>`}<span class="chip">${esc(x.g)||"SEM GRUPO"}${x.sg?" › "+esc(x.sg):""}</span><span>ID ${x.id}</span></div></div>`;
  $("#list").innerHTML=L.slice(0,shown).map(x=>x.fam?`<div class="card fam" onclick="togFe('${x.id}')"><b>${FEXP.has(x.id)?"▾":"▸"} ${esc(x.t)}</b><div class="m"><span>Ref: ${esc(x.r)||"-"}</span><span class="chip">GRUPO DE ITENS · ${x.ms.length} ${x.ms.length>1?"itens":"item"}</span></div></div>`+(FEXP.has(x.id)?x.ms.map(m=>icard(m,1)).join(""):""):icard(x,0)).join("")+(L.length>shown?'<button class="btn" onclick="shown+=60;render()">Mostrar mais</button>':"");
  if(cur&&$("#dv").style.display=="block"){if(editingD())_rfq=1;else openItem(cur)}}
 function clr(){TSEL="";$("#ft").classList.remove("ex");["fi","ft","fd","fk","fy","fe"].forEach(i=>$("#"+i).value="");$("#fg").value="";$("#fs").value="";shown=60;render()}
@@ -1117,9 +1119,8 @@ function loIdx(){const code=new Map(),ean=new Map(),tp=new Map(),info=new Map(),
  M.forEach((x,id)=>{const o=loCodes(x.d),r=nk(x.r);if(r.length>=4)o.codes.add(r);o.tk=loTk(x.t);info.set(id,o);o.codes.forEach(c=>push(code,c,id));o.eans.forEach(c=>push(ean,c,id));push(tp,o.tk,id)});return{code,ean,tp,info}}
 function loMatch(X,it){const o=loCodes(it.descricao),tk=loTk(it.titulo),C=new Map(),get=id=>{if(!C.has(id))C.set(id,{id,codes:[],ean:[]});return C.get(id)};
  o.codes.forEach(c=>(X.code.get(c)||[]).forEach(id=>get(id).codes.push(c)));o.eans.forEach(e=>(X.ean.get(e)||[]).forEach(id=>get(id).ean.push(e)));
- if(o.cars.size>=3)(X.tp.get(tk)||[]).forEach(id=>{if(!C.has(id)){const n=X.info.get(id).cars;let i=0;o.cars.forEach(c=>{if(n.has(c))i++});if(i>=3&&i/Math.min(o.cars.size,n.size)>=0.8)get(id)}});
  const out=[];C.forEach(c=>{const inf=X.info.get(c.id),sameT=inf.tk==tk;let i=0;o.cars.forEach(z=>{if(inf.cars.has(z))i++});const mn=Math.min(o.cars.size,inf.cars.size),ov=mn?i/mn:0,ml=Math.max(0,...c.codes.map(z=>z.length));let lvl="";
-  if(c.ean.length)lvl="forte";else if(c.codes.length&&sameT&&(ml>=6||ov>=0.5))lvl="forte";else if(c.codes.length&&(sameT||ml>=6))lvl="médio";else if(!c.codes.length&&sameT&&ov>=0.8&&i>=3)lvl="médio";if(!lvl)return;
+  if(c.ean.length)lvl="forte";else if(c.codes.length&&(sameT||ml>=6))lvl="forte";else if(c.codes.length)lvl="médio";if(!lvl)return;
   const why=[];if(c.ean.length)why.push("EAN igual");if(c.codes.length)why.push("código "+c.codes.slice(0,3).join(", "));if(sameT)why.push("mesmo tipo");if(i)why.push("aplicações "+i+"/"+o.cars.size);
   out.push({id:c.id,lvl,why:why.join(" · "),sc:(lvl=="forte"?1000:0)+c.codes.length*10+i})});
  return out.sort((a,b)=>b.sc-a.sc).slice(0,4)}
@@ -1167,7 +1168,7 @@ function filtQ(q){const ids=["fi","ft","fd","fk","fy","fe"],m={fi:q.i,ft:q.t,fd:
  try{ids.forEach(i=>$("#"+i).value=m[i]||"");$("#fg").value="";$("#fs").value="";TSEL="";return _f0()}finally{ids.forEach(i=>$("#"+i).value=sv[i]);$("#fg").value=g;$("#fs").value=sg;TSEL=ts}}
 function loSearch(){const q=LX.R;if(!(q.i||q.t||q.a||q.y||q.k||q.e))return null;return filtQ(q)}
 function loShell(){const o=document.createElement("div");o.id="lov";
- o.innerHTML=`<div class="lh"><h2 style="margin:0;flex:1">IMPORTAR LOTE <span id="lo_tn" class="mu" style="font-size:14px"></span></h2><button class="btn p" data-a="imp">IMPORTAR (.ZIP)</button><button class="btn" data-a="hist">VER HISTÓRICO</button><button class="btn" data-a="close">✕ Fechar (Esc)</button></div>
+ o.innerHTML=`<div class="lh"><h2 style="margin:0;flex:1">IMPORTAR LOTE <span id="lo_tn" class="mu" style="font-size:14px"></span></h2><button class="btn p" data-a="imp">IMPORTAR (.ZIP)</button><button class="btn" data-a="hist">VER HISTÓRICO</button><button class="btn" onclick="impOpen()">IMPORTAÇÕES / DESFAZER</button><button class="btn" data-a="close">✕ Fechar (Esc)</button></div>
  <div class="lh" id="lo_tabs"></div><div class="lh" id="lo_act"></div>
  <div class="lgrid" id="lo_grid"><div class="lpn"><div class="lpt" style="display:flex;gap:8px;align-items:center"><span id="lo_lt" style="flex:1">Do lote</span><input id="lo_fq" placeholder="filtrar a lista…" style="width:150px;padding:4px 8px"></div><div class="lsc" id="lo_left"></div></div>
  <div class="lpn" id="lo_rp"><div class="lpt">Cadastro (catálogo atual)</div><div style="padding:6px 8px;display:grid;grid-template-columns:repeat(3,1fr);gap:6px"><input id="lo_st" placeholder="Título" autocomplete="off"><input id="lo_sa" placeholder="Aplicação" autocomplete="off"><input id="lo_sy" type="number" inputmode="numeric" placeholder="Ano"><input id="lo_sk" placeholder="Código" autocomplete="off"><input id="lo_si" placeholder="ID / Referência" autocomplete="off"><input id="lo_se" placeholder="EAN" inputmode="numeric" autocomplete="off"></div><div class="lsc" id="lo_right"></div></div></div>`;
@@ -1246,6 +1247,7 @@ async function loCommit(){const tab=LS.ui.tab;if(tab=="w")return;const R=LS.rows
  if(!await askH(`Importar para o catálogo oficial (aba <b>${LNM[tab]}</b>): <b>${nn}</b> novo(s)${no?" ("+no+" desativado(s))":""} e <b>${R.length-nn}</b> para mesclar em itens existentes?<div class="mu">Itens tirados da importação (✕) continuam na lista.</div>`))return;
  await loApply(R)}
 async function loApply(R){
+ const REC={novos:[],ups:[],imgs:[],rels:[]};
  const byRk=loByRk(),dups=[],novos=[],ups=[],none=[];for(const l of new Set(R.map(r=>r.l)))await lsZip(l);
  R.forEach(r=>{if(r.kind=="u"){const u=loMk(r.it,r.eid,false,r.op);if(u){u.r=r;ups.push(u)}else none.push(r);return}
   if(r.tgt&&M.has(r.tgt)){const u=loMk(r.it,r.tgt,true,r.op,r.pri);if(u){u.r=r;ups.push(u)}else none.push(r);return}
@@ -1256,16 +1258,16 @@ async function loApply(R){
  let nid=Math.max(0,...[...M.keys()].map(Number));const ids=new Map();let n=0;
  for(const it of novos){nid++;const id=String(nid).padStart(6,"0"),g=String(it.grupo||"").trim().toUpperCase()||"SEM GRUPO",s=g=="SEM GRUPO"?"":String(it.subgrupo||"").trim();
   const x={t:String(it.titulo).trim(),r:String(it.referencia).trim(),g,sg:s,e:"",d:String(it.descricao||""),del:false};
-  if(!await W(()=>db.doc("items/"+id).set(x)))break;await addVer(id,x,"Importação de lote (item novo)");M.set(id,{id,t:x.t,r:x.r,d:x.d,g:x.g,sg:x.sg,e:""});ids.set(nk(x.r),id);byRk.set(nk(x.r),id);done.set(it.__r.k,["importado",id]);n++;if(n%20==0)toast("Criando itens "+n+" de "+novos.length+"…")}
+  if(!await W(()=>db.doc("items/"+id).set(x)))break;await addVer(id,x,"Importação de lote (item novo)");M.set(id,{id,t:x.t,r:x.r,d:x.d,g:x.g,sg:x.sg,e:""});ids.set(nk(x.r),id);byRk.set(nk(x.r),id);done.set(it.__r.k,["importado",id]);REC.novos.push({id,d:x.d,k:ik(M.get(id))});n++;if(n%20==0)toast("Criando itens "+n+" de "+novos.length+"…")}
  let nu=0;for(const u of ups){ids.set(nk(u.ex.r),u.id);if(u.via){ids.set(nk(u.it.referencia),u.id);byRk.set(nk(u.it.referencia),u.id)}
   if(!u.tx){done.set(u.r.k,[u.via?"mesclado":"atualizado",u.id]);continue}
-  const x={t:u.t,r:u.ex.r,g:u.ex.g,sg:u.ex.sg,e:u.ex.e||"",d:u.d,del:false};if(!await W(()=>db.doc("items/"+u.id).set(x)))break;await addVer(u.id,x,"Importação de lote (aplicações "+u.op.a+" · códigos "+u.op.c+" · obs. "+u.op.o+")",u.ex);M.set(u.id,{...u.ex,d:u.d,t:u.t});done.set(u.r.k,[u.via?"mesclado":"atualizado",u.id]);nu++}
+  const x={t:u.t,r:u.ex.r,g:u.ex.g,sg:u.ex.sg,e:u.ex.e||"",d:u.d,del:false};REC.ups.push({id:u.id,ad:u.d,prev:{t:u.ex.t||"",r:u.ex.r||"",g:u.ex.g||"",sg:u.ex.sg||"",e:u.ex.e||"",d:u.ex.d||""}});if(!await W(()=>db.doc("items/"+u.id).set(x)))break;await addVer(u.id,x,"Importação de lote (aplicações "+u.op.a+" · códigos "+u.op.c+" · obs. "+u.op.o+")",u.ex);M.set(u.id,{...u.ex,d:u.d,t:u.t});done.set(u.r.k,[u.via?"mesclado":"atualizado",u.id]);nu++}
  const todos=novos.concat(ups.map(u=>u.it));
  const pend=[];let nr=0;
- for(const it of todos){const a=ids.get(nk(it.referencia));if(!a)continue;for(const rr of(it.relacionados||[])){const b=byRk.get(nk(rr));if(!b||b==a){pend.push(it.referencia+" → "+rr);continue}await W(()=>db.doc("dir/"+k2(a,b)).set({a,b,del:false}));nr++}}
+ for(const it of todos){const a=ids.get(nk(it.referencia));if(!a)continue;for(const rr of(it.relacionados||[])){const b=byRk.get(nk(rr));if(!b||b==a){pend.push(it.referencia+" → "+rr);continue}await W(()=>db.doc("dir/"+k2(a,b)).set({a,b,del:false}));nr++;REC.rels.push([a,b])}}
  const as=await claude.use("assets"),jobs=[],mime=p=>/\.png$/i.test(p)?"image/png":/\.webp$/i.test(p)?"image/webp":"image/jpeg";
  const ij=[...novos.filter(it=>done.has(it.__r.k)).map(it=>({it,m:"m"})),...ups.filter(u=>u.im&&done.has(u.r.k)).map(u=>({it:u.it,m:u.im}))];
- for(const o of ij){const id=ids.get(nk(o.it.referencia));if(!id)continue;const rr0=M.get(id).r,k=ik(M.get(id)),old=IMG.get(k)||[];if(o.m=="m"&&old.length)continue;const zz=ZIPS.get(o.it.__l);const fl=(o.it.fotos||[]).map(p=>({p,e:zz&&zz.file(p)})).filter(q=>q.e);if(fl.length)jobs.push({k,ref:rr0,fl,old:o.m=="s"?old:[]})}
+ for(const o of ij){const id=ids.get(nk(o.it.referencia));if(!id)continue;const rr0=M.get(id).r,k=ik(M.get(id)),old=IMG.get(k)||[];if(o.m=="m"&&old.length)continue;const zz=ZIPS.get(o.it.__l);const fl=(o.it.fotos||[]).map(p=>({p,e:zz&&zz.file(p)})).filter(q=>q.e);if(fl.length){REC.imgs.push({k,old:[...old]});jobs.push({k,ref:rr0,fl,old:o.m=="s"?old:[]})}}
  let i=0,dn=0,okf=0;const badF=[];
  const HM=new Map(),UC=new Map(),IDH=new Map(),hsh=async ab=>{try{return[...new Uint8Array(await crypto.subtle.digest("SHA-1",ab))].map(b=>b.toString(16).padStart(2,"0")).join("")}catch(er){return""}};
  const upl=async(o,ref)=>{const ab=await o.e.async("arraybuffer"),h=await hsh(ab);let p=h&&HM.get(h);if(!p){p=(async()=>(await as.upload(await shrink(new Blob([ab],{type:mime(o.p)})),ref)).id)();if(h){HM.set(h,p);p.then(id=>IDH.set(id,h),()=>HM.delete(h))}}const id=await p;UC.set(id,(UC.get(id)||0)+1);return id};
@@ -1276,7 +1278,46 @@ async function loApply(R){
  if(jobs.length)await Promise.all([1,2,3,4,5,6,7,8].map(wk));
  LS.lotes.forEach(l=>l.items.forEach(it=>{const d=done.get(it.k);if(d){it.st=d[0];it.id=d[1]}}));
  LS.rows=LS.rows.filter(r=>!done.has(r.k));lsSave();loRefresh();LX.sel=null;LX.chkL=LX.chkR=null;loDraw();
+
+ if(REC.novos.length||REC.ups.length){const at=Date.now(),rid="imp_"+at,o=Object.assign({},REC,{at,nomes:[...new Set(R.map(r=>(LS.lotes.find(l=>l.id==r.l)||{}).nome).filter(Boolean))],seen:false,undone:false});if(await W(()=>db.doc("cfg/"+rid).set(o))){ov.cfg.set(rid,o);window.NWC=null}try{render()}catch(e){}}
  await showR("<b>Importação concluída.</b><div class=\"mu\" style=\"margin-top:6px\">• Itens criados: "+n+(ups.length?"<br>• Itens atualizados/mesclados: "+nu:"")+(none.length?"<br>• Sem novidade (saíram da lista): "+none.length:"")+"<br>• Relacionamentos: "+nr+(pend.length?"<br>&nbsp;&nbsp;não encontrados: "+pend.slice(0,8).map(esc).join("; ")+(pend.length>8?"…":""):"")+"<br>• Fotos enviadas: "+okf+(badF.length?"<br>&nbsp;&nbsp;falharam em: "+badF.slice(0,8).map(esc).join(", ")+" (importe as fotos dessas referências depois)":"")+"</div>");try{render()}catch(e){}}
+
+/* ===== IMPORTAÇÕES DE LOTE (desfazer / itens novos) ===== */
+var NWC=null,NWF=null;
+function impLegacy(){const now=Date.now(),lim=now-3*864e5,ev=[];
+ ov.ver.forEach((o,id)=>{(o.v||[]).forEach((v,i,L)=>{if(v.at>=lim&&/^Importação de lote/.test(v.src||"")){ev.push({id,i,L,at:v.at,nv:/item novo/.test(v.src)})}})});
+ ev.sort((a,b)=>a.at-b.at);const gr=[];ev.forEach(e=>{const g=gr[gr.length-1];if(g&&e.at-g.last<=20*60*1000){g.ev.push(e);g.last=e.at}else gr.push({ev:[e],last:e.at,first:e.at})});
+ return gr.map(g=>{const novos=[],ups=[];g.ev.forEach(e=>{const v=e.L[e.i];if(e.nv)novos.push({id:e.id,d:v.d,k:""});else if(e.i>0){const p=e.L[e.i-1];ups.push({id:e.id,ad:v.d,prev:{t:p.t||"",r:p.r||"",g:p.g||"",sg:p.sg||"",e:p.e||"",d:p.d||""}})}});
+  return{id:"imp_"+g.first,at:g.first,nomes:["(importação anterior, recuperada do histórico de versões)"],novos,ups,imgs:[],rels:[],seen:false,undone:false,legacy:1}})}
+function impAll(){const st=[];ov.cfg.forEach((v,k)=>{if(/^imp_/.test(k)&&v&&v.at)st.push(Object.assign({id:k},v))});const have=new Set(st.map(r=>r.id));
+ // legado só entra se nenhum registro guardado cobre o mesmo instante
+ const lg=impLegacy().filter(r=>!have.has(r.id)&&!st.some(s=>Math.abs(s.at-r.at)<30*60*1000));return st.concat(lg).sort((a,b)=>b.at-a.at)}
+function nwSet(){if(NWC)return NWC;const S=new Set();try{impAll().forEach(r=>{if(!r.seen&&!r.undone)r.novos.forEach(n=>{if(M.has(n.id))S.add(n.id)})})}catch(e){}NWC=S;return S}
+var _nwb=build;build=function(){NWC=null;return _nwb.apply(this,arguments)};
+var _nwf=filt;filt=function(){const L=_nwf.apply(this,arguments);return NWF?L.filter(x=>NWF.has(x.id)):L};
+var _nwc=clr;clr=function(){NWF=null;return _nwc.apply(this,arguments)};
+var _nwr=render;render=function(){const v=_nwr.apply(this,arguments);const c=$("#cnt");if(c&&NWF)c.innerHTML=c.textContent+' · <a href="#" onclick="impVer(null);return false" style="color:var(--ac)">só itens da importação — mostrar todos</a>';return v};
+function impVer(ids){NWF=ids?new Set(ids):null;try{loClose()}catch(e){}const m=document.getElementById("imv");if(m)m.style.display="none";shown=60;render()}
+function impOpen(){let h=document.getElementById("imv");if(!h){h=document.createElement("div");h.id="imv";h.className="ov";h.style.zIndex=50;document.body.appendChild(h);h.onclick=async e=>{const t=e.target.closest("[data-a]");if(!t)return;const a=t.dataset.a,id=t.dataset.id;if(a=="x")h.style.display="none";else if(a=="n")impVer([...nwSet()]);else if(a=="v"){const r=impAll().find(z=>z.id==id);if(r)impVer(r.novos.map(n=>n.id).filter(i=>M.has(i)))}else if(a=="s")await impSeen(id);else if(a=="u")await impUndo(id)}}
+ const L=impAll(),nw=nwSet().size,fd=t=>new Date(t).toLocaleString("pt-BR");
+ h.innerHTML=`<div class="pane" style="max-width:900px"><h2>Importações de lote</h2><p class="mu">Itens novos criados por lote ganham a etiqueta <span class="nwb">NOVO</span> na lista até você marcar como visto. "Desfazer" apaga os itens novos dessa importação e devolve os itens mesclados ao conteúdo de antes (itens que você editou depois são preservados e listados).</p>
+ <div class="row">${nw?`<button class="btn p" data-a="n">Ver os ${nw} itens novos (não vistos)</button>`:'<span class="mu">Nenhum item novo pendente de visto.</span>'}</div>
+ ${L.length?L.map(r=>{const st=r.undone?"desfeita":r.seen?"vista":"nova";return`<div class="card" style="cursor:default"><b>${fd(r.at)}</b> <span class="mu">· ${esc((r.nomes||[]).join(", "))} · ${r.novos.length} novo(s) · ${r.ups.length} mesclado(s) · ${st}</span><div class="row" style="margin-top:6px">${r.undone?"":`<button class="btn" data-a="v" data-id="${r.id}">Ver itens novos</button>${r.seen?"":`<button class="btn" data-a="s" data-id="${r.id}">Marcar como vistos</button>`}<button class="btn" data-a="u" data-id="${r.id}" style="border-color:#c0392b;color:#e74c3c">Desfazer importação</button>`}</div></div>`}).join(""):'<p class="mu">Nenhuma importação registrada ainda (importações antigas só são recuperadas até 3 dias atrás).</p>'}
+ <div class="row"><button class="btn" data-a="x">Fechar</button></div></div>`;h.style.display="block"}
+async function impSave(r){const o=Object.assign({},r);delete o.id;delete o.legacy;if(!await W(()=>db.doc("cfg/"+r.id).set(o)))return false;ov.cfg.set(r.id,o);NWC=null;return true}
+async function impSeen(id){const r=impAll().find(z=>z.id==id);if(!r)return;r.seen=true;if(await impSave(r)){impOpen();render()}}
+async function impUndo(id){const r=impAll().find(z=>z.id==id);if(!r||r.undone)return;
+ const edN=r.novos.filter(n=>M.has(n.id)&&M.get(n.id).d!==n.d),edU=r.ups.filter(u=>M.has(u.id)&&M.get(u.id).d!==u.ad),delN=r.novos.filter(n=>M.has(n.id)&&M.get(n.id).d===n.d),rsU=r.ups.filter(u=>M.has(u.id)&&M.get(u.id).d===u.ad);
+ if(!await askH(`Desfazer esta importação?<div class="mu" style="margin-top:6px">• Apagar <b>${delN.length}</b> item(ns) novo(s)<br>• Restaurar <b>${rsU.length}</b> item(ns) mesclado(s) ao conteúdo de antes${edN.length+edU.length?`<br>• <b>${edN.length+edU.length}</b> item(ns) foram editados depois e <b>não serão mexidos</b>`:""}</div>`))return;
+ let a=0,b=0;const gone=new Set();
+ for(const n of delN){const x=M.get(n.id);if(await W(()=>db.doc("items/"+n.id).set({del:true}))){const k=n.k||ik(x);if(k&&IMG.get(k)&&IMG.get(k).length)await W(()=>db.doc("img/"+k).set({ids:[]}));M.delete(n.id);gone.add(n.id);a++}}
+ for(const u of rsU){const cu=M.get(u.id),x={t:u.prev.t,r:u.prev.r,g:u.prev.g||cu.g||"SEM GRUPO",sg:u.prev.sg||"",e:u.prev.e||"",d:u.prev.d,del:false};
+  if(await W(()=>db.doc("items/"+u.id).set(x))){await addVer(u.id,x,"Importação desfeita",cu);const cm=(ov.cls.get("all")||{}).m||{};if(cm[u.id]){const m2=Object.assign({},cm);m2[u.id]=[x.g,x.sg];await W(()=>db.doc("cls/all").set({m:m2}))}M.set(u.id,{id:u.id,t:x.t,r:x.r,d:x.d,g:x.g,sg:x.sg,e:x.e});b++}}
+ for(const im of(r.imgs||[])){if(im.old&&!im.old.length)continue;await W(()=>db.doc("img/"+im.k).set({ids:im.old}))}
+ for(const p of(r.rels||[])){if(gone.has(p[0])||gone.has(p[1]))await W(()=>db.doc("dir/"+k2(p[0],p[1])).set({a:p[0],b:p[1],del:true}))}
+ r.undone=true;await impSave(r);
+ try{LS.lotes.forEach(l=>l.items.forEach(i=>{if(i.id&&(gone.has(i.id)||rsU.some(u=>u.id==i.id)))i.st="desfeito"}));lsSave();loRefresh();loDraw()}catch(e){}
+ impOpen();render();toast("Importação desfeita: "+a+" apagado(s), "+b+" restaurado(s).")}
 addEventListener("keydown",e=>{if(e.key=="F1"&&!e.ctrlKey&&!e.altKey&&!e.shiftKey){e.preventDefault();if(document.body.classList.contains("ro"))return;loOpen()}
  else if(e.key=="Escape"){const o=document.getElementById("lov");if(o&&o.style.display=="flex"){const cf=$("#cf"),hv=document.getElementById("lhv");if(cf&&cf.style.display=="block")return;if(hv&&hv.style.display=="block"){hv.style.display="none";return}if(["INPUT","TEXTAREA"].includes((document.activeElement||{}).tagName)&&document.activeElement.value){return}loClose()}}},true);
 

@@ -541,3 +541,6 @@ Itens novos são sempre criados completos.
 ## v151
 - Botão direito no olho (itens desativados) agora abre um menu: **NOVOS** (dourado: só itens novos importados por lote) ou **DESATIVADOS** (verde: só os desativados). Clicar de novo na opção marcada desliga.
 - A etiqueta NOVO some sozinha 15 dias depois do cadastro do item.
+
+## v152
+- Itens cadastrados manualmente (Cadastro do item) também ganham a etiqueta NOVO e aparecem no filtro NOVOS, por 15 dias.

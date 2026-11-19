@@ -522,3 +522,10 @@ Itens novos são sempre criados completos.
 - Busca da direita no mesmo padrão da página inicial (Título, Aplicação, Ano, Código, ID/Referência, EAN), usando o mesmo filtro.
 - Tabela do item dividida em seções com título e linha: Fotos, Aplicações, Códigos, EAN, Observações.
 - Desfazer mesclagem: botão "↩ desfazer mesclagem" no item do lote; "Juntar"/"desfazer" também nos resultados da busca.
+
+## v148 — Orçamento em andamento
+- O orçamento fica guardado neste aparelho (rascunho): fechar, pesquisar um item, recarregar a página ou fechar o navegador não perde nada. Ao reabrir, volta com carro, itens, desconto, parcelas, observações e o que estava digitado em "Adicionar item".
+- Fechar o orçamento (✕) não pergunta mais nada.
+- Botão de atalho no topo (à esquerda dos botões da direita), só aparece quando há orçamento em andamento; mostra a quantidade de itens.
+- **F2** na página inicial abre o orçamento de onde parou (F2 dentro do orçamento fecha).
+- 🧹 Limpar tudo: apaga o orçamento atual (com confirmação) para começar do zero.

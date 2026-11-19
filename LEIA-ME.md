@@ -537,3 +537,7 @@ Itens novos são sempre criados completos.
 - Importar lote: coincidência agora só por **código** (e EAN); aplicações/carros parecidos não geram mais "coincidem".
 - **Importações de lote** (Produtos › Importações de lote, ou botão na tela F1): lista as importações, com **Desfazer importação** (apaga os itens novos e restaura os mesclados; itens editados depois são preservados). Recupera importações dos últimos 3 dias pelo histórico de versões.
 - Itens novos criados por lote ganham a etiqueta **NOVO** na lista (até "Marcar como vistos") e há filtro "Ver itens novos".
+
+## v151
+- Botão direito no olho (itens desativados) agora abre um menu: **NOVOS** (dourado: só itens novos importados por lote) ou **DESATIVADOS** (verde: só os desativados). Clicar de novo na opção marcada desliga.
+- A etiqueta NOVO some sozinha 15 dias depois do cadastro do item.

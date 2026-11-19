@@ -544,3 +544,6 @@ Itens novos são sempre criados completos.
 
 ## v152
 - Itens cadastrados manualmente (Cadastro do item) também ganham a etiqueta NOVO e aparecem no filtro NOVOS, por 15 dias.
+
+## v153
+- Botão do olho com 4 modos no clique esquerdo: cinza = só ativos; vermelho = ativos + desativados; verde = só desativados; dourado = só itens NOVOS. Removido o menu do botão direito.

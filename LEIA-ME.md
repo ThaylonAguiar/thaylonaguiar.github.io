@@ -516,3 +516,9 @@ Itens novos são sempre criados completos.
 - 🔀 Mesclar: marca 1 item da esquerda e 1 da direita, escolhe o principal (lote ou cadastro) e Save. Na prática o item do lote é somado ao existente (principal = lote também troca o título; a referência/ID/fotos do cadastro permanecem).
 - 🚫 entra desativado (vai para o fim da lista); ✕ tira da importação sem apagar da lista.
 - "Importar para o sistema oficial" importa a aba atual; os importados saem da lista.
+
+## v147 — Ajustes da tela Importar lote
+- Fotos nas duas pontas: ao abrir a seta ▸ aparecem as fotos do item (lote à esquerda, cadastro à direita; clique para ampliar).
+- Busca da direita no mesmo padrão da página inicial (Título, Aplicação, Ano, Código, ID/Referência, EAN), usando o mesmo filtro.
+- Tabela do item dividida em seções com título e linha: Fotos, Aplicações, Códigos, EAN, Observações.
+- Desfazer mesclagem: botão "↩ desfazer mesclagem" no item do lote; "Juntar"/"desfazer" também nos resultados da busca.

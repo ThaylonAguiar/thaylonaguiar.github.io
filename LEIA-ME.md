@@ -529,3 +529,6 @@ Itens novos são sempre criados completos.
 - Botão de atalho no topo (à esquerda dos botões da direita), só aparece quando há orçamento em andamento; mostra a quantidade de itens.
 - **F2** na página inicial abre o orçamento de onde parou (F2 dentro do orçamento fecha).
 - 🧹 Limpar tudo: apaga o orçamento atual (com confirmação) para começar do zero.
+
+## v149
+- Botão de atalho do orçamento: botão direito (ou segurar o dedo no celular) termina e limpa o orçamento, com confirmação, sem abrir a tela.

@@ -547,3 +547,7 @@ Itens novos são sempre criados completos.
 
 ## v153
 - Botão do olho com 4 modos no clique esquerdo: cinza = só ativos; vermelho = ativos + desativados; verde = só desativados; dourado = só itens NOVOS. Removido o menu do botão direito.
+
+## v154
+- Menu: "Códigos via GPT" agora se chama **CHAT-GPT**. Logo abaixo, novo botão **Tabela do distribuidor** (escolhe o item e cola a APLICAÇÃO COMPLETA + EQUIVALÊNCIA do site do distribuidor; também há o botão no item, ao lado de "Versão … histórico"). Gera aplicações por montadora com motor, anos e versões `@`, códigos por marca (ORIGINAL agrupado) e o motor na OBSERVAÇÃO; prévia antes de aplicar, juntar/substituir/não mexer. Anos finais ≥ ano atual viram XXXX.
+- Importar lote (F1): novo botão **CHAT-GPT** que gera pedidos para os itens do lote (códigos, aplicações 🤖, EAN), recebe a resposta pela REF e aplica nos itens do lote (pendentes) para que eles passem a coincidir com o cadastro. Guarda o original: "ver original" e "voltar ao original" (por item ou todos). Info do GPT pode entrar na OBSERVAÇÃO (opcional).

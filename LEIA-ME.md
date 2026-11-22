@@ -559,3 +559,9 @@ Itens novos são sempre criados completos.
 
 ## v156
 - Assistente AI no importar lote: o pedido agora traz "BUSCAR POR: <marca> <código>" (ex.: SABO 77911) mais os outros códigos do item, e instrui o assistente a pesquisar também cada código novo que achar (original, Cofap, Nakata etc.) em outros sites, cruzando as informações. CONFIRMADO só com 2 fontes independentes ou catálogo do fabricante; divergências vão em INFO; a peça tem de ser a mesma do título (tipo e lado).
+
+## v157
+- Assistente AI no lote: pedidos de até 10 itens (antes 30; aviso se passar de 15) e dica na tela: um chat novo para cada pedido.
+- O pedido agora exige pesquisa item por item e proíbe "SEM NOVOS" sem pesquisar: cada item sem novidade precisa de uma linha `INFO: PESQUISADO: ...` com o que buscou e onde; itens não pesquisados vão em `NAO PESQUISADOS: REFs`.
+- Ao colar a resposta, o app mostra a linha PESQUISADO de cada item "sem novos", avisa quando ela não existe (talvez não pesquisou) e lista os "não pesquisados".
+- Comando curto do lote reescrito (pesquisar de verdade, item por item).

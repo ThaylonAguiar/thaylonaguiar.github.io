@@ -570,3 +570,9 @@ Itens novos são sempre criados completos.
 - Assistente AI no lote: **um só botão** "Copiar próximo pedido" (comando + itens no mesmo texto) e a caixa de **colar a resposta fica no topo**. A lista com todos os pedidos ficou recolhida ("Ver todos os pedidos").
 - Itens que a resposta pesquisou (com PESQUISADO: ou com dados) são marcados como consultados ao aplicar; o próximo pedido é sempre o botão de cima. Itens "SEM NOVOS" sem a linha PESQUISADO continuam pendentes e voltam no próximo pedido.
 - A caixa de resposta mantém o texto ao mudar as opções.
+
+## v159
+- Assistente AI no lote: o app agora decide a certeza pelas **fontes**: o pedido manda listar os sites de cada aplicação (FONTE) e 2 ou mais sites diferentes (www/subdomínios contam como o mesmo) viram CONFIRMADO e vêm marcados. A prévia mostra o número de fontes e os sites de cada aplicação.
+- O pedido pede aplicações por modelo e período, com MOTOR só quando a fonte disser (traço `-` se não disser); a leitura aceita linha APP sem motor (também na tela ASSISTENTE AI do menu).
+- Nova linha `INFO: VALIDACAO:` (códigos novos pesquisados na 2ª etapa e sites); a prévia mostra e avisa quando falta.
+- Botões "marcar apps / desmarcar" por item e "marcar/desmarcar todas as aplicações" para todos.

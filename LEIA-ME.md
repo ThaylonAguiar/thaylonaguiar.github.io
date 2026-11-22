@@ -556,3 +556,6 @@ Itens novos são sempre criados completos.
 - "CHAT-GPT" agora se chama **ASSISTENTE AI** (menu, tela e botão no importar lote); textos aceitam Gemini ou ChatGPT.
 - **Tabela do distribuidor** removida das telas (menu e botão no item). O código da função continua guardado no arquivo, sem acesso pela interface.
 - Cabeçalho do Importar lote só com ícones: + (importar .zip), lista (histórico), seta (importações/desfazer), robô (assistente AI) e X (fechar). Passe o mouse para ver a dica.
+
+## v156
+- Assistente AI no importar lote: o pedido agora traz "BUSCAR POR: <marca> <código>" (ex.: SABO 77911) mais os outros códigos do item, e instrui o assistente a pesquisar também cada código novo que achar (original, Cofap, Nakata etc.) em outros sites, cruzando as informações. CONFIRMADO só com 2 fontes independentes ou catálogo do fabricante; divergências vão em INFO; a peça tem de ser a mesma do título (tipo e lado).

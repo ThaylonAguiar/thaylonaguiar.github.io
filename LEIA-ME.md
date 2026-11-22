@@ -565,3 +565,8 @@ Itens novos são sempre criados completos.
 - O pedido agora exige pesquisa item por item e proíbe "SEM NOVOS" sem pesquisar: cada item sem novidade precisa de uma linha `INFO: PESQUISADO: ...` com o que buscou e onde; itens não pesquisados vão em `NAO PESQUISADOS: REFs`.
 - Ao colar a resposta, o app mostra a linha PESQUISADO de cada item "sem novos", avisa quando ela não existe (talvez não pesquisou) e lista os "não pesquisados".
 - Comando curto do lote reescrito (pesquisar de verdade, item por item).
+
+## v158
+- Assistente AI no lote: **um só botão** "Copiar próximo pedido" (comando + itens no mesmo texto) e a caixa de **colar a resposta fica no topo**. A lista com todos os pedidos ficou recolhida ("Ver todos os pedidos").
+- Itens que a resposta pesquisou (com PESQUISADO: ou com dados) são marcados como consultados ao aplicar; o próximo pedido é sempre o botão de cima. Itens "SEM NOVOS" sem a linha PESQUISADO continuam pendentes e voltam no próximo pedido.
+- A caixa de resposta mantém o texto ao mudar as opções.

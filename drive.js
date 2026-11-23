@@ -55,7 +55,7 @@
   }
 
   /* ---------- status ---------- */
-  var VERSION = "v162", lastErr = "";
+  var VERSION = "v163", lastErr = "";
   var state = "init";
   var testMode = false, tdata = null, testPh = [], gShow = false;
   function visitor() { return !testMode && localStorage.getItem("signed") !== "1"; }

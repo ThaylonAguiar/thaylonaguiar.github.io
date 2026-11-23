@@ -588,3 +588,6 @@ Itens novos são sempre criados completos.
 ## v162
 - **Fotos por ID do item** (não mais pela referência). Migração automática única: ao abrir, as fotos de cada item são copiadas para `img/id_<ID>`; as antigas ficam guardadas (nada é apagado). Trocar a referência não mexe mais nas fotos. Itens que dividiam a mesma referência passam a ter fotos próprias.
 - **Títulos › ícone de etiqueta: trocar referência por marca.** Digite o título (COXIM = todos; COXIM DO MOTOR = só o do motor) e a marca; a referência vira o código dessa marca em CÓDIGOS. Mostra prévia (trocam / já estão / de fora). Depois abre a tela **De fora**: tabela de códigos do item, toque no código para usá-lo ou digite a referência. Fica no histórico de versões.
+
+## v163
+- Assistente AI (lote): clicar no **título** do item abre uma **janela** só de consulta com a tabela atual do item (aplicações, códigos, EAN, observações). ✕, Fechar, clique fora ou Esc fecham só essa janela.

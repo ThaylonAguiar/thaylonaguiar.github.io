@@ -591,3 +591,6 @@ Itens novos são sempre criados completos.
 
 ## v163
 - Assistente AI (lote): clicar no **título** do item abre uma **janela** só de consulta com a tabela atual do item (aplicações, códigos, EAN, observações). ✕, Fechar, clique fora ou Esc fecham só essa janela.
+
+## v164
+- Assistente AI: "Itens alterados pelo assistente" agora tem **setinha** para recolher/abrir a lista (lembra o estado enquanto a janela está aberta).

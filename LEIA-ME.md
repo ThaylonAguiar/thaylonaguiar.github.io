@@ -576,3 +576,7 @@ Itens novos são sempre criados completos.
 - O pedido pede aplicações por modelo e período, com MOTOR só quando a fonte disser (traço `-` se não disser); a leitura aceita linha APP sem motor (também na tela ASSISTENTE AI do menu).
 - Nova linha `INFO: VALIDACAO:` (códigos novos pesquisados na 2ª etapa e sites); a prévia mostra e avisa quando falta.
 - Botões "marcar apps / desmarcar" por item e "marcar/desmarcar todas as aplicações" para todos.
+
+## v160
+- Importar lote: cada item da esquerda (abas Novos, Códigos coincidem e Mesclar) ganha um botão verde de **importar agora** (ícone de envio, ao lado do 🚫/✕). Envia só aquele item ao catálogo oficial: novo, juntando com o item marcado ("JUNTAR →") ou atualizando o de mesma referência, e ele sai da lista. Em "Códigos coincidem" sem item marcado para juntar, pergunta antes de criar como novo.
+- As importações rápidas feitas em até 30 min são agrupadas num único registro em "Importações / desfazer" (dá para desfazer o grupo todo).

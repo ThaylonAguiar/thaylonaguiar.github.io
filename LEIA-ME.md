@@ -584,3 +584,7 @@ Itens novos são sempre criados completos.
 ## v161
 - Importar lote: no **Histórico** cada lote tem o botão "abrir só este lote". A tela passa a mostrar só aquele zip (abas, contadores, avisos, importar para o oficial e assistente AI valem só para ele). Faixa "LOTE: nome · trocar · ver todos". As edições ficam salvas em cada lote e a aba em que você parou é lembrada por lote. Ao importar um zip novo, ele já abre.
 - Produtos relacionados: abrir um item a partir de outro empilha a navegação; ✕ ou Esc volta para o item anterior (só fecha tudo quando não há anterior).
+
+## v162
+- **Fotos por ID do item** (não mais pela referência). Migração automática única: ao abrir, as fotos de cada item são copiadas para `img/id_<ID>`; as antigas ficam guardadas (nada é apagado). Trocar a referência não mexe mais nas fotos. Itens que dividiam a mesma referência passam a ter fotos próprias.
+- **Títulos › ícone de etiqueta: trocar referência por marca.** Digite o título (COXIM = todos; COXIM DO MOTOR = só o do motor) e a marca; a referência vira o código dessa marca em CÓDIGOS. Mostra prévia (trocam / já estão / de fora). Depois abre a tela **De fora**: tabela de códigos do item, toque no código para usá-lo ou digite a referência. Fica no histórico de versões.

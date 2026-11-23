@@ -580,3 +580,7 @@ Itens novos são sempre criados completos.
 ## v160
 - Importar lote: cada item da esquerda (abas Novos, Códigos coincidem e Mesclar) ganha um botão verde de **importar agora** (ícone de envio, ao lado do 🚫/✕). Envia só aquele item ao catálogo oficial: novo, juntando com o item marcado ("JUNTAR →") ou atualizando o de mesma referência, e ele sai da lista. Em "Códigos coincidem" sem item marcado para juntar, pergunta antes de criar como novo.
 - As importações rápidas feitas em até 30 min são agrupadas num único registro em "Importações / desfazer" (dá para desfazer o grupo todo).
+
+## v161
+- Importar lote: no **Histórico** cada lote tem o botão "abrir só este lote". A tela passa a mostrar só aquele zip (abas, contadores, avisos, importar para o oficial e assistente AI valem só para ele). Faixa "LOTE: nome · trocar · ver todos". As edições ficam salvas em cada lote e a aba em que você parou é lembrada por lote. Ao importar um zip novo, ele já abre.
+- Produtos relacionados: abrir um item a partir de outro empilha a navegação; ✕ ou Esc volta para o item anterior (só fecha tudo quando não há anterior).

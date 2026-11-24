@@ -618,3 +618,7 @@ Itens novos são sempre criados completos.
 
 ## v171
 - **Aviso de código repetido** nos Assistentes AI (catálogo e lote): antes de aplicar, cada código novo que já existe em OUTRO item (do catálogo ou de outro item do lote) mostra "⚠ código também está em: ITEM · ID …" (clicando abre uma janela com a tabela do outro item). No catálogo há o botão **⇄ marcar como equivalente** (vincula em Produtos relacionados; só avisa, nunca vincula sozinho). Depois de aplicar, o catálogo lista um resumo dos códigos aplicados que também estão em outros itens. Códigos com menos de 4 caracteres são ignorados.
+
+## v172
+- Importar lote: nova aba **⚠ Repetidos**: agrupa os itens NOVOS do lote que têm o mesmo código de outro item novo (grupos ligados por códigos em comum, mostrando os códigos e as marcas). Cada item tem os mesmos botões (ver tabela, 🚫, ✕, importar). Respeita o filtro por lote. Códigos com menos de 4 caracteres são ignorados.
+- Assistente AI do lote: removido o aviso de código repetido dentro do cartão (agora é pela aba). O aviso do Assistente AI do catálogo continua.

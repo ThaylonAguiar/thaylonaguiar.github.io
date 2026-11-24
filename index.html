@@ -1097,20 +1097,22 @@ function mergeDesc(o,n,op){op=Object.assign({a:"m",c:"m",o:"m"},op||{});o=String
 const nk=r=>norm(r).replace(/[^A-Z0-9]+/g,"");
 const v3=n=>String(n).padStart(3,"0");
 const vlist=id=>((ov.ver.get(id)||{}).v)||[];
-const vnum=id=>{const L=vlist(id);return L.length?L[L.length-1].n:1};
+const vcur=id=>{const o=ov.ver.get(id)||{},L=o.v||[];return o.cur&&L.some(v=>v.n==o.cur)?o.cur:(L.length?L[L.length-1].n:1)};
+const vnum=vcur;
 async function addVer(id,x,src,prev,extra){const snap=o=>({t:o.t||"",r:o.r||"",g:o.g||"",sg:o.sg||"",e:o.e||"",d:o.d||""});let L=vlist(id).slice();
  if(!L.length&&prev)L.push(Object.assign({n:1,at:0,src:"Versão original (antes do histórico)"},snap(prev)));
- const sn=snap(x),last=L[L.length-1];if(last&&["t","r","g","sg","e","d"].every(k=>last[k]===sn[k]))return;
- L.push(Object.assign({n:(last?last.n:0)+1,at:Date.now(),src},sn,extra||{}));const o={v:L};ov.ver.set(id,o);
+ const sn=snap(x),last=L[L.length-1],cn=vcur(id),cv=L.find(v=>v.n==cn)||last;if(cv&&["t","r","g","sg","e","d"].every(k=>cv[k]===sn[k]))return;
+ const nn=(last?last.n:0)+1;L.push(Object.assign({n:nn,at:Date.now(),src},sn,extra||{}));const o={v:L,cur:nn};ov.ver.set(id,o);
  await W(()=>db.doc("ver/"+id).set(o))}
-function openVer(id){const x=M.get(id);if(!x)return;let L=vlist(id);if(!L.length)L=[{n:1,at:0,src:"Versão original (sem edições registradas)",t:x.t,r:x.r,d:x.d}];const cu=L[L.length-1].n;
- $("#vc").innerHTML=`<h2>Histórico de versões</h2><div class="mu">${esc(x.t)} · Ref ${esc(x.r)} · ID ${id} · versão atual <b>${v3(cu)}</b></div>`+L.slice().reverse().map(v=>`<div class="card" style="cursor:default"><b>Versão ${v3(v.n)}${v.n==cu?" (atual)":""}</b> <span class="mu">${v.at?new Date(v.at).toLocaleString("pt-BR"):"data desconhecida"} · ${esc(v.src||"")}</span><div class="m"><span>${esc(v.t)}</span><span>Ref ${esc(v.r)}</span></div><div class="row"><button class="btn" onclick="var e=document.getElementById('vp${v.n}');e.style.display=e.style.display=='none'?'block':'none'">Ver conteúdo</button>${v.n==cu?"":`<button class="btn" onclick="verRest('${id}',${v.n})">Restaurar esta versão</button>`}</div><pre class="pre" id="vp${v.n}" style="display:none">${esc(v.d)}</pre></div>`).join("");
+function openVer(id){const x=M.get(id);if(!x)return;let L=vlist(id);if(!L.length)L=[{n:1,at:0,src:"Versão original (sem edições registradas)",t:x.t,r:x.r,d:x.d}];const cu=vcur(id);
+ $("#vc").innerHTML=`<h2>Histórico de versões</h2><div class="mu">${esc(x.t)} · Ref ${esc(x.r)} · ID ${id} · versão atual <b>${v3(cu)}</b></div>`+L.slice().reverse().map(v=>`<div class="card" style="cursor:default"><b>Versão ${v3(v.n)}${v.n==cu?" (atual)":""}</b> <span class="mu">${v.at?new Date(v.at).toLocaleString("pt-BR"):"data desconhecida"} · ${esc(v.src||"")}</span><div class="m"><span>${esc(v.t)}</span><span>Ref ${esc(v.r)}</span></div><div class="row"><button class="btn" onclick="var e=document.getElementById('vp${v.n}');e.style.display=e.style.display=='none'?'block':'none'">Ver conteúdo</button>${v.n==cu?"":`<button class="btn" onclick="verRest('${id}',${v.n})">Ir para esta versão</button>`}</div><pre class="pre" id="vp${v.n}" style="display:none">${esc(v.d)}</pre></div>`).join("");
  $("#vv").style.display="block"}
-async function verRest(id,n){const v=vlist(id).find(q=>q.n==n);if(!v)return;if(!await askC("Restaurar a versão "+v3(n)+"? A versão atual continua no histórico (a restauração vira uma nova versão)."))return;
+async function verRest(id,n){const v=vlist(id).find(q=>q.n==n);if(!v)return;if(!await askC("Ir para a versão "+v3(n)+"? O item passa a mostrar o conteúdo dela. As outras versões continuam no histórico, sem criar versão nova, e você pode voltar para elas quando quiser."))return;
  const o=M.get(id)||{},x={t:v.t,r:v.r,g:v.g||o.g||"SEM GRUPO",sg:v.sg||"",e:v.e||"",d:v.d,del:false};
- if(!await W(()=>db.doc("items/"+id).set(x)))return;await addVer(id,x,"Restauração da versão "+v3(n),o);
+ await addVer(id,{t:o.t,r:o.r,g:o.g,sg:o.sg,e:o.e,d:o.d},"Estado antes de trocar de versão",o);
+ if(!await W(()=>db.doc("items/"+id).set(x)))return;{const L=vlist(id).slice(),ob={v:L,cur:n};ov.ver.set(id,ob);await W(()=>db.doc("ver/"+id).set(ob))}
  const cm=(ov.cls.get("all")||{}).m||{};if(cm[id]){const m2=Object.assign({},cm);m2[id]=[x.g,x.sg];await W(()=>db.doc("cls/all").set({m:m2}))}
- M.set(id,{id,t:x.t,r:x.r,d:x.d,g:x.g,sg:x.sg,e:x.e});$("#vv").style.display="none";openItem(id);toast("Versão "+v3(n)+" restaurada.")}
+ M.set(id,{id,t:x.t,r:x.r,d:x.d,g:x.g,sg:x.sg,e:x.e});$("#vv").style.display="none";openItem(id);toast("Agora o item está na versão "+v3(n)+".")}
 var MG=[],MGP=null;
 function openMerge(){MG=[];MGP=null;mgUI();$("#mv").style.display="block"}
 function mgUI(){const q0=($("#mq")||{}).value||"",L=MG.map(i=>M.get(i)).filter(Boolean);if(!L.find(x=>x.id==MGP))MGP=L.length?L[0].id:null;

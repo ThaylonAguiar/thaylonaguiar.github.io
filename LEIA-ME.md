@@ -612,3 +612,6 @@ Itens novos são sempre criados completos.
 
 ## v169
 - Opção **imagens** ocultada nos dois Assistentes AI (catálogo e lote) a pedido. O código (miniaturas, baixar, colar foto) continua no app, dormente, para retomar depois (idéia: mini-servidor intermediário que baixa a foto da página).
+
+## v170
+- **Versões do item**: "Restaurar" virou **"Ir para esta versão"**: o item passa a mostrar aquela versão e o histórico continua igual, **sem criar versão nova**. Dá para alternar entre versões quando quiser (a "atual" é a que está marcada). Se editar estando numa versão antiga, a edição vira a próxima versão (ex.: 003). Antes de trocar, se o item tiver alteração que não está no histórico, ela é guardada como versão.

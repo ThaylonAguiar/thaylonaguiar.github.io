@@ -603,3 +603,6 @@ Itens novos são sempre criados completos.
 ## v166
 - **Assistente AI do catálogo** (códigos, aplicações e EAN): nova opção **imagens 🖼** e **só itens sem foto** (marcada por padrão; itens que já têm foto, ou já consultados para imagem, são pulados). O pedido pede `IMAGEM: <link direto> | <página>`.
 - Ao colar a resposta, miniaturas com caixinha por item. Aplicar baixa as marcadas e salva no item (por ID). Se o site bloquear: lista "Fotos que o site não deixou baixar" com abrir imagem, 📋 colar foto e 📁 escolher arquivo. "zerar consultados" também zera os de imagem.
+
+## v167
+- Imagens no Assistente AI (catálogo e lote): o pedido agora traz "BUSCAR POR" (marca + código e equivalentes), manda pesquisar por vários códigos, proíbe `IMAGEM: NENHUMA` sem pesquisa de pelo menos 3 códigos e pede `INFO: PESQUISADO:`. Se a resposta vier só com NENHUMA e sem PESQUISADO, o item NÃO é marcado como consultado (aviso amarelo).

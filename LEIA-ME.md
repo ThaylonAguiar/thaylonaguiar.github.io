@@ -606,3 +606,6 @@ Itens novos são sempre criados completos.
 
 ## v167
 - Imagens no Assistente AI (catálogo e lote): o pedido agora traz "BUSCAR POR" (marca + código e equivalentes), manda pesquisar por vários códigos, proíbe `IMAGEM: NENHUMA` sem pesquisa de pelo menos 3 códigos e pede `INFO: PESQUISADO:`. Se a resposta vier só com NENHUMA e sem PESQUISADO, o item NÃO é marcado como consultado (aviso amarelo).
+
+## v168
+- Cartões de "Fotos sugeridas" (catálogo e lote) ganham **📋 colar foto** e **📁 arquivo** direto, para quando o assistente só traz a página (sem link direto da imagem): abra a página, copie a imagem, clique em colar foto. No catálogo a foto vai direto para o item; no lote fica guardada no item do lote.

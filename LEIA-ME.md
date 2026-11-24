@@ -609,3 +609,6 @@ Itens novos são sempre criados completos.
 
 ## v168
 - Cartões de "Fotos sugeridas" (catálogo e lote) ganham **📋 colar foto** e **📁 arquivo** direto, para quando o assistente só traz a página (sem link direto da imagem): abra a página, copie a imagem, clique em colar foto. No catálogo a foto vai direto para o item; no lote fica guardada no item do lote.
+
+## v169
+- Opção **imagens** ocultada nos dois Assistentes AI (catálogo e lote) a pedido. O código (miniaturas, baixar, colar foto) continua no app, dormente, para retomar depois (idéia: mini-servidor intermediário que baixa a foto da página).

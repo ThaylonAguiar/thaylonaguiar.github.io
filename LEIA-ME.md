@@ -594,3 +594,8 @@ Itens novos são sempre criados completos.
 
 ## v164
 - Assistente AI: "Itens alterados pelo assistente" agora tem **setinha** para recolher/abrir a lista (lembra o estado enquanto a janela está aberta).
+
+## v165
+- **Assistente AI › Pesquisar › "imagens 🖼"**: o pedido passa a pedir linhas `IMAGEM: <link direto> | <página>` (até 3 por item, sem inventar link). Ao colar a resposta, cada item mostra as miniaturas com caixinha e os links da imagem/página.
+- Ao aplicar, o app baixa as fotos marcadas e guarda no item do lote (entram na importação, vão para o item pelo ID). Se o site não permitir o download, a foto vai para a lista **"Fotos que o site não deixou baixar"**, com "abrir imagem", "📋 colar foto" (copie a imagem e cole) e "📁 escolher arquivo".
+- "↩ voltar ao original" também remove as fotos adicionadas pelo assistente.

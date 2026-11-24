@@ -599,3 +599,7 @@ Itens novos são sempre criados completos.
 - **Assistente AI › Pesquisar › "imagens 🖼"**: o pedido passa a pedir linhas `IMAGEM: <link direto> | <página>` (até 3 por item, sem inventar link). Ao colar a resposta, cada item mostra as miniaturas com caixinha e os links da imagem/página.
 - Ao aplicar, o app baixa as fotos marcadas e guarda no item do lote (entram na importação, vão para o item pelo ID). Se o site não permitir o download, a foto vai para a lista **"Fotos que o site não deixou baixar"**, com "abrir imagem", "📋 colar foto" (copie a imagem e cole) e "📁 escolher arquivo".
 - "↩ voltar ao original" também remove as fotos adicionadas pelo assistente.
+
+## v166
+- **Assistente AI do catálogo** (códigos, aplicações e EAN): nova opção **imagens 🖼** e **só itens sem foto** (marcada por padrão; itens que já têm foto, ou já consultados para imagem, são pulados). O pedido pede `IMAGEM: <link direto> | <página>`.
+- Ao colar a resposta, miniaturas com caixinha por item. Aplicar baixa as marcadas e salva no item (por ID). Se o site bloquear: lista "Fotos que o site não deixou baixar" com abrir imagem, 📋 colar foto e 📁 escolher arquivo. "zerar consultados" também zera os de imagem.

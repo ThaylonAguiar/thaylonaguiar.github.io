@@ -615,3 +615,6 @@ Itens novos são sempre criados completos.
 
 ## v170
 - **Versões do item**: "Restaurar" virou **"Ir para esta versão"**: o item passa a mostrar aquela versão e o histórico continua igual, **sem criar versão nova**. Dá para alternar entre versões quando quiser (a "atual" é a que está marcada). Se editar estando numa versão antiga, a edição vira a próxima versão (ex.: 003). Antes de trocar, se o item tiver alteração que não está no histórico, ela é guardada como versão.
+
+## v171
+- **Aviso de código repetido** nos Assistentes AI (catálogo e lote): antes de aplicar, cada código novo que já existe em OUTRO item (do catálogo ou de outro item do lote) mostra "⚠ código também está em: ITEM · ID …" (clicando abre uma janela com a tabela do outro item). No catálogo há o botão **⇄ marcar como equivalente** (vincula em Produtos relacionados; só avisa, nunca vincula sozinho). Depois de aplicar, o catálogo lista um resumo dos códigos aplicados que também estão em outros itens. Códigos com menos de 4 caracteres são ignorados.

@@ -632,3 +632,6 @@ Itens novos são sempre criados completos.
 
 ## v174
 - Cadastrar item: botão **📋 Colar tabela do distribuidor** acima da descrição. Abre a janela onde se cola APLICAÇÃO COMPLETA + EQUIVALÊNCIA; mostra a prévia (aplicações, códigos, motores na observação, avisos) e "Colocar na descrição" preenche o campo (junta com o que já estiver digitado). Nada é salvo até salvar o item.
+
+## v175
+- Cadastrar item: botão 🔄 **Reiniciar cadastro** (começa do zero) e 💾 **guardar cadastro**. O que está sendo digitado é guardado sozinho neste aparelho (a cada digitação); ao fechar com ✕ e abrir Cadastrar item de novo, volta de onde parou. O rascunho some ao cadastrar o item. Fotos escolhidas/coladas não ficam no rascunho.

@@ -635,3 +635,6 @@ Itens novos são sempre criados completos.
 
 ## v175
 - Cadastrar item: botão 🔄 **Reiniciar cadastro** (começa do zero) e 💾 **guardar cadastro**. O que está sendo digitado é guardado sozinho neste aparelho (a cada digitação); ao fechar com ✕ e abrir Cadastrar item de novo, volta de onde parou. O rascunho some ao cadastrar o item. Fotos escolhidas/coladas não ficam no rascunho.
+
+## v176
+- Cadastrar item: o rascunho agora é guardado **sempre que se sai da tela** (✕, Esc, clicar fora, trocar de aba ou fechar o app), além de a cada digitação. Removido o botão 💾; ficou só o 🔄 Reiniciar cadastro.

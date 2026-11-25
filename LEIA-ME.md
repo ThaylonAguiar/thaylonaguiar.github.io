@@ -629,3 +629,6 @@ Itens novos são sempre criados completos.
 - EAN: ao digitar o começo de um código, sugere os códigos da seção CÓDIGOS do próprio item.
 - Botões: Salvar Item (próximo cadastro mantém só o título até o "-", grupo e subgrupo; referência e descrição vazias), Salvar e Reiniciar Cadastro (tudo vazio), Salvar e Visualizar Item.
 - Fotos do item: Ctrl+V cola imagem da área de transferência (com miniaturas e ✕); "Escolher arquivos" continua.
+
+## v174
+- Cadastrar item: botão **📋 Colar tabela do distribuidor** acima da descrição. Abre a janela onde se cola APLICAÇÃO COMPLETA + EQUIVALÊNCIA; mostra a prévia (aplicações, códigos, motores na observação, avisos) e "Colocar na descrição" preenche o campo (junta com o que já estiver digitado). Nada é salvo até salvar o item.

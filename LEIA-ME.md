@@ -638,3 +638,6 @@ Itens novos são sempre criados completos.
 
 ## v176
 - Cadastrar item: o rascunho agora é guardado **sempre que se sai da tela** (✕, Esc, clicar fora, trocar de aba ou fechar o app), além de a cada digitação. Removido o botão 💾; ficou só o 🔄 Reiniciar cadastro.
+
+## v177
+- Cadastrar item: corrigida a lista de sugestões do Título (aparecia atrás da tela e ficava invisível). Agora, quem começa com o que foi digitado vem primeiro (ex.: INT → INTERRUPTOR TERMICO).

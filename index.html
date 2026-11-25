@@ -559,7 +559,7 @@ function fOff(){FOFF=FOFF?0:1;if(!FOFF)FEST=0;fOffUI();fDraftSoon()}
 function fEst(){if(FOFF){FEST=FEST?0:1;fOffUI();fDraftSoon()}}
 function tPre(){if(TPF&&TPn===M.size)return TPF;const m=new Map();M.forEach(x=>{if(x.fam)return;const p=String(x.t||"").replace(/^[~@\s]+/,"").split("-")[0].trim().toUpperCase();if(p.length<2)return;const k=norm(p),e=m.get(k)||{n:p,c:0};e.c++;m.set(k,e)});TPF=[...m.values()];TPn=M.size;return TPF}
 function xtSug(inp){const b=$("#xsg"),v=inp.value;if(!v.trim()||v.includes("-")){b.style.display="none";return}
- const q=norm(v).trim();XTL=tPre().filter(e=>{const k=norm(e.n);return k!=q&&(k.startsWith(q)||(q.length>=2&&k.includes(" "+q)))}).sort((a,b)=>(norm(b.n).startsWith(q)-norm(a.n).startsWith(q))||b.c-a.c||(a.n<b.n?-1:1)).slice(0,10);
+ const q=norm(v).trim();XTL=tPre().filter(e=>{const k=norm(e.n);return k!=q&&k.startsWith(q)}).sort((a,b)=>b.c-a.c||(a.n<b.n?-1:1)).slice(0,10);
  if(!XTL.length){b.style.display="none";return}
  const r=inp.getBoundingClientRect();b.style.left=r.left+"px";b.style.width=r.width+"px";
  if(innerHeight-r.bottom<240){b.style.top="";b.style.bottom=(innerHeight-r.top+2)+"px";b.style.maxHeight=Math.max(120,r.top-12)+"px"}else{b.style.bottom="";b.style.top=(r.bottom+2)+"px";b.style.maxHeight=Math.min(300,innerHeight-r.bottom-12)+"px"}

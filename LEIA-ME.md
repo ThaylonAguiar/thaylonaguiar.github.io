@@ -641,3 +641,6 @@ Itens novos são sempre criados completos.
 
 ## v177
 - Cadastrar item: corrigida a lista de sugestões do Título (aparecia atrás da tela e ficava invisível). Agora, quem começa com o que foi digitado vem primeiro (ex.: INT → INTERRUPTOR TERMICO).
+
+## v178
+- Cadastrar item: sugestões do Título agora só pelo início da palavra (IN → INTERRUPTOR TERMICO), sem trazer títulos que apenas contêm o texto.

@@ -622,3 +622,10 @@ Itens novos são sempre criados completos.
 ## v172
 - Importar lote: nova aba **⚠ Repetidos**: agrupa os itens NOVOS do lote que têm o mesmo código de outro item novo (grupos ligados por códigos em comum, mostrando os códigos e as marcas). Cada item tem os mesmos botões (ver tabela, 🚫, ✕, importar). Respeita o filtro por lote. Códigos com menos de 4 caracteres são ignorados.
 - Assistente AI do lote: removido o aviso de código repetido dentro do cartão (agora é pela aba). O aviso do Assistente AI do catálogo continua.
+
+## v173 — Cadastrar item
+- Botões no topo: 🚫 desativar / ✅ ativar, 📦 estoque (aparece ao desativar) e ✕ fechar.
+- Título: sugestão com os tipos já cadastrados (só a parte antes do "-"); ao escolher entra "TIPO-".
+- EAN: ao digitar o começo de um código, sugere os códigos da seção CÓDIGOS do próprio item.
+- Botões: Salvar Item (próximo cadastro mantém só o título até o "-", grupo e subgrupo; referência e descrição vazias), Salvar e Reiniciar Cadastro (tudo vazio), Salvar e Visualizar Item.
+- Fotos do item: Ctrl+V cola imagem da área de transferência (com miniaturas e ✕); "Escolher arquivos" continua.
